@@ -4,7 +4,7 @@
  * Created on 23 July 2003, 20:15
  */
 
-package com.mapflow.geo.helper.dataaccess;
+package com.mapflow.geo.common.helper.dataaccess;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
-import com.mapflow.geo.exceptions.MapflowAppException;
+import com.mapflow.geo.common.exceptions.MapflowAppException;
 
 public class DBHelper {
 

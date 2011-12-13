@@ -1,4 +1,4 @@
-package com.mapflow.geo.persistence;
+package com.mapflow.geo.common.persistence;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.mapflow.geo.exceptions.MapflowAppException;
-import com.mapflow.geo.helper.dataaccess.DBHelper;
+import com.mapflow.geo.common.exceptions.MapflowAppException;
+import com.mapflow.geo.common.helper.dataaccess.DBHelper;
 
 public abstract class GenericDaoImpl<T, PK extends Serializable> implements GenericDaoExtend<T, PK> {
 

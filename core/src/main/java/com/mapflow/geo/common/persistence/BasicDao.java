@@ -1,4 +1,4 @@
-package com.mapflow.geo.persistence;
+package com.mapflow.geo.common.persistence;
 
 import java.io.Serializable;
 import java.util.Collection;

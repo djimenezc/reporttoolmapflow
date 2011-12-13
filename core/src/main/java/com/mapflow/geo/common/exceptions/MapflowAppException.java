@@ -1,5 +1,5 @@
 // $Id: MapflowAppException.java,v 1.4 2005/09/20 11:17:39 ArturW Exp $
-package com.mapflow.geo.exceptions;
+package com.mapflow.geo.common.exceptions;
 
 import java.lang.RuntimeException;
 import java.text.ParseException;

@@ -1,4 +1,4 @@
-package com.mapflow.geo.helper.dataaccess;
+package com.mapflow.geo.common.helper.dataaccess;
 
 public class DBDataSource {
 

@@ -2,8 +2,8 @@ package com.mapflow.geo.logging.model;
 
 import java.util.Date;
 
+import com.mapflow.geo.common.model.BaseObject;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
-import com.mapflow.geo.model.BaseObject;
 
 public class LogCounterFeaturesTo extends BaseObject {
 

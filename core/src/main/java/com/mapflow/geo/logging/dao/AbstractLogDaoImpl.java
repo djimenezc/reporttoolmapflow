@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.mapflow.geo.helper.dataaccess.DBHelper;
-import com.mapflow.geo.persistence.GenericDaoImpl;
+import com.mapflow.geo.common.helper.dataaccess.DBHelper;
+import com.mapflow.geo.common.persistence.GenericDaoImpl;
 
 public abstract class AbstractLogDaoImpl<T, PK> extends GenericDaoImpl<T, String> {
 

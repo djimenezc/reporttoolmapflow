@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
-import com.mapflow.geo.helper.dataaccess.DBHelper;
+import com.mapflow.geo.common.helper.dataaccess.DBHelper;
 import com.mapflow.geo.logging.dao.LogCountPointsDao;
 import com.mapflow.geo.logging.dao.LogMapdisplayDao;
 import com.mapflow.geo.logging.dao.impl.LogCountDaoImpl;

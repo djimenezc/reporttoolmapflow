@@ -1,6 +1,6 @@
 package com.mapflow.geo.logging.services.locator;
 
-import com.mapflow.geo.helper.dataaccess.DBHelper;
+import com.mapflow.geo.common.helper.dataaccess.DBHelper;
 import com.mapflow.geo.logging.services.LoggerDatabaseServiceImpl;
 import com.mapflow.geo.logging.services.LoggerService;
 

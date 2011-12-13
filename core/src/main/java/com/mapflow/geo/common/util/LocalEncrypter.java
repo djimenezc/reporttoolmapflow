@@ -1,4 +1,4 @@
-package com.mapflow.geo.util;
+package com.mapflow.geo.common.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

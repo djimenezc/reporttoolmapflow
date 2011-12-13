@@ -1,4 +1,4 @@
-package com.mapflow.geo.model;
+package com.mapflow.geo.common.model;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -26,7 +26,7 @@ import org.compass.annotations.SearchableProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.mapflow.geo.model.BaseObject;
+import com.mapflow.geo.common.model.BaseObject;
 
 /**
  * This class represents the basic "user" object in AppFuse that allows for authentication and user

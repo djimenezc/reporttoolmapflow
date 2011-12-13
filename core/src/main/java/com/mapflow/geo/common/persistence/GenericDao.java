@@ -1,8 +1,8 @@
-package com.mapflow.geo.persistence;
+package com.mapflow.geo.common.persistence;
 
 import java.io.Serializable;
 
-import com.mapflow.geo.model.BaseObject;
+import com.mapflow.geo.common.model.BaseObject;
 
 /**
  * Generic DAO Pattern

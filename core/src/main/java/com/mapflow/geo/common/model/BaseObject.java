@@ -1,4 +1,4 @@
-package com.mapflow.geo.model;
+package com.mapflow.geo.common.model;
 
 import java.io.Serializable;
 
