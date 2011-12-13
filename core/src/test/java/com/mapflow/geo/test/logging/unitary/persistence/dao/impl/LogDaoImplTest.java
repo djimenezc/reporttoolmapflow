@@ -4,8 +4,8 @@ import java.util.Date;
 
 import junit.framework.TestCase;
 
-import com.mapflow.geo.exceptions.MapflowAppException;
-import com.mapflow.geo.helper.dataaccess.DBHelper;
+import com.mapflow.geo.common.exceptions.MapflowAppException;
+import com.mapflow.geo.common.helper.dataaccess.DBHelper;
 import com.mapflow.geo.logging.dao.LogCountPointsDao;
 import com.mapflow.geo.logging.dao.LogMapdisplayDao;
 import com.mapflow.geo.logging.dao.impl.LogCountDaoImpl;

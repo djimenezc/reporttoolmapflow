@@ -7,7 +7,7 @@ import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 
-import com.mapflow.geo.exceptions.MapflowAppException;
+import com.mapflow.geo.common.exceptions.MapflowAppException;
 import com.mapflow.geo.logging.dao.LogCountPointsDao;
 import com.mapflow.geo.logging.dao.LogMapdisplayDao;
 import com.mapflow.geo.logging.model.LogCounterFeaturesTo;

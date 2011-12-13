@@ -7,7 +7,7 @@ import java.net.URISyntaxException;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mapflow.geo.exceptions.MapflowAppException;
+import com.mapflow.geo.common.exceptions.MapflowAppException;
 import com.mapflow.geo.logging.services.LoggerDatabaseServiceImpl;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
 import com.mapflow.geo.test.logging.unitary.mock.FactoryMock;
