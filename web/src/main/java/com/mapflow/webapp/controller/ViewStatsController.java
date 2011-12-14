@@ -1,6 +1,5 @@
 package com.mapflow.webapp.controller;
 
-import org.appfuse.Constants;
 import org.appfuse.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mapflow.geo.common.constants.Constants;
 
 /**
  * Simple class to retrieve a list of users from the database.
@@ -16,21 +16,23 @@ import org.springframework.web.servlet.ModelAndView;
  * <p>
  * <a href="UserController.java.html"><i>View Source</i></a>
  * </p>
- *
+ * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 @Controller
 @RequestMapping("/stats/view*")
 public class ViewStatsController {
-    private UserManager mgr = null;
 
-    @Autowired
-    public void setUserManager(UserManager userManager) {
-        this.mgr = userManager;
-    }
+  private UserManager mgr = null;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView handleRequest(@RequestParam(required = false, value = "q") String query) throws Exception {
-        return new ModelAndView("stats/viewStats", Constants.USER_LIST, mgr.search(query));
-    }
+  @Autowired
+  public void setUserManager(final UserManager userManager) {
+    mgr = userManager;
+  }
+
+  @RequestMapping(method = RequestMethod.GET)
+  public ModelAndView handleRequest(@RequestParam(required = false, value = "q") final String query)
+    throws Exception {
+    return new ModelAndView("stats/viewStats", Constants.USER_LIST, mgr.search(query));
+  }
 }

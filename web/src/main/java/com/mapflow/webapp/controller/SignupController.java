@@ -5,8 +5,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.appfuse.Constants;
-import org.appfuse.model.User;
 import org.appfuse.service.RoleManager;
 import org.appfuse.service.UserExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mapflow.geo.common.constants.Constants;
+import com.mapflow.geo.common.model.User;
 import com.mapflow.webapp.util.RequestUtil;
 
 /**

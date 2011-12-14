@@ -1,7 +1,12 @@
 package com.mapflow.webapp.controller;
 
-import org.appfuse.Constants;
-import org.appfuse.model.User;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import org.appfuse.service.UserManager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,125 +16,129 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 
-import static org.junit.Assert.*;
+import com.mapflow.geo.common.constants.Constants;
+import com.mapflow.geo.common.model.User;
 
 public class UserFormControllerTest extends BaseControllerTestCase {
-    @Autowired
-    private UserFormController c = null;
-    private MockHttpServletRequest request;
-    private User user;
 
-    @Test
-    public void testAdd() throws Exception {
-        log.debug("testing add new user...");
-        request = newGet("/userform.html");
-        request.addParameter("method", "Add");
-        request.addUserRole(Constants.ADMIN_ROLE);
+  @Autowired
+  private final UserFormController c = null;
+  private MockHttpServletRequest request;
+  private User user;
 
-        user = c.showForm(request, new MockHttpServletResponse());
-        assertNull(user.getUsername());
+  @Test
+  public void testAdd() throws Exception {
+    log.debug("testing add new user...");
+    request = newGet("/userform.html");
+    request.addParameter("method", "Add");
+    request.addUserRole(Constants.ADMIN_ROLE);
+
+    user = c.showForm(request, new MockHttpServletResponse());
+    assertNull(user.getUsername());
+  }
+
+  @Test
+  public void testAddWithoutPermission() throws Exception {
+    log.debug("testing add new user...");
+    request = newGet("/userform.html");
+    request.addParameter("method", "Add");
+
+    try {
+      c.showForm(request, new MockHttpServletResponse());
+      fail("AccessDeniedException not thrown...");
     }
-
-    @Test
-    public void testAddWithoutPermission() throws Exception {
-        log.debug("testing add new user...");
-        request = newGet("/userform.html");
-        request.addParameter("method", "Add");
-
-        try {
-            c.showForm(request, new MockHttpServletResponse());
-            fail("AccessDeniedException not thrown...");
-        } catch (AccessDeniedException ade) {
-            assertNotNull(ade.getMessage());
-        }     
+    catch (final AccessDeniedException ade) {
+      assertNotNull(ade.getMessage());
     }
+  }
 
-    @Test
-    public void testCancel() throws Exception {
-        log.debug("testing cancel...");
-        request = newPost("/userform.html");
-        request.addParameter("cancel", "");
+  @Test
+  public void testCancel() throws Exception {
+    log.debug("testing cancel...");
+    request = newPost("/userform.html");
+    request.addParameter("cancel", "");
 
-        BindingResult errors = new DataBinder(user).getBindingResult();
-        String view = c.onSubmit(user, errors, request, new MockHttpServletResponse());
+    final BindingResult errors = new DataBinder(user).getBindingResult();
+    final String view = c.onSubmit(user, errors, request, new MockHttpServletResponse());
 
-        assertEquals("redirect:/mainMenu", view);
+    assertEquals("redirect:/mainMenu", view);
+  }
+
+  @Test
+  public void testEdit() throws Exception {
+    log.debug("testing edit...");
+    request = newGet("/userform.html");
+    request.addParameter("id", "-1"); // regular user
+    request.addUserRole(Constants.ADMIN_ROLE);
+
+    final User user = c.showForm(request, new MockHttpServletResponse());
+    assertEquals("Tomcat User", user.getFullName());
+  }
+
+  @Test
+  public void testEditWithoutPermission() throws Exception {
+    log.debug("testing edit...");
+    request = newGet("/userform.html");
+    request.addParameter("id", "-1"); // regular user
+
+    try {
+      c.showForm(request, new MockHttpServletResponse());
+      fail("AccessDeniedException not thrown...");
     }
-
-    @Test
-    public void testEdit() throws Exception {
-        log.debug("testing edit...");
-        request = newGet("/userform.html");
-        request.addParameter("id", "-1"); // regular user
-        request.addUserRole(Constants.ADMIN_ROLE);
-
-        User user = c.showForm(request, new MockHttpServletResponse());
-        assertEquals("Tomcat User", user.getFullName());
+    catch (final AccessDeniedException ade) {
+      assertNotNull(ade.getMessage());
     }
+  }
 
-    @Test
-    public void testEditWithoutPermission() throws Exception {
-        log.debug("testing edit...");
-        request = newGet("/userform.html");
-        request.addParameter("id", "-1"); // regular user
+  @Test
+  public void testEditProfile() throws Exception {
+    log.debug("testing edit profile...");
+    request = newGet("/userform.html");
+    request.setRemoteUser("user");
 
-        try {
-            c.showForm(request, new MockHttpServletResponse());
-            fail("AccessDeniedException not thrown...");
-        } catch (AccessDeniedException ade) {
-            assertNotNull(ade.getMessage());
-        }
-    }
+    user = c.showForm(request, new MockHttpServletResponse());
+    assertEquals("Tomcat User", user.getFullName());
+  }
 
-    @Test
-    public void testEditProfile() throws Exception {
-        log.debug("testing edit profile...");
-        request = newGet("/userform.html");
-        request.setRemoteUser("user");
+  @Test
+  public void testSave() throws Exception {
+    request = newPost("/userform.html");
+    // set updated properties first since adding them later will
+    // result in multiple parameters with the same name getting sent
+    final User user = ((UserManager) applicationContext.getBean("userManager")).getUser("-1");
+    user.setConfirmPassword(user.getPassword());
+    user.setLastName("Updated Last Name");
 
-        user = c.showForm(request, new MockHttpServletResponse());
-        assertEquals("Tomcat User", user.getFullName());
-    }
+    final BindingResult errors = new DataBinder(user).getBindingResult();
+    c.onSubmit(user, errors, request, new MockHttpServletResponse());
 
-    @Test
-    public void testSave() throws Exception {
-        request = newPost("/userform.html");
-        // set updated properties first since adding them later will
-        // result in multiple parameters with the same name getting sent
-        User user = ((UserManager) applicationContext.getBean("userManager")).getUser("-1");
-        user.setConfirmPassword(user.getPassword());
-        user.setLastName("Updated Last Name");
+    assertFalse(errors.hasErrors());
+    assertNotNull(request.getSession().getAttribute("successMessages"));
+  }
 
-        BindingResult errors = new DataBinder(user).getBindingResult();
-        c.onSubmit(user, errors, request, new MockHttpServletResponse());
+  @Test
+  public void testAddWithMissingFields() throws Exception {
+    request = newPost("/userform.html");
+    user = new User();
+    user.setFirstName("Jack");
+    request.setRemoteUser("user");
 
-        assertFalse(errors.hasErrors());
-        assertNotNull(request.getSession().getAttribute("successMessages"));
-    }
+    final BindingResult errors = new DataBinder(user).getBindingResult();
+    c.onSubmit(user, errors, request, new MockHttpServletResponse());
 
-    @Test
-    public void testAddWithMissingFields() throws Exception {
-        request = newPost("/userform.html");
-        user = new User();
-        user.setFirstName("Jack");
-        request.setRemoteUser("user");
+    assertTrue(errors.getAllErrors().size() == 10);
+  }
 
-        BindingResult errors = new DataBinder(user).getBindingResult();
-        c.onSubmit(user, errors, request, new MockHttpServletResponse());
-        
-        assertTrue(errors.getAllErrors().size() == 10);
-    }
+  @Test
+  public void testRemove() throws Exception {
+    request = newPost("/userform.html");
+    request.addParameter("delete", "");
+    user = new User();
+    user.setId(-2L);
 
-    @Test
-    public void testRemove() throws Exception {
-        request = newPost("/userform.html");
-        request.addParameter("delete", "");
-        user = new User();
-        user.setId(-2L);
+    final BindingResult errors = new DataBinder(user).getBindingResult();
+    c.onSubmit(user, errors, request, new MockHttpServletResponse());
 
-        BindingResult errors = new DataBinder(user).getBindingResult();
-        c.onSubmit(user, errors, request, new MockHttpServletResponse());
-        
-        assertNotNull(request.getSession().getAttribute("successMessages"));
-    }
+    assertNotNull(request.getSession().getAttribute("successMessages"));
+  }
 }
