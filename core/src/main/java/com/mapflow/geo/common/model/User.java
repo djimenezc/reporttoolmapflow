@@ -37,7 +37,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  *         david@carter.net
  */
 @Entity
-@Table(name = "USERS", schema = "GEOUW", uniqueConstraints = @UniqueConstraint(columnNames = "USERNAME"))
+@Table(name = "USERS", uniqueConstraints = @UniqueConstraint(columnNames = "USERNAME"))
 @Searchable
 @XmlRootElement
 public class User extends BaseObject implements Serializable, UserDetails {
@@ -51,7 +51,6 @@ public class User extends BaseObject implements Serializable, UserDetails {
   private String passwordHint;
   private String firstName; // required
   private String lastName; // required
-  private String email; // required; unique
   private String phoneNumber;
   private String website;
   private Integer version;
@@ -114,6 +113,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
 
   }
 
+  @Transient
   public Address getAddress() {
     return address;
   }
@@ -163,19 +163,15 @@ public class User extends BaseObject implements Serializable, UserDetails {
     return disabledDate;
   }
 
-  @Column(nullable = false, unique = true)
   @SearchableProperty
+  @Column(name = "EMAIL_ADDRESS", length = 320, nullable = false, unique = true)
   public String getEmail() {
-    return email;
-  }
-
-  @Column(name = "EMAIL_ADDRESS", length = 320)
-  public String getEmailAddress() {
     return emailAddress;
   }
 
   @Column(name = "first_name", nullable = false, length = 50)
-  @SearchableProperty
+  @Transient
+  // @SearchableProperty
   public String getFirstName() {
     return firstName;
   }
@@ -192,6 +188,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "ID")
   @SearchableId
   public Long getId() {
     return id;
@@ -204,7 +201,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
   }
 
   @Column(name = "last_name", nullable = false, length = 50)
-  @SearchableProperty
+  @Transient
+  // @SearchableProperty
   public String getLastName() {
     return lastName;
   }
@@ -224,12 +222,14 @@ public class User extends BaseObject implements Serializable, UserDetails {
 
   @Column(name = "password_hint")
   @XmlTransient
+  @Transient
   public String getPasswordHint() {
     return passwordHint;
   }
 
   @Column(name = "phone_number")
-  @SearchableProperty
+  @Transient
+  // @SearchableProperty
   public String getPhoneNumber() {
     return phoneNumber;
   }
@@ -280,11 +280,13 @@ public class User extends BaseObject implements Serializable, UserDetails {
   // @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") },
   // inverseJoinColumns = @JoinColumn(name = "role_id"))
   @Version
+  @Transient
   public Integer getVersion() {
     return version;
   }
 
-  @SearchableProperty
+  // @SearchableProperty
+  @Transient
   public String getWebsite() {
     return website;
   }
@@ -298,11 +300,13 @@ public class User extends BaseObject implements Serializable, UserDetails {
   }
 
   @Column(name = "account_expired", nullable = false)
+  @Transient
   public boolean isAccountExpired() {
     return accountExpired;
   }
 
   @Column(name = "account_locked", nullable = false)
+  @Transient
   public boolean isAccountLocked() {
     return accountLocked;
   }
@@ -328,6 +332,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
   }
 
   @Column(name = "credentials_expired", nullable = false)
+  @Transient
   public boolean isCredentialsExpired() {
     return credentialsExpired;
   }
@@ -344,6 +349,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
 
   @Override
   @Column(name = "account_enabled")
+  @Transient
   public boolean isEnabled() {
     return enabled;
   }
@@ -392,11 +398,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     this.disabledDate = disabledDate;
   }
 
-  public void setEmail(final String email) {
-    this.email = email;
-  }
-
-  public void setEmailAddress(final String emailAddress) {
+  public void setEmail(final String emailAddress) {
     this.emailAddress = emailAddress;
   }
 

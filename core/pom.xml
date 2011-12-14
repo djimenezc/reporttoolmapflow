@@ -63,7 +63,7 @@
 					<username>${jdbc.username}</username>
 					<password>${jdbc.password}</password>
 					<url>${jdbc.url}</url>
-					<src>src/test/resources/sample-data.xml</src>
+					<src>src/test/resources/dbunit/sample-data.xml</src>
 					<type>${dbunit.operation.type}</type>
 					<schema>${dbunit.schema}</schema>
 					<skip>${skipTests}</skip>
@@ -260,12 +260,6 @@
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
-<!--		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.1.0</version>
-		</dependency>-->
 
 	</dependencies>
 

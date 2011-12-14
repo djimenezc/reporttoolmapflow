@@ -2,9 +2,25 @@ package com.mapflow.geo.logging.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.compass.annotations.Searchable;
+import org.compass.annotations.SearchableId;
+
 import com.mapflow.geo.common.model.BaseObject;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
 
+@Entity
+@Table(name = "MF_SERVICE_LOG", uniqueConstraints = @UniqueConstraint(columnNames = "MF_SERVICE_LOG"))
+@Searchable
+@XmlRootElement
 public class LogCounterFeaturesTo extends BaseObject {
 
   private static final long serialVersionUID = -6725055993229100539L;
@@ -162,6 +178,7 @@ public class LogCounterFeaturesTo extends BaseObject {
   /**
    * @return the clientHostname
    */
+  @Column(name = "BRANCH_NAME", length = 20)
   public String getClientHostname() {
     return clientHostname;
   }
@@ -187,9 +204,17 @@ public class LogCounterFeaturesTo extends BaseObject {
     return featuresCategory;
   }
 
+  public String getFeaturesType() {
+    return featuresType;
+  }
+
   /**
    * @return the id
    */
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "TRANSACTION_ID")
+  @SearchableId
   public String getId() {
     return id;
   }
@@ -303,6 +328,10 @@ public class LogCounterFeaturesTo extends BaseObject {
     featuresCategory = featuresTypes;
   }
 
+  public void setFeaturesType(final String featuresType) {
+    this.featuresType = featuresType;
+  }
+
   /**
    * @param id
    *          the id to set
@@ -383,14 +412,6 @@ public class LogCounterFeaturesTo extends BaseObject {
       + ", ycoord=" + ycoord + ", featuresCategory=" + featuresCategory + ", featuresType="
       + featuresType + ", zoomLevel=" + zoomLevel + ", mapStyle=" + mapStyle + ", layerCount="
       + layerCount + "]";
-  }
-
-  public String getFeaturesType() {
-    return featuresType;
-  }
-
-  public void setFeaturesType(final String featuresType) {
-    this.featuresType = featuresType;
   }
 
 }
