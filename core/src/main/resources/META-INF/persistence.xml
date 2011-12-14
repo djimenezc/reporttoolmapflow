@@ -5,8 +5,9 @@
 	<persistence-unit name="ApplicationEntityManager"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>org.appfuse.model.User</class>
-		<class>org.appfuse.model.Role</class>
+<!-- 		<class>org.appfuse.model.User</class> -->
+<!-- 		<class>org.appfuse.model.Role</class> -->
+		<class>com.mapflow.geo.common.model.User</class>
 
 		<!-- Adding more <class>f.q.c.Name</class> elements here is not required. 
 			The annotated classes will still be detected, as can be observed in the following 

@@ -1,7 +1,9 @@
 package com.mapflow.geo.common.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,8 +27,6 @@ import org.compass.annotations.SearchableId;
 import org.compass.annotations.SearchableProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.mapflow.geo.common.model.BaseObject;
 
 /**
  * This class represents the basic "user" object in AppFuse that allows for authentication and user
@@ -59,6 +59,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
   private boolean accountExpired;
   private boolean accountLocked;
   private boolean credentialsExpired;
+  private Address address;
+  private String roles;
 
   /**
    * Default constructor - creates a new instance with no values set.
@@ -302,21 +304,21 @@ public class User extends BaseObject implements Serializable, UserDetails {
         .append("enabled", enabled).append("accountExpired", accountExpired)
         .append("credentialsExpired", credentialsExpired).append("accountLocked", accountLocked);
 
-    // TODO add roles toString
-    // if (roles != null) {
-    // sb.append("Granted Authorities: ");
-    //
-    // int i = 0;
-    // for (Role role : roles) {
-    // if (i > 0) {
-    // sb.append(", ");
-    // }
-    // sb.append(role.toString());
-    // i++;
-    // }
-    // } else {
-    // sb.append("No Granted Authorities");
-    // }
+    if (getRoles() != null) {
+      sb.append("Granted Authorities: ");
+
+      int i = 0;
+      for (final Role role : getRoles()) {
+        if (i > 0) {
+          sb.append(", ");
+        }
+        sb.append(role.toString());
+        i++;
+      }
+    }
+    else {
+      sb.append("No Granted Authorities");
+    }
     return sb.toString();
   }
 
@@ -324,5 +326,48 @@ public class User extends BaseObject implements Serializable, UserDetails {
   public Collection<GrantedAuthority> getAuthorities() {
     // TODO Auto-generated method stub
     return null;
+  }
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(final Address address) {
+    this.address = address;
+  }
+
+  public List<Role> getRoles() {
+
+    final String[] stringList = roles.split(",");
+
+    final List<Role> rolesList = new ArrayList<Role>();
+
+    Long i = 0L;
+
+    for (final String roleName : stringList) {
+      final Role role = new Role();
+      role.setId(++i);
+      role.setName(roleName);
+
+      rolesList.add(role);
+    }
+
+    return rolesList;
+  }
+
+  public void setRoles(final List<Role> roles) {
+
+    final StringBuffer rolesStringBuffer = new StringBuffer();
+
+    for (final Role role : roles) {
+      rolesStringBuffer.append(role.getName());
+    }
+
+    this.roles = rolesStringBuffer.toString();
+  }
+
+  public void addRole(final Role role) {
+
+    roles += role.getName();
   }
 }

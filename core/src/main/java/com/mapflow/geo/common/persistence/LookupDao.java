@@ -1,5 +1,8 @@
 package com.mapflow.geo.common.persistence;
 
+import java.util.List;
+
+import com.mapflow.geo.common.model.Role;
 
 /**
  * Lookup Data Access Object (GenericDao) interface. This is used to lookup values in the database
@@ -16,5 +19,5 @@ public interface LookupDao {
    * 
    * @return populated list of roles
    */
-  // List<Role> getRoles();
+  List<Role> getRoles();
 }
