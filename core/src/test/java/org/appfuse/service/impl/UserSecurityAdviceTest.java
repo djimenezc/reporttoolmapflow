@@ -113,7 +113,7 @@ public class UserSecurityAdviceTest {
     final UserManager userManager = makeInterceptedTarget();
     final User user = new User("user");
     user.setId(1L);
-    user.getRoles().add(new Role(Constants.USER_ROLE));
+    user.getRolesList().add(new Role(Constants.USER_ROLE));
 
     context.checking(new Expectations() {
 
@@ -131,7 +131,7 @@ public class UserSecurityAdviceTest {
     final UserManager userManager = makeInterceptedTarget();
     final User user = new User("user");
     user.setId(1L);
-    user.getRoles().add(new Role(Constants.ADMIN_ROLE));
+    user.getRolesList().add(new Role(Constants.ADMIN_ROLE));
 
     try {
       userManager.saveUser(user);
@@ -149,8 +149,8 @@ public class UserSecurityAdviceTest {
     final UserManager userManager = makeInterceptedTarget();
     final User user = new User("user");
     user.setId(1L);
-    user.getRoles().add(new Role(Constants.ADMIN_ROLE));
-    user.getRoles().add(new Role(Constants.USER_ROLE));
+    user.getRolesList().add(new Role(Constants.ADMIN_ROLE));
+    user.getRolesList().add(new Role(Constants.USER_ROLE));
 
     try {
       userManager.saveUser(user);
@@ -180,8 +180,8 @@ public class UserSecurityAdviceTest {
     final UserManager userManager = makeInterceptedTarget();
     final User user = new User("user");
     user.setId(1L);
-    user.getRoles().add(new Role(Constants.ADMIN_ROLE));
-    user.getRoles().add(new Role(Constants.USER_ROLE));
+    user.getRolesList().add(new Role(Constants.ADMIN_ROLE));
+    user.getRolesList().add(new Role(Constants.USER_ROLE));
 
     context.checking(new Expectations() {
 
@@ -199,7 +199,7 @@ public class UserSecurityAdviceTest {
     final UserManager userManager = makeInterceptedTarget();
     final User user = new User("user");
     user.setId(1L);
-    user.getRoles().add(new Role(Constants.USER_ROLE));
+    user.getRolesList().add(new Role(Constants.USER_ROLE));
 
     context.checking(new Expectations() {
 

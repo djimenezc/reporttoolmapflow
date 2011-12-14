@@ -85,7 +85,7 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
           && !administrator) {
           // get the list of roles the user is trying add
           final Set<String> userRoles = new HashSet<String>();
-          if (user.getRoles() != null) {
+          if (user.getRolesList() != null) {
             // TODO proccess roles
             // for (final Object o : user.getRoles()) {
             // final Role role = (Role) o;

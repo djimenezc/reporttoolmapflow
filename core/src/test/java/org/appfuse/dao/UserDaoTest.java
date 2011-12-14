@@ -48,7 +48,7 @@ public class UserDaoTest extends BaseDaoTestCase {
     final User user = dao.get(-1L);
 
     assertNotNull(user);
-    assertEquals(1, user.getRoles().size());
+    assertEquals(1, user.getRolesList().size());
     assertTrue(user.isEnabled());
   }
 
@@ -86,7 +86,7 @@ public class UserDaoTest extends BaseDaoTestCase {
   @Test
   public void testAddUserRole() throws Exception {
     User user = dao.get(-1L);
-    assertEquals(1, user.getRoles().size());
+    assertEquals(1, user.getRolesList().size());
 
     final Role role = rdao.getRoleByName(Constants.ADMIN_ROLE);
     user.addRole(role);
@@ -94,7 +94,7 @@ public class UserDaoTest extends BaseDaoTestCase {
     flush();
 
     user = dao.get(-1L);
-    assertEquals(2, user.getRoles().size());
+    assertEquals(2, user.getRolesList().size());
 
     // add the same role twice - should result in no additional role
     user.addRole(role);
@@ -102,14 +102,14 @@ public class UserDaoTest extends BaseDaoTestCase {
     flush();
 
     user = dao.get(-1L);
-    assertEquals("more than 2 roles", 2, user.getRoles().size());
+    assertEquals("more than 2 roles", 2, user.getRolesList().size());
 
-    user.getRoles().remove(role);
+    user.getRolesList().remove(role);
     dao.saveUser(user);
     flush();
 
     user = dao.get(-1L);
-    assertEquals(1, user.getRoles().size());
+    assertEquals(1, user.getRolesList().size());
   }
 
   @Test

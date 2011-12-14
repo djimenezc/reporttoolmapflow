@@ -27,7 +27,7 @@ public class UserManagerTest extends BaseManagerTestCase {
     assertNotNull(user);
 
     log.debug(user);
-    assertEquals(1, user.getRoles().size());
+    assertEquals(1, user.getRolesList().size());
   }
 
   @Test
@@ -39,7 +39,7 @@ public class UserManagerTest extends BaseManagerTestCase {
 
     user = mgr.saveUser(user);
     assertEquals("303-555-1212", user.getPhoneNumber());
-    assertEquals(1, user.getRoles().size());
+    assertEquals(1, user.getRolesList().size());
   }
 
   @Test
@@ -54,7 +54,7 @@ public class UserManagerTest extends BaseManagerTestCase {
 
     user = mgr.saveUser(user);
     assertEquals("john", user.getUsername());
-    assertEquals(1, user.getRoles().size());
+    assertEquals(1, user.getRolesList().size());
 
     log.debug("removing user...");
 

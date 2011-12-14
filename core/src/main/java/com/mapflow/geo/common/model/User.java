@@ -7,13 +7,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -150,8 +146,9 @@ public class User extends BaseObject implements Serializable, UserDetails {
     return firstName + ' ' + lastName;
   }
 
-  @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = @JoinColumn(name = "role_id"))
+  // @ManyToMany(fetch = FetchType.EAGER)
+  // @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") },
+  // inverseJoinColumns = @JoinColumn(name = "role_id"))
   @Version
   public Integer getVersion() {
     return version;
@@ -304,11 +301,11 @@ public class User extends BaseObject implements Serializable, UserDetails {
         .append("enabled", enabled).append("accountExpired", accountExpired)
         .append("credentialsExpired", credentialsExpired).append("accountLocked", accountLocked);
 
-    if (getRoles() != null) {
+    if (getRolesList() != null) {
       sb.append("Granted Authorities: ");
 
       int i = 0;
-      for (final Role role : getRoles()) {
+      for (final Role role : getRolesList()) {
         if (i > 0) {
           sb.append(", ");
         }
@@ -323,6 +320,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
   }
 
   @Override
+  @Transient
   public Collection<GrantedAuthority> getAuthorities() {
     // TODO Auto-generated method stub
     return null;
@@ -336,7 +334,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
     this.address = address;
   }
 
-  public List<Role> getRoles() {
+  @Transient
+  public List<Role> getRolesList() {
 
     final String[] stringList = roles.split(",");
 

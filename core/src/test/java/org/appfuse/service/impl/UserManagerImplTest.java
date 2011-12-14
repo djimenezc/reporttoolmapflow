@@ -37,7 +37,7 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
   @Test
   public void testGetUser() throws Exception {
     final User testData = new User("1");
-    testData.getRoles().add(new Role("user"));
+    testData.getRolesList().add(new Role("user"));
 
     // set expected behavior on dao
     context.checking(new Expectations() {
@@ -51,13 +51,13 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
     final User user = userManager.getUser("1");
     assertTrue(user != null);
     assert user != null;
-    assertTrue(user.getRoles().size() == 1);
+    assertTrue(user.getRolesList().size() == 1);
   }
 
   @Test
   public void testSaveUser() throws Exception {
     final User testData = new User("1");
-    testData.getRoles().add(new Role("user"));
+    testData.getRolesList().add(new Role("user"));
 
     // set expected behavior on dao
     context.checking(new Expectations() {
@@ -81,7 +81,7 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
 
     final User returned = userManager.saveUser(user);
     assertTrue(returned.getPhoneNumber().equals("303-555-1212"));
-    assertTrue(returned.getRoles().size() == 1);
+    assertTrue(returned.getRolesList().size() == 1);
   }
 
   @Test
@@ -116,7 +116,7 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
 
     user = userManager.saveUser(user);
     assertTrue(user.getUsername().equals("john"));
-    assertTrue(user.getRoles().size() == 1);
+    assertTrue(user.getRolesList().size() == 1);
 
     context.checking(new Expectations() {
 

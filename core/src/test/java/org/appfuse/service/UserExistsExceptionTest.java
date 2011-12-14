@@ -33,7 +33,7 @@ public class UserExistsExceptionTest extends AbstractTransactionalJUnit4SpringCo
     final User user2 = new User();
     BeanUtils.copyProperties(user, user2);
     user2.setId(null);
-    user2.setVersion(null);
+    // user2.setVersion(null);
     user2.setRoles(null);
 
     // try saving as new user, this should fail UserExistsException b/c of unique keys

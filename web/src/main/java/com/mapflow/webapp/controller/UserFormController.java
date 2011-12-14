@@ -91,7 +91,7 @@ public class UserFormController extends BaseFormController {
         final String[] userRoles = request.getParameterValues("userRoles");
 
         if (userRoles != null) {
-          user.getRoles().clear();
+          user.getRolesList().clear();
           for (final String roleName : userRoles) {
             user.addRole(roleManager.getRole(roleName));
           }
