@@ -33,6 +33,7 @@
 						<drop>true</drop>
 						<jdk5>true</jdk5>
 						<propertyfile>target/test-classes/jdbc.properties</propertyfile>
+						<configurationfile>/src/main/resources/hibernate/hibernate.cfg.xml</configurationfile>
 						<skip>${skipTests}</skip>
 					</componentProperties>
 				</configuration>
@@ -260,11 +261,11 @@
             <version>${spring.version}</version>
         </dependency>
 
-		<dependency>
+<!--		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>11.1.0</version>
-		</dependency>
+		</dependency>-->
 
 	</dependencies>
 
