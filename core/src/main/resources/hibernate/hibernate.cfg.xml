@@ -16,7 +16,7 @@
 		<property name="hibernate.dialect">${hibernate.dialect}</property>
 
 		<mapping class="com.mapflow.geo.common.model.User" />
-		<mapping class="com.mapflow.geo.common.model.entities.MfServiceLogId" />
+<!-- 		<mapping class="com.mapflow.geo.common.model.entities.MfServiceLogId" /> -->
 		<mapping class="com.mapflow.geo.common.model.entities.MfServiceLog" />
 	</session-factory>
 </hibernate-configuration>
