@@ -2,7 +2,7 @@ package org.appfuse.service;
 
 import java.util.List;
 
-import com.mapflow.geo.common.model.LabelValue;
+import com.mapflow.model.LabelValue;
 
 /**
  * Business Service Interface to talk to persistence layer and retrieve values for drop-down choice

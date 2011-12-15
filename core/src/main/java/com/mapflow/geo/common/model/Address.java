@@ -10,6 +10,8 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableProperty;
 
+import com.mapflow.model.BaseObject;
+
 /**
  * This class is used to represent an address with address, city, province and postal-code
  * information.
@@ -26,56 +28,6 @@ public class Address extends BaseObject implements Serializable {
   private String province;
   private String country;
   private String postalCode;
-
-  @Column(length = 150)
-  @SearchableProperty
-  public String getAddress() {
-    return address;
-  }
-
-  @Column(length = 50)
-  @SearchableProperty
-  public String getCity() {
-    return city;
-  }
-
-  @Column(length = 100)
-  @SearchableProperty
-  public String getProvince() {
-    return province;
-  }
-
-  @Column(length = 100)
-  @SearchableProperty
-  public String getCountry() {
-    return country;
-  }
-
-  @Column(name = "postal_code", length = 15)
-  @SearchableProperty
-  public String getPostalCode() {
-    return postalCode;
-  }
-
-  public void setAddress(final String address) {
-    this.address = address;
-  }
-
-  public void setCity(final String city) {
-    this.city = city;
-  }
-
-  public void setCountry(final String country) {
-    this.country = country;
-  }
-
-  public void setPostalCode(final String postalCode) {
-    this.postalCode = postalCode;
-  }
-
-  public void setProvince(final String province) {
-    this.province = province;
-  }
 
   /**
    * Overridden equals method for object comparison. Compares based on hashCode.
@@ -98,6 +50,36 @@ public class Address extends BaseObject implements Serializable {
     return this.hashCode() == address1.hashCode();
   }
 
+  @Column(length = 150)
+  @SearchableProperty
+  public String getAddress() {
+    return address;
+  }
+
+  @Column(length = 50)
+  @SearchableProperty
+  public String getCity() {
+    return city;
+  }
+
+  @Column(length = 100)
+  @SearchableProperty
+  public String getCountry() {
+    return country;
+  }
+
+  @Column(name = "postal_code", length = 15)
+  @SearchableProperty
+  public String getPostalCode() {
+    return postalCode;
+  }
+
+  @Column(length = 100)
+  @SearchableProperty
+  public String getProvince() {
+    return province;
+  }
+
   /**
    * Overridden hashCode method - compares on address, city, province, country and postal code.
    * 
@@ -112,6 +94,26 @@ public class Address extends BaseObject implements Serializable {
     result = (29 * result) + (country != null ? country.hashCode() : 0);
     result = (29 * result) + (postalCode != null ? postalCode.hashCode() : 0);
     return result;
+  }
+
+  public void setAddress(final String address) {
+    this.address = address;
+  }
+
+  public void setCity(final String city) {
+    this.city = city;
+  }
+
+  public void setCountry(final String country) {
+    this.country = country;
+  }
+
+  public void setPostalCode(final String postalCode) {
+    this.postalCode = postalCode;
+  }
+
+  public void setProvince(final String province) {
+    this.province = province;
   }
 
   /**

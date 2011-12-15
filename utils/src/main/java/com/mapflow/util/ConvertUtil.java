@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.util;
+package com.mapflow.util;
 
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.mapflow.geo.common.model.LabelValue;
+import com.mapflow.model.LabelValue;
 
 /**
  * Utility class to convert one object to another.
@@ -22,12 +22,6 @@ import com.mapflow.geo.common.model.LabelValue;
 public final class ConvertUtil {
 
   private static final Log log = LogFactory.getLog(ConvertUtil.class);
-
-  /**
-   * Checkstyle rule: utility classes should not have public constructor
-   */
-  private ConvertUtil() {
-  }
 
   /**
    * Method to convert a ResourceBundle to a Map object.
@@ -43,23 +37,6 @@ public final class ConvertUtil {
     while (keys.hasMoreElements()) {
       final String key = keys.nextElement();
       map.put(key, rb.getString(key));
-    }
-
-    return map;
-  }
-
-  /**
-   * Convert a java.util.List of LabelValue objects to a LinkedHashMap.
-   * 
-   * @param list
-   *          the list to convert
-   * @return the populated map with the label as the key
-   */
-  public static Map<String, String> convertListToMap(final List<LabelValue> list) {
-    final Map<String, String> map = new LinkedHashMap<String, String>();
-
-    for (final LabelValue option : list) {
-      map.put(option.getLabel(), option.getValue());
     }
 
     return map;
@@ -84,6 +61,23 @@ public final class ConvertUtil {
   }
 
   /**
+   * Convert a java.util.List of LabelValue objects to a LinkedHashMap.
+   * 
+   * @param list
+   *          the list to convert
+   * @return the populated map with the label as the key
+   */
+  public static Map<String, String> convertListToMap(final List<LabelValue> list) {
+    final Map<String, String> map = new LinkedHashMap<String, String>();
+
+    for (final LabelValue option : list) {
+      map.put(option.getLabel(), option.getValue());
+    }
+
+    return map;
+  }
+
+  /**
    * Convenience method used by tests to populate an object from a ResourceBundle
    * 
    * @param obj
@@ -103,5 +97,11 @@ public final class ConvertUtil {
     }
 
     return obj;
+  }
+
+  /**
+   * Checkstyle rule: utility classes should not have public constructor
+   */
+  private ConvertUtil() {
   }
 }

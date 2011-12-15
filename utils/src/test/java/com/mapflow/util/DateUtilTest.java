@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.util;
+package com.mapflow.util;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -10,8 +10,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.i18n.LocaleContextHolder;
 
-import com.mapflow.geo.common.util.DateUtil;
-
 public class DateUtilTest extends TestCase {
 
   // ~ Instance fields ========================================================
@@ -22,25 +20,6 @@ public class DateUtilTest extends TestCase {
 
   public DateUtilTest(final String name) {
     super(name);
-  }
-
-  public void testGetInternationalDatePattern() {
-    LocaleContextHolder.setLocale(new Locale("nl"));
-    assertEquals("dd-MMM-yyyy", DateUtil.getDatePattern());
-
-    LocaleContextHolder.setLocale(Locale.FRANCE);
-    assertEquals("dd/MM/yyyy", DateUtil.getDatePattern());
-
-    LocaleContextHolder.setLocale(Locale.GERMANY);
-    assertEquals("dd.MM.yyyy", DateUtil.getDatePattern());
-
-    // non-existant bundle should default to default locale
-    LocaleContextHolder.setLocale(new Locale("fi"));
-    final String fiPattern = DateUtil.getDatePattern();
-    LocaleContextHolder.setLocale(Locale.getDefault());
-    final String defaultPattern = DateUtil.getDatePattern();
-
-    assertEquals(defaultPattern, fiPattern);
   }
 
   public void testGetDate() throws Exception {
@@ -66,14 +45,33 @@ public class DateUtilTest extends TestCase {
     log.debug(now);
   }
 
+  public void testGetDateTimeWithNull() {
+    final String date = DateUtil.getDateTime(null, null);
+    assertEquals("", date);
+  }
+
   public void testGetDateWithNull() {
     final String date = DateUtil.getDate(null);
     assertEquals("", date);
   }
 
-  public void testGetDateTimeWithNull() {
-    final String date = DateUtil.getDateTime(null, null);
-    assertEquals("", date);
+  public void testGetInternationalDatePattern() {
+    LocaleContextHolder.setLocale(new Locale("nl"));
+    assertEquals("dd-MMM-yyyy", DateUtil.getDatePattern());
+
+    LocaleContextHolder.setLocale(Locale.FRANCE);
+    assertEquals("dd/MM/yyyy", DateUtil.getDatePattern());
+
+    LocaleContextHolder.setLocale(Locale.GERMANY);
+    assertEquals("dd.MM.yyyy", DateUtil.getDatePattern());
+
+    // non-existant bundle should default to default locale
+    LocaleContextHolder.setLocale(new Locale("fi"));
+    final String fiPattern = DateUtil.getDatePattern();
+    LocaleContextHolder.setLocale(Locale.getDefault());
+    final String defaultPattern = DateUtil.getDatePattern();
+
+    assertEquals(defaultPattern, fiPattern);
   }
 
   public void testGetToday() throws ParseException {

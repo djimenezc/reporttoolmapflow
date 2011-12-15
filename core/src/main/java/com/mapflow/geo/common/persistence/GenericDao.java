@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import com.mapflow.geo.common.model.BaseObject;
-
 /**
  * Generic DAO Pattern
  * 
@@ -13,14 +11,17 @@ import com.mapflow.geo.common.model.BaseObject;
  * @param <I>
  * @param <E>
  */
-public interface GenericDao<E extends BaseObject, PK extends Serializable> extends BasicDao<E, PK> {
+public interface GenericDao<E extends com.mapflow.model.BaseObject, PK extends Serializable>
+  extends BasicDao<E, PK> {
 
   /**
-   * Method that delete a specific object in the persistent tier
+   * Checks for existence of an object of type E using the id arg.
    * 
-   * @param entity
+   * @param id
+   *          the id of the entity
+   * @return - true if it exists, false if it doesn't
    */
-  void remove(E entity);
+  boolean exists(PK id);
 
   /**
    * Method that save a object information in the persistent tier
@@ -28,6 +29,28 @@ public interface GenericDao<E extends BaseObject, PK extends Serializable> exten
    * @param entity
    */
   // void save(E entity);
+
+  /**
+   * Find a list of records by using a named query
+   * 
+   * @param queryName
+   *          query name of the named query
+   * @param queryParams
+   *          a map of the query names and the values
+   * @return a list of the records found
+   */
+  List<E> findByNamedQuery(String queryName, Map<String, Object> queryParams);
+
+  /**
+   * Generic method to get an object based on class and identifier. An
+   * ObjectRetrievalFailureException Runtime Exception is thrown if nothing is found.
+   * 
+   * @param id
+   *          the identifier (primary key) of the object to get
+   * @return a populated object
+   * @see org.springframework.orm.ObjectRetrievalFailureException
+   */
+  E get(PK id);
 
   /**
    * Generic method used to get all objects of a particular type. This is the same as lookup up all
@@ -49,33 +72,11 @@ public interface GenericDao<E extends BaseObject, PK extends Serializable> exten
   List<E> getAllDistinct();
 
   /**
-   * Generic method to get an object based on class and identifier. An
-   * ObjectRetrievalFailureException Runtime Exception is thrown if nothing is found.
+   * Method that delete a specific object in the persistent tier
    * 
-   * @param id
-   *          the identifier (primary key) of the object to get
-   * @return a populated object
-   * @see org.springframework.orm.ObjectRetrievalFailureException
+   * @param entity
    */
-  E get(PK id);
-
-  /**
-   * Checks for existence of an object of type E using the id arg.
-   * 
-   * @param id
-   *          the id of the entity
-   * @return - true if it exists, false if it doesn't
-   */
-  boolean exists(PK id);
-
-  /**
-   * Generic method to save an object - handles both update and insert.
-   * 
-   * @param object
-   *          the object to save
-   * @return the persisted object
-   */
-  E save(E object);
+  void remove(E entity);
 
   /**
    * Generic method to delete an object based on class and id
@@ -86,14 +87,12 @@ public interface GenericDao<E extends BaseObject, PK extends Serializable> exten
   void remove(PK id);
 
   /**
-   * Find a list of records by using a named query
+   * Generic method to save an object - handles both update and insert.
    * 
-   * @param queryName
-   *          query name of the named query
-   * @param queryParams
-   *          a map of the query names and the values
-   * @return a list of the records found
+   * @param object
+   *          the object to save
+   * @return the persisted object
    */
-  List<E> findByNamedQuery(String queryName, Map<String, Object> queryParams);
+  E save(E object);
 
 }

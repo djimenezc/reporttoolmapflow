@@ -28,6 +28,8 @@ import org.compass.annotations.SearchableProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.mapflow.model.BaseObject;
+
 /**
  * This class represents the basic "user" object in AppFuse that allows for authentication and user
  * management. It implements Acegi Security's UserDetails interface.

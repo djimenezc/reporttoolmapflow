@@ -14,7 +14,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.displaytag.tags.el.ExpressionEvaluator;
 
-import com.mapflow.geo.common.model.LabelValue;
+import com.mapflow.model.LabelValue;
 
 /**
  * Tag for creating multiple &lt;select&gt; options for displaying a list of country names.
@@ -28,47 +28,78 @@ import com.mapflow.geo.common.model.LabelValue;
  */
 public class CountryTag extends TagSupport {
 
+  /**
+   * Class to compare LabelValues using their labels with locale-sensitive behaviour.
+   */
+  public class LabelValueComparator implements Comparator {
+
+    private final Comparator c;
+
+    /**
+     * Creates a new LabelValueComparator object.
+     * 
+     * @param locale
+     *          The Locale used for localized String comparison.
+     */
+    public LabelValueComparator(final Locale locale) {
+      c = Collator.getInstance(locale);
+    }
+
+    /**
+     * Compares the localized labels of two LabelValues.
+     * 
+     * @param o1
+     *          The first LabelValue to compare.
+     * @param o2
+     *          The second LabelValue to compare.
+     * @return The value returned by comparing the localized labels.
+     */
+    @Override
+    public final int compare(final Object o1, final Object o2) {
+      final LabelValue lhs = (LabelValue) o1;
+      final LabelValue rhs = (LabelValue) o2;
+
+      return c.compare(lhs.getLabel(), rhs.getLabel());
+    }
+  }
+
   private static final long serialVersionUID = 3905528206810167095L;
   private String name;
   private String prompt;
   private String scope;
+
   private String selected;
 
   /**
-   * @param name
-   *          The name to set.
-   * @jsp.attribute required="false" rtexprvalue="true"
-   */
-  public void setName(final String name) {
-    this.name = name;
-  }
-
-  /**
-   * @param prompt
-   *          The prompt to set.
-   * @jsp.attribute required="false" rtexprvalue="true"
-   */
-  public void setPrompt(final String prompt) {
-    this.prompt = prompt;
-  }
-
-  /**
-   * @param selected
-   *          The selected option.
-   * @jsp.attribute required="false" rtexprvalue="true"
-   */
-  public void setDefault(final String selected) {
-    this.selected = selected;
-  }
-
-  /**
-   * Property used to simply stuff the list of countries into a specified scope.
+   * Build a List of LabelValues for all the available countries. Uses the two letter uppercase ISO
+   * name of the country as the value and the localized country name as the label.
    * 
-   * @param scope
-   * @jsp.attribute required="false" rtexprvalue="true"
+   * @param locale
+   *          The Locale used to localize the country names.
+   * @return List of LabelValues for all available countries.
    */
-  public void setToScope(final String scope) {
-    this.scope = scope;
+  protected List buildCountryList(final Locale locale) {
+    final String EMPTY = "";
+    final Locale[] available = Locale.getAvailableLocales();
+
+    final List countries = new ArrayList();
+
+    for (final Locale element : available) {
+      final String iso = element.getCountry();
+      final String name = element.getDisplayCountry(locale);
+
+      if (!EMPTY.equals(iso) && !EMPTY.equals(name)) {
+        final LabelValue country = new LabelValue(name, iso);
+
+        if (!countries.contains(country)) {
+          countries.add(new LabelValue(name, iso));
+        }
+      }
+    }
+
+    Collections.sort(countries, new LabelValueComparator(locale));
+
+    return countries;
   }
 
   /**
@@ -151,69 +182,39 @@ public class CountryTag extends TagSupport {
   }
 
   /**
-   * Build a List of LabelValues for all the available countries. Uses the two letter uppercase ISO
-   * name of the country as the value and the localized country name as the label.
-   * 
-   * @param locale
-   *          The Locale used to localize the country names.
-   * @return List of LabelValues for all available countries.
+   * @param selected
+   *          The selected option.
+   * @jsp.attribute required="false" rtexprvalue="true"
    */
-  protected List buildCountryList(final Locale locale) {
-    final String EMPTY = "";
-    final Locale[] available = Locale.getAvailableLocales();
-
-    final List countries = new ArrayList();
-
-    for (final Locale element : available) {
-      final String iso = element.getCountry();
-      final String name = element.getDisplayCountry(locale);
-
-      if (!EMPTY.equals(iso) && !EMPTY.equals(name)) {
-        final LabelValue country = new LabelValue(name, iso);
-
-        if (!countries.contains(country)) {
-          countries.add(new LabelValue(name, iso));
-        }
-      }
-    }
-
-    Collections.sort(countries, new LabelValueComparator(locale));
-
-    return countries;
+  public void setDefault(final String selected) {
+    this.selected = selected;
   }
 
   /**
-   * Class to compare LabelValues using their labels with locale-sensitive behaviour.
+   * @param name
+   *          The name to set.
+   * @jsp.attribute required="false" rtexprvalue="true"
    */
-  public class LabelValueComparator implements Comparator {
+  public void setName(final String name) {
+    this.name = name;
+  }
 
-    private final Comparator c;
+  /**
+   * @param prompt
+   *          The prompt to set.
+   * @jsp.attribute required="false" rtexprvalue="true"
+   */
+  public void setPrompt(final String prompt) {
+    this.prompt = prompt;
+  }
 
-    /**
-     * Creates a new LabelValueComparator object.
-     * 
-     * @param locale
-     *          The Locale used for localized String comparison.
-     */
-    public LabelValueComparator(final Locale locale) {
-      c = Collator.getInstance(locale);
-    }
-
-    /**
-     * Compares the localized labels of two LabelValues.
-     * 
-     * @param o1
-     *          The first LabelValue to compare.
-     * @param o2
-     *          The second LabelValue to compare.
-     * @return The value returned by comparing the localized labels.
-     */
-    @Override
-    public final int compare(final Object o1, final Object o2) {
-      final LabelValue lhs = (LabelValue) o1;
-      final LabelValue rhs = (LabelValue) o2;
-
-      return c.compare(lhs.getLabel(), rhs.getLabel());
-    }
+  /**
+   * Property used to simply stuff the list of countries into a specified scope.
+   * 
+   * @param scope
+   * @jsp.attribute required="false" rtexprvalue="true"
+   */
+  public void setToScope(final String scope) {
+    this.scope = scope;
   }
 }

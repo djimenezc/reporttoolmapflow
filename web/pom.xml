@@ -13,7 +13,7 @@
 
 	<artifactId>webReportTool</artifactId>
 	<packaging>war</packaging>
-	<name>Mapflow Statistics Underwriting Tool</name>
+	<name>Mapflow Statistics Underwriting Tool - Web</name>
 
 	<build>
 		<plugins>

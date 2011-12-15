@@ -2,7 +2,7 @@ package com.mapflow.geo.common.persistence;
 
 import java.io.Serializable;
 
-import com.mapflow.geo.common.model.BaseObject;
+import com.mapflow.model.BaseObject;
 
 /**
  * @author djimenez

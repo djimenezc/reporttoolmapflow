@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.model.User;
+import com.mapflow.test.service.BaseManagerTestCase;
 
 public class UserManagerTest extends BaseManagerTestCase {
 
@@ -20,27 +21,6 @@ public class UserManagerTest extends BaseManagerTestCase {
   @Autowired
   private RoleManager roleManager;
   private User user;
-
-  @Test
-  public void testGetUser() throws Exception {
-    user = mgr.getUserByUsername("user");
-    assertNotNull(user);
-
-    log.debug(user);
-    assertEquals(1, user.getRolesList().size());
-  }
-
-  @Test
-  public void testSaveUser() throws Exception {
-    user = mgr.getUserByUsername("user");
-    user.setPhoneNumber("303-555-1212");
-
-    log.debug("saving user with updated phone number: " + user);
-
-    user = mgr.saveUser(user);
-    assertEquals("303-555-1212", user.getPhoneNumber());
-    assertEquals(1, user.getRolesList().size());
-  }
 
   @Test
   public void testAddAndRemoveUser() throws Exception {
@@ -68,5 +48,26 @@ public class UserManagerTest extends BaseManagerTestCase {
       log.debug(e);
       assertNotNull(e);
     }
+  }
+
+  @Test
+  public void testGetUser() throws Exception {
+    user = mgr.getUserByUsername("user");
+    assertNotNull(user);
+
+    log.debug(user);
+    assertEquals(1, user.getRolesList().size());
+  }
+
+  @Test
+  public void testSaveUser() throws Exception {
+    user = mgr.getUserByUsername("user");
+    user.setPhoneNumber("303-555-1212");
+
+    log.debug("saving user with updated phone number: " + user);
+
+    user = mgr.saveUser(user);
+    assertEquals("303-555-1212", user.getPhoneNumber());
+    assertEquals(1, user.getRolesList().size());
   }
 }

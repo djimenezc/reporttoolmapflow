@@ -2,7 +2,7 @@ package com.mapflow.geo.logging.model;
 
 import java.util.Date;
 
-import com.mapflow.geo.common.model.BaseObject;
+import com.mapflow.model.BaseObject;
 
 public class LogMapdisplayTo extends BaseObject {
 

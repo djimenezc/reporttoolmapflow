@@ -16,6 +16,7 @@ import com.mapflow.geo.common.dao.RoleDao;
 import com.mapflow.geo.common.dao.UserDao;
 import com.mapflow.geo.common.model.Role;
 import com.mapflow.geo.common.model.User;
+import com.mapflow.test.BaseManagerMockTestCase;
 
 public class UserManagerImplTest extends BaseManagerMockTestCase {
 
@@ -32,56 +33,6 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
     userManager.setUserDao(userDao);
     roleDao = context.mock(RoleDao.class);
     roleManager = new RoleManagerImpl(roleDao);
-  }
-
-  @Test
-  public void testGetUser() throws Exception {
-    final User testData = new User("1");
-    testData.getRolesList().add(new Role("user"));
-
-    // set expected behavior on dao
-    context.checking(new Expectations() {
-
-      {
-        one(userDao).get(with(equal(1L)));
-        will(returnValue(testData));
-      }
-    });
-
-    final User user = userManager.getUser("1");
-    assertTrue(user != null);
-    assert user != null;
-    assertTrue(user.getRolesList().size() == 1);
-  }
-
-  @Test
-  public void testSaveUser() throws Exception {
-    final User testData = new User("1");
-    testData.getRolesList().add(new Role("user"));
-
-    // set expected behavior on dao
-    context.checking(new Expectations() {
-
-      {
-        one(userDao).get(with(equal(1L)));
-        will(returnValue(testData));
-      }
-    });
-
-    final User user = userManager.getUser("1");
-    user.setPhoneNumber("303-555-1212");
-
-    context.checking(new Expectations() {
-
-      {
-        one(userDao).saveUser(with(same(user)));
-        will(returnValue(user));
-      }
-    });
-
-    final User returned = userManager.saveUser(user);
-    assertTrue(returned.getPhoneNumber().equals("303-555-1212"));
-    assertTrue(returned.getRolesList().size() == 1);
   }
 
   @Test
@@ -137,6 +88,56 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
 
     user = userManager.getUser("5");
     assertNull(user);
+  }
+
+  @Test
+  public void testGetUser() throws Exception {
+    final User testData = new User("1");
+    testData.getRolesList().add(new Role("user"));
+
+    // set expected behavior on dao
+    context.checking(new Expectations() {
+
+      {
+        one(userDao).get(with(equal(1L)));
+        will(returnValue(testData));
+      }
+    });
+
+    final User user = userManager.getUser("1");
+    assertTrue(user != null);
+    assert user != null;
+    assertTrue(user.getRolesList().size() == 1);
+  }
+
+  @Test
+  public void testSaveUser() throws Exception {
+    final User testData = new User("1");
+    testData.getRolesList().add(new Role("user"));
+
+    // set expected behavior on dao
+    context.checking(new Expectations() {
+
+      {
+        one(userDao).get(with(equal(1L)));
+        will(returnValue(testData));
+      }
+    });
+
+    final User user = userManager.getUser("1");
+    user.setPhoneNumber("303-555-1212");
+
+    context.checking(new Expectations() {
+
+      {
+        one(userDao).saveUser(with(same(user)));
+        will(returnValue(user));
+      }
+    });
+
+    final User returned = userManager.saveUser(user);
+    assertTrue(returned.getPhoneNumber().equals("303-555-1212"));
+    assertTrue(returned.getRolesList().size() == 1);
   }
 
   @Test

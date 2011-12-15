@@ -13,8 +13,8 @@ import org.compass.core.support.search.CompassSearchHelper;
 import org.compass.core.support.search.CompassSearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mapflow.geo.common.model.BaseObject;
 import com.mapflow.geo.common.persistence.GenericDao;
+import com.mapflow.model.BaseObject;
 
 /**
  * This class serves as the Base class for all other Managers - namely to hold common CRUD methods
@@ -83,8 +83,8 @@ public class GenericManagerImpl<T extends BaseObject, PK extends Serializable> i
    * {@inheritDoc}
    */
   @Override
-  public List<T> getAll() {
-    return dao.getAll();
+  public boolean exists(final PK id) {
+    return dao.exists(id);
   }
 
   /**
@@ -99,16 +99,8 @@ public class GenericManagerImpl<T extends BaseObject, PK extends Serializable> i
    * {@inheritDoc}
    */
   @Override
-  public boolean exists(final PK id) {
-    return dao.exists(id);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public T save(final T object) {
-    return dao.save(object);
+  public List<T> getAll() {
+    return dao.getAll();
   }
 
   /**
@@ -117,6 +109,14 @@ public class GenericManagerImpl<T extends BaseObject, PK extends Serializable> i
   @Override
   public void remove(final PK id) {
     dao.remove(id);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public T save(final T object) {
+    return dao.save(object);
   }
 
   /**

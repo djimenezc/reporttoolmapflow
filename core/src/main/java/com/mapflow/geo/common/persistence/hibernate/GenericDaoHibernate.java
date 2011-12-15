@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import com.mapflow.geo.common.model.BaseObject;
 import com.mapflow.geo.common.persistence.GenericDao;
 
 /**
@@ -38,8 +37,8 @@ import com.mapflow.geo.common.persistence.GenericDao;
  * @param <PK>
  *          the primary key for that type
  */
-public class GenericDaoHibernate<T extends BaseObject, PK extends Serializable> implements
-  GenericDao<T, PK> {
+public class GenericDaoHibernate<T extends com.mapflow.model.BaseObject, PK extends Serializable>
+  implements GenericDao<T, PK> {
 
   /**
    * Log variable for all child classes. Uses LogFactory.getLog(getClass()) from Commons Logging
@@ -74,19 +73,20 @@ public class GenericDaoHibernate<T extends BaseObject, PK extends Serializable> 
     this.hibernateTemplate = new HibernateTemplate(sessionFactory);
   }
 
-  public HibernateTemplate getHibernateTemplate() {
-    return this.hibernateTemplate;
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @SuppressWarnings("unchecked")
+  public boolean exists(final PK id) {
+    final T entity = hibernateTemplate.get(this.persistentClass, id);
+    return entity != null;
   }
 
-  public SessionFactory getSessionFactory() {
-    return this.sessionFactory;
-  }
+  @Override
+  public T findById(final PK id) {
 
-  @Autowired
-  @Required
-  public void setSessionFactory(final SessionFactory sessionFactory) {
-    this.sessionFactory = sessionFactory;
-    this.hibernateTemplate = new HibernateTemplate(sessionFactory);
+    return get(id);
   }
 
   /**
@@ -94,18 +94,17 @@ public class GenericDaoHibernate<T extends BaseObject, PK extends Serializable> 
    */
   @Override
   @SuppressWarnings("unchecked")
-  public List<T> getAll() {
-    return hibernateTemplate.loadAll(this.persistentClass);
-  }
+  public List<T> findByNamedQuery(final String queryName, final Map<String, Object> queryParams) {
+    final String[] params = new String[queryParams.size()];
+    final Object[] values = new Object[queryParams.size()];
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  @SuppressWarnings("unchecked")
-  public List<T> getAllDistinct() {
-    final Collection result = new LinkedHashSet(getAll());
-    return new ArrayList(result);
+    int index = 0;
+    for (final String s : queryParams.keySet()) {
+      params[index] = s;
+      values[index++] = queryParams.get(s);
+    }
+
+    return hibernateTemplate.findByNamedQueryAndNamedParam(queryName, params, values);
   }
 
   /**
@@ -129,9 +128,46 @@ public class GenericDaoHibernate<T extends BaseObject, PK extends Serializable> 
    */
   @Override
   @SuppressWarnings("unchecked")
-  public boolean exists(final PK id) {
-    final T entity = hibernateTemplate.get(this.persistentClass, id);
-    return entity != null;
+  public List<T> getAll() {
+    return hibernateTemplate.loadAll(this.persistentClass);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @SuppressWarnings("unchecked")
+  public List<T> getAllDistinct() {
+    final Collection result = new LinkedHashSet(getAll());
+    return new ArrayList(result);
+  }
+
+  public HibernateTemplate getHibernateTemplate() {
+    return this.hibernateTemplate;
+  }
+
+  public SessionFactory getSessionFactory() {
+    return this.sessionFactory;
+  }
+
+  @Override
+  public Collection<T> loadAll() {
+
+    return getAll();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void remove(final PK id) {
+    hibernateTemplate.delete(this.get(id));
+  }
+
+  @Override
+  public void remove(final T entity) {
+
+    hibernateTemplate.delete(entity);
   }
 
   /**
@@ -143,47 +179,10 @@ public class GenericDaoHibernate<T extends BaseObject, PK extends Serializable> 
     return hibernateTemplate.merge(object);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void remove(final PK id) {
-    hibernateTemplate.delete(this.get(id));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  @SuppressWarnings("unchecked")
-  public List<T> findByNamedQuery(final String queryName, final Map<String, Object> queryParams) {
-    final String[] params = new String[queryParams.size()];
-    final Object[] values = new Object[queryParams.size()];
-
-    int index = 0;
-    for (final String s : queryParams.keySet()) {
-      params[index] = s;
-      values[index++] = queryParams.get(s);
-    }
-
-    return hibernateTemplate.findByNamedQueryAndNamedParam(queryName, params, values);
-  }
-
-  @Override
-  public T findById(final PK id) {
-
-    return get(id);
-  }
-
-  @Override
-  public Collection<T> loadAll() {
-
-    return getAll();
-  }
-
-  @Override
-  public void remove(final T entity) {
-
-    hibernateTemplate.delete(entity);
+  @Autowired
+  @Required
+  public void setSessionFactory(final SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+    this.hibernateTemplate = new HibernateTemplate(sessionFactory);
   }
 }

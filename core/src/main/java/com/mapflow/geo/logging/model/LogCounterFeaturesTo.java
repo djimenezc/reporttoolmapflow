@@ -14,8 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableId;
 
-import com.mapflow.geo.common.model.BaseObject;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
+import com.mapflow.model.BaseObject;
 
 @Entity
 @Table(name = "MF_SERVICE_LOG", uniqueConstraints = @UniqueConstraint(columnNames = "MF_SERVICE_LOG"))

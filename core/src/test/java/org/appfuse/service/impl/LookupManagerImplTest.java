@@ -10,9 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.mapflow.geo.common.constants.Constants;
-import com.mapflow.geo.common.model.LabelValue;
 import com.mapflow.geo.common.model.Role;
 import com.mapflow.geo.common.persistence.LookupDao;
+import com.mapflow.model.LabelValue;
+import com.mapflow.test.BaseManagerMockTestCase;
 
 public class LookupManagerImplTest extends BaseManagerMockTestCase {
 

@@ -7,8 +7,8 @@ import org.appfuse.service.LookupManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mapflow.geo.common.model.LabelValue;
 import com.mapflow.geo.common.persistence.LookupDao;
+import com.mapflow.model.LabelValue;
 
 /**
  * Implementation of LookupManager interface to talk to the persistence layer.

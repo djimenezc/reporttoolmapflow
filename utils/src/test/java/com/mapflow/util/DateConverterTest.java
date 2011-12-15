@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.util;
+package com.mapflow.util;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -12,60 +12,17 @@ import junit.framework.TestCase;
 
 import org.springframework.context.i18n.LocaleContextHolder;
 
-import com.mapflow.geo.common.util.DateConverter;
-import com.mapflow.geo.common.util.DateUtil;
+import com.mapflow.util.DateConverter;
+import com.mapflow.util.DateUtil;
 
 public class DateConverterTest extends TestCase {
 
   private final DateConverter converter = new DateConverter();
 
-  public void testInternationalization() throws Exception {
-    final List<Locale> locales = new ArrayList<Locale>() {
-
-      private static final long serialVersionUID = 1L;
-      {
-        add(Locale.US);
-        add(Locale.GERMANY);
-        add(Locale.FRANCE);
-        add(Locale.CHINA);
-        add(Locale.ITALY);
-      }
-    };
-
-    for (final Locale locale : locales) {
-      LocaleContextHolder.setLocale(locale);
-      testConvertStringToDate();
-      testConvertDateToString();
-      testConvertStringToTimestamp();
-      testConvertTimestampToString();
-    }
-  }
-
-  public void testConvertStringToDate() throws Exception {
-    final Date today = new Date();
-    final Calendar todayCalendar = new GregorianCalendar();
-    todayCalendar.setTime(today);
-    final String datePart = DateUtil.convertDateToString(today);
-    // test empty time
-    Date date = (Date) converter.convert(Date.class, "");
-    assertNull(date);
-    date = (Date) converter.convert(Date.class, datePart);
-
-    final Calendar cal = new GregorianCalendar();
-    cal.setTime(date);
-    assertEquals(todayCalendar.get(Calendar.YEAR), cal.get(Calendar.YEAR));
-    assertEquals(todayCalendar.get(Calendar.MONTH), cal.get(Calendar.MONTH));
-    assertEquals(todayCalendar.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_MONTH));
-  }
-
   public void testConvertDateToString() throws Exception {
     final Calendar cal = new GregorianCalendar(2005, 0, 16);
     final String date = (String) converter.convert(String.class, cal.getTime());
     assertEquals(DateUtil.convertDateToString(cal.getTime()), date);
-  }
-
-  public void testConvertStringToString() throws Exception {
-    assertEquals(converter.convert(String.class, "anystring"), "anystring");
   }
 
   public void testConvertDateWithNull() throws Exception {
@@ -91,6 +48,27 @@ public class DateConverterTest extends TestCase {
     }
   }
 
+  public void testConvertStringToDate() throws Exception {
+    final Date today = new Date();
+    final Calendar todayCalendar = new GregorianCalendar();
+    todayCalendar.setTime(today);
+    final String datePart = DateUtil.convertDateToString(today);
+    // test empty time
+    Date date = (Date) converter.convert(Date.class, "");
+    assertNull(date);
+    date = (Date) converter.convert(Date.class, datePart);
+
+    final Calendar cal = new GregorianCalendar();
+    cal.setTime(date);
+    assertEquals(todayCalendar.get(Calendar.YEAR), cal.get(Calendar.YEAR));
+    assertEquals(todayCalendar.get(Calendar.MONTH), cal.get(Calendar.MONTH));
+    assertEquals(todayCalendar.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_MONTH));
+  }
+
+  public void testConvertStringToString() throws Exception {
+    assertEquals(converter.convert(String.class, "anystring"), "anystring");
+  }
+
   public void testConvertStringToTimestamp() throws Exception {
     final Date today = new Date();
     final Calendar todayCalendar = new GregorianCalendar();
@@ -109,6 +87,28 @@ public class DateConverterTest extends TestCase {
     final Timestamp timestamp = Timestamp.valueOf("2005-03-10 01:02:03.4");
     final String time = (String) converter.convert(String.class, timestamp);
     assertEquals(DateUtil.getDateTime(DateUtil.getDateTimePattern(), timestamp), time);
+  }
+
+  public void testInternationalization() throws Exception {
+    final List<Locale> locales = new ArrayList<Locale>() {
+
+      private static final long serialVersionUID = 1L;
+      {
+        add(Locale.US);
+        add(Locale.GERMANY);
+        add(Locale.FRANCE);
+        add(Locale.CHINA);
+        add(Locale.ITALY);
+      }
+    };
+
+    for (final Locale locale : locales) {
+      LocaleContextHolder.setLocale(locale);
+      testConvertStringToDate();
+      testConvertDateToString();
+      testConvertStringToTimestamp();
+      testConvertTimestampToString();
+    }
   }
 
 }

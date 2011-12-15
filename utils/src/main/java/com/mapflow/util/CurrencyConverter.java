@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.util;
+package com.mapflow.util;
 
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;

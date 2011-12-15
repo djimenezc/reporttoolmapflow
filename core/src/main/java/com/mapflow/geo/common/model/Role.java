@@ -16,6 +16,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.security.core.GrantedAuthority;
 
+import com.mapflow.model.BaseObject;
+
 /**
  * This class is used to represent available roles in the database.
  * 
@@ -49,42 +51,11 @@ public class Role extends BaseObject implements Serializable, GrantedAuthority {
     this.name = name;
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  public Long getId() {
-    return id;
-  }
-
   /**
-   * @return the name property (getAuthority required by Acegi's GrantedAuthority interface)
-   * @see org.springframework.security.core.GrantedAuthority#getAuthority()
+   * {@inheritDoc}
    */
-  @Override
-  @Transient
-  public String getAuthority() {
-    return getName();
-  }
-
-  @Column(length = 20)
-  public String getName() {
-    return name;
-  }
-
-  @Column(length = 64)
-  public String getDescription() {
-    return description;
-  }
-
-  public void setId(final Long id) {
-    this.id = id;
-  }
-
-  public void setName(final String name) {
-    this.name = name;
-  }
-
-  public void setDescription(final String description) {
-    this.description = description;
+  public int compareTo(final Object o) {
+    return (equals(o) ? 0 : -1);
   }
 
   /**
@@ -106,11 +77,49 @@ public class Role extends BaseObject implements Serializable, GrantedAuthority {
   }
 
   /**
+   * @return the name property (getAuthority required by Acegi's GrantedAuthority interface)
+   * @see org.springframework.security.core.GrantedAuthority#getAuthority()
+   */
+  @Override
+  @Transient
+  public String getAuthority() {
+    return getName();
+  }
+
+  @Column(length = 64)
+  public String getDescription() {
+    return description;
+  }
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public Long getId() {
+    return id;
+  }
+
+  @Column(length = 20)
+  public String getName() {
+    return name;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
   public int hashCode() {
     return (name != null ? name.hashCode() : 0);
+  }
+
+  public void setDescription(final String description) {
+    this.description = description;
+  }
+
+  public void setId(final Long id) {
+    this.id = id;
+  }
+
+  public void setName(final String name) {
+    this.name = name;
   }
 
   /**
@@ -119,12 +128,5 @@ public class Role extends BaseObject implements Serializable, GrantedAuthority {
   @Override
   public String toString() {
     return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append(name).toString();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int compareTo(final Object o) {
-    return (equals(o) ? 0 : -1);
   }
 }
