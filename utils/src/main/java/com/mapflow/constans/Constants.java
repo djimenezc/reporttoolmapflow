@@ -7,16 +7,12 @@ package com.mapflow.constans;
  */
 public final class Constants {
 
-  private Constants() {
-    // hide me
-  }
-
-  // ~ Static fields/initializers =============================================
-
   /**
    * The name of the ResourceBundle used in this application
    */
-  public static final String BUNDLE_KEY = "ApplicationResources";
+  public static final String BUNDLE_KEY = "applicationResources/ApplicationResources";
+
+  // ~ Static fields/initializers =============================================
 
   /**
    * File separator from System properties
@@ -79,4 +75,8 @@ public final class Constants {
    * The name of the CSS Theme setting.
    */
   public static final String CSS_THEME = "csstheme";
+
+  private Constants() {
+    // hide me
+  }
 }

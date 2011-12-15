@@ -28,74 +28,90 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymockclassextension</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.concordion</groupId>
 			<artifactId>concordion</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>xom</groupId>
 			<artifactId>xom</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>ognl</groupId>
 			<artifactId>ognl</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.codehaus.castor</groupId>
-			<artifactId>castor-xml</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jmock</groupId>
 			<artifactId>jmock</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jmock</groupId>
 			<artifactId>jmock-junit4</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit-dep</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.codehaus.castor</groupId>
 			<artifactId>castor-xml</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
