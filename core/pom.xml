@@ -32,7 +32,7 @@
 					<componentProperties>
 						<drop>true</drop>
 						<jdk5>true</jdk5>
-						<propertyfile>target/test-classes/jdbc.properties</propertyfile>
+						<propertyfile>target/test-classes/hibernate/jdbc.properties</propertyfile>
 						<configurationfile>/src/main/resources/hibernate/hibernate.cfg.xml</configurationfile>
 						<skip>${skipTests}</skip>
 					</componentProperties>
