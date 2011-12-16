@@ -27,13 +27,13 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:/applicationContext-resources.xml
-            classpath:/applicationContext-dao.xml
-            classpath:/applicationContext-service.xml
-            classpath*:/applicationContext.xml
-            /WEB-INF/applicationContext*.xml
-            /WEB-INF/cxf-servlet.xml
-            /WEB-INF/security.xml
+            classpath:/spring/applicationContext-resources.xml
+            classpath:/spring/applicationContext-dao.xml
+            classpath:/spring/applicationContext-service.xml
+            classpath*:/spring/applicationContext.xml
+            /WEB-INF/spring/applicationContext*.xml
+            /WEB-INF/spring/cxf-servlet.xml
+            /WEB-INF/spring/security.xml
         </param-value>
     </context-param>
 

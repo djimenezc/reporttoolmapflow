@@ -27,7 +27,7 @@
 					<username>${jdbc.username}</username>
 					<password>${jdbc.password}</password>
 					<url>${jdbc.url}</url>
-					<src>src/test/resources/sample-data.xml</src>
+					<src>src/test/resources/dbunit/sample-data.xml</src>
 					<type>${dbunit.operation.type}</type>
 					<schema>${dbunit.schema}</schema>
 					<skip>${skipTests}</skip>
@@ -95,13 +95,13 @@
 						</goals>
 						<configuration>
 							<encoding>UTF8</encoding>
-							<includes>ApplicationResources_*.properties</includes>
-							<excludes>ApplicationResources.properties,
-								ApplicationResources_de*.properties,
-								ApplicationResources_fr*.properties,
-								ApplicationResources_nl*.properties,
-								ApplicationResources_pt*.properties,
-								ApplicationResources_es*.properties</excludes>
+							<includes>messages/ApplicationResources_*.properties</includes>
+							<excludes>messages/ApplicationResources.properties,
+								messages/ApplicationResources_de*.properties,
+								messages/ApplicationResources_fr*.properties,
+								messages/ApplicationResources_nl*.properties,
+								messages/ApplicationResources_pt*.properties,
+								messages/ApplicationResources_es*.properties</excludes>
 						</configuration>
 					</execution>
 					<execution>
@@ -111,12 +111,12 @@
 						</goals>
 						<configuration>
 							<encoding>8859_1</encoding>
-							<includes>ApplicationResources.properties,
-								ApplicationResources_de.properties,
-								ApplicationResources_fr.properties,
-								ApplicationResources_nl.properties,
-								ApplicationResources_pt*.properties,
-								ApplicationResources_es*.properties</includes>
+							<includes>messages/ApplicationResources.properties,
+								messages/ApplicationResources_de.properties,
+								messages/ApplicationResources_fr.properties,
+								messages/ApplicationResources_nl.properties,
+								messages/ApplicationResources_pt*.properties,
+								messages/ApplicationResources_es*.properties</includes>
 						</configuration>
 					</execution>
 				</executions>
@@ -124,9 +124,9 @@
 		</plugins>
 		<resources>
 			<resource>
-				<directory>src/main/resources/messages</directory>
+				<directory>src/main/resources</directory>
 				<excludes>
-					<exclude>ApplicationResources*.properties</exclude>
+					<exclude>messages/ApplicationResources*.properties</exclude>
 				</excludes>
 				<filtering>true</filtering>
 			</resource>
@@ -211,6 +211,20 @@
 			<artifactId>coreReportTool</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>mapflowUtils</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>mapflowTest</artifactId>
+			<version>${project.parent.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -309,12 +323,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>${servlet.version}</version>
-            <scope>provided</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>javax.servlet</groupId> -->
+<!--             <artifactId>servlet-api</artifactId> -->
+<!--             <version>${servlet.version}</version> -->
+<!--             <scope>provided</scope> -->
+<!--         </dependency> -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -373,6 +387,13 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.tuckey</groupId>
             <artifactId>urlrewritefilter</artifactId>
@@ -485,7 +506,7 @@
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>dbunit-maven-plugin</artifactId>
 						<configuration>
-							<src>src/main/resources/default-data.xml</src>
+							<src>src/main/resources/dbunit/default-data.xml</src>
 						</configuration>
 					</plugin>
 				</plugins>

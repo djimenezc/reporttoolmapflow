@@ -6,9 +6,9 @@
     <bean id="validatorFactory" class="org.springmodules.validation.commons.DefaultValidatorFactory">
         <property name="validationConfigLocations">
             <list>
-                <value>/WEB-INF/validation.xml</value>
-                <value>/WEB-INF/validator-rules.xml</value>
-                <value>/WEB-INF/validator-rules-custom.xml</value>
+                <value>/WEB-INF/validation/validation.xml</value>
+                <value>/WEB-INF/validation/validator-rules.xml</value>
+                <value>/WEB-INF/validation/validator-rules-custom.xml</value>
             </list>
         </property>
     </bean>
