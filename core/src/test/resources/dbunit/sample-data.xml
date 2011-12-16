@@ -21,11 +21,10 @@
 		<row>
 			<value description="ID">1</value>
 			<value description="USERNAME">user</value>
-			<value description="PASSWORD">12dea96fec20593566ab75692c9949596833adc9
-			</value>
+			<value description="PASSWORD">12dea96fec20593566ab75692c9949596833adc9</value>
 			<value description="BRANCH_NAME"></value>
-			<value description="CLIENT_ID"></value>
-			<value description="COMMENTS"></value>
+			<value description="CLIENT_ID">1</value>
+			<value description="COMMENTS">Normal user</value>
 			<value description="CREATED_DATE">2010-08-23 13:27:00.0</value>
 			<value description="DATA_ID">1</value>
 			<value description="DISABLED_DATE">2015-08-23 13:27:00.0</value>
@@ -33,17 +32,16 @@
 			<value description="LAST_LOGIN_DATE">2011-08-23 13:27:00.0</value>
 			<value description="PASSWORD_EXPIRY">2015-08-23 13:27:00.0</value>
 			<value description="PW_SALT"></value>
-			<value description="ROLE_NAM"></value>
+			<value description="ROLE_NAME">ROLE_USER</value>
 			<value description="USER_ROLE_ID">1</value>
 		</row>
 		<row>
-			<value description="ID">-2</value>
+			<value description="ID">2</value>
 			<value description="USERNAME">admin</value>
-			<value description="PASSWORD">d033e22ae348aeb5660fc2140aec35850c4da997
-			</value>
+			<value description="PASSWORD">d033e22ae348aeb5660fc2140aec35850c4da997</value>
 			<value description="BRANCH_NAME"></value>
-			<value description="CLIENT_ID"></value>
-			<value description="COMMENTS"></value>
+			<value description="CLIENT_ID">2</value>
+			<value description="COMMENTS">Admin user</value>
 			<value description="CREATED_DATE">2010-08-23 13:27:00.0</value>
 			<value description="DATA_ID">1</value>
 			<value description="DISABLED_DATE">2015-08-23 13:27:00.0</value>
@@ -51,7 +49,7 @@
 			<value description="LAST_LOGIN_DATE">2011-08-23 13:27:00.0</value>
 			<value description="PASSWORD_EXPIRY">2015-08-23 13:27:00.0</value>
 			<value description="PW_SALT"></value>
-			<value description="ROLE_NAM"></value>
+			<value description="ROLE_NAME">ROLE_ADMIN</value>
 			<value description="USER_ROLE_ID">1</value>
 		</row>
 	</table>

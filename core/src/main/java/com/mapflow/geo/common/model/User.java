@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -71,7 +74,6 @@ public class User extends BaseObject implements Serializable, UserDetails {
   private Date disabledDate;
   private Date lastLoginDate;
   private Date createdDate;
-  private String roleName;
   private String emailAddress;
   private String pwSalt;
   private String branchName;
@@ -94,7 +96,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
 
   public void addRole(final Role role) {
 
-    roles += role.getName();
+    roles += "," + role.getName();
   }
 
   /**
@@ -123,8 +125,12 @@ public class User extends BaseObject implements Serializable, UserDetails {
   @Override
   @Transient
   public Collection<GrantedAuthority> getAuthorities() {
-    // TODO Auto-generated method stub
-    return null;
+
+    final Set<GrantedAuthority> authorities = new LinkedHashSet<GrantedAuthority>();
+
+    authorities.addAll(getRolesGrantedAuthorities());
+
+    return authorities;
   }
 
   @Column(name = "BRANCH_NAME", length = 20)
@@ -242,8 +248,32 @@ public class User extends BaseObject implements Serializable, UserDetails {
   }
 
   @Column(name = "ROLE_NAME", length = 20)
-  public String getRoleName() {
-    return roleName;
+  public String getRoles() {
+    return roles;
+  }
+
+  @Transient
+  public Set<? extends GrantedAuthority> getRolesGrantedAuthorities() {
+
+    final Set<Role> rolesArray = new HashSet<Role>();
+
+    if (roles != null) {
+      final String[] stringArray = roles.split(",");
+
+      long i = 1;
+
+      for (final String roleName : stringArray) {
+
+        final Role role = new Role();
+
+        role.setId(i++);
+        role.setName(roleName);
+
+        rolesArray.add(role);
+      }
+    }
+
+    return rolesArray;
   }
 
   @Transient
@@ -353,15 +383,21 @@ public class User extends BaseObject implements Serializable, UserDetails {
   @Column(name = "account_enabled")
   @Transient
   public boolean isEnabled() {
-    return enabled;
+
+    return true;
+    // return enabled;
   }
 
   public void setAccountExpired(final boolean accountExpired) {
-    this.accountExpired = accountExpired;
+
+    this.accountExpired = false;
+    // this.accountExpired = accountExpired;
   }
 
   public void setAccountLocked(final boolean accountLocked) {
-    this.accountLocked = accountLocked;
+
+    this.accountLocked = false;
+    // this.accountLocked = accountLocked;
   }
 
   public void setAddress(final Address address) {
@@ -405,7 +441,9 @@ public class User extends BaseObject implements Serializable, UserDetails {
   }
 
   public void setEnabled(final boolean enabled) {
-    this.enabled = enabled;
+
+    this.enabled = true;
+    // this.enabled = enabled;
   }
 
   public void setFirstName(final String firstName) {
@@ -444,19 +482,18 @@ public class User extends BaseObject implements Serializable, UserDetails {
     this.pwSalt = pwSalt;
   }
 
-  public void setRoleName(final String roleName) {
-    this.roleName = roleName;
-  }
+  public void setRoles(final String roles) {
 
-  public void setRoles(final List<Role> roles) {
+    // final StringBuffer rolesStringBuffer = new StringBuffer();
+    //
+    // for (final Role role : roles) {
+    // rolesStringBuffer.append(role.getName());
+    // rolesStringBuffer.append(",");
+    // }
 
-    final StringBuffer rolesStringBuffer = new StringBuffer();
+    // this.roles = rolesStringBuffer.toString();
 
-    for (final Role role : roles) {
-      rolesStringBuffer.append(role.getName());
-    }
-
-    this.roles = rolesStringBuffer.toString();
+    this.roles = roles;
   }
 
   public void setUsername(final String username) {
