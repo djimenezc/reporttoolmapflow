@@ -9,7 +9,6 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.appfuse.service.LookupManager;
 import org.compass.gps.CompassGps;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
@@ -20,6 +19,7 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.mapflow.geo.common.constants.Constants;
+import com.mapflow.geo.common.service.LookupManager;
 
 /**
  * <p>

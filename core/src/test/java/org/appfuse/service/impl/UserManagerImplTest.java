@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.appfuse.service.UserExistsException;
 import org.jmock.Expectations;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +15,7 @@ import com.mapflow.geo.common.dao.RoleDao;
 import com.mapflow.geo.common.dao.UserDao;
 import com.mapflow.geo.common.model.Role;
 import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.service.UserExistsException;
 import com.mapflow.test.BaseManagerMockTestCase;
 
 public class UserManagerImplTest extends BaseManagerMockTestCase {

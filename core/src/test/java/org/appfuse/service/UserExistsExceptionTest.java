@@ -12,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.service.UserExistsException;
+import com.mapflow.geo.common.service.UserManager;
 
 @ContextConfiguration(locations = { "/applicationContext-service.xml",
   "/applicationContext-resources.xml", "classpath:/applicationContext-dao.xml" })

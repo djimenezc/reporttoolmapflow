@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import com.mapflow.geo.common.exceptions.MapflowAppException;
 import com.mapflow.geo.common.helper.dataaccess.DBHelper;
 
-public abstract class GenericDaoImpl<T, PK extends Serializable> implements GenericDaoExtend<T, PK> {
+public abstract class GenericJdbcDaoImpl<T, PK extends Serializable> implements GenericDaoExtend<T, PK> {
 
   // private final Log log = LogFactory.getLog(getClass());
   private final Logger logger = Logger.getLogger(getClass());
@@ -31,13 +31,13 @@ public abstract class GenericDaoImpl<T, PK extends Serializable> implements Gene
 
   private DBHelper dbHelper;
 
-  public GenericDaoImpl(final Class<T> persistentClass, final String datasourceName) {
+  public GenericJdbcDaoImpl(final Class<T> persistentClass, final String datasourceName) {
     super();
     this.persistentClass = persistentClass;
     this.datasourceName = datasourceName;
   }
 
-  public GenericDaoImpl(final Class<T> persistentClass, final String driver, final String user,
+  public GenericJdbcDaoImpl(final Class<T> persistentClass, final String driver, final String user,
     final String password, final String url, final DBHelper dbHelper) {
     super();
     this.persistentClass = persistentClass;

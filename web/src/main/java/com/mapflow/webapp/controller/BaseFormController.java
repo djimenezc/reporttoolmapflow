@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.appfuse.service.MailEngine;
-import org.appfuse.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
@@ -30,6 +28,8 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.service.MailEngine;
+import com.mapflow.geo.common.service.UserManager;
 
 /**
  * Implementation of <strong>SimpleFormController</strong> that contains convenience methods for

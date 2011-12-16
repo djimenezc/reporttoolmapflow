@@ -1,4 +1,4 @@
-package org.appfuse.service;
+package com.mapflow.geo.common.service;
 
 import java.lang.reflect.Method;
 import java.util.Collection;

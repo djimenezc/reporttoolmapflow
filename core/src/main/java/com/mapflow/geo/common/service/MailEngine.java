@@ -1,4 +1,4 @@
-package org.appfuse.service;
+package com.mapflow.geo.common.service;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

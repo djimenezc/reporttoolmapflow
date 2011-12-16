@@ -5,12 +5,10 @@ import java.net.URISyntaxException;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mapflow.geo.common.helper.dataaccess.DBHelper;
 import com.mapflow.geo.logging.dao.LogCountPointsDao;
 import com.mapflow.geo.logging.dao.LogMapdisplayDao;
-import com.mapflow.geo.logging.dao.impl.LogCountDaoImpl;
-import com.mapflow.geo.logging.dao.impl.LogMapdisplayDaoImpl;
 import com.mapflow.geo.logging.model.LogCounterFeaturesTo;
 import com.mapflow.geo.logging.model.LogMapdisplayTo;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
@@ -19,14 +17,11 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
 
   private final Logger logger = Logger.getLogger(getClass());
 
+  @Autowired
   private LogMapdisplayDao logMapdisplayDao;
+
+  @Autowired
   private LogCountPointsDao logCounterDao;
-
-  public LoggerDatabaseServiceImpl(final String jndiName, final DBHelper dbHelper) {
-
-    logMapdisplayDao = new LogMapdisplayDaoImpl(LogMapdisplayTo.class, jndiName, dbHelper);
-    logCounterDao = new LogCountDaoImpl(LogCounterFeaturesTo.class, jndiName, dbHelper);
-  }
 
   private String extractDomain(final String serviceUrl) {
 

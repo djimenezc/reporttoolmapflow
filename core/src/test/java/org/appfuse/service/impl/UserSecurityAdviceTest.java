@@ -5,8 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.appfuse.service.UserManager;
-import org.appfuse.service.UserSecurityAdvice;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JMock;
@@ -29,6 +27,8 @@ import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.dao.UserDao;
 import com.mapflow.geo.common.model.Role;
 import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.service.UserManager;
+import com.mapflow.geo.common.service.UserSecurityAdvice;
 
 @RunWith(JMock.class)
 public class UserSecurityAdviceTest {

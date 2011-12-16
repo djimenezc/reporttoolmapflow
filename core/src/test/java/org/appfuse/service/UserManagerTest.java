@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.service.RoleManager;
+import com.mapflow.geo.common.service.UserManager;
 import com.mapflow.test.service.BaseManagerTestCase;
 
 public class UserManagerTest extends BaseManagerTestCase {

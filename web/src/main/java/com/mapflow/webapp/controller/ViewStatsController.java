@@ -1,6 +1,5 @@
 package com.mapflow.webapp.controller;
 
-import org.appfuse.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mapflow.geo.common.constants.Constants;
+import com.mapflow.geo.common.service.UserManager;
 
 /**
  * Simple class to retrieve a list of users from the database.

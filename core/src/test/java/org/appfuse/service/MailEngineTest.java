@@ -21,6 +21,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
+import com.mapflow.geo.common.service.MailEngine;
 import com.mapflow.test.service.BaseManagerTestCase;
 
 /**

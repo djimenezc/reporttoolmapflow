@@ -1,4 +1,4 @@
-package org.appfuse.service;
+package com.mapflow.geo.common.service;
 
 import java.io.Serializable;
 import java.util.List;

@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mapflow.geo.common.exceptions.MapflowAppException;
 import com.mapflow.geo.logging.services.LoggerDatabaseServiceImpl;
@@ -14,14 +15,13 @@ import com.mapflow.geo.test.logging.unitary.mock.FactoryMock;
 
 public class LoggerDatabaseServiceImplTest {
 
+  @Autowired
   private LoggerDatabaseServiceImpl loggerService;
 
   private FactoryMock factoryMock;
 
   @Before
   public void setUp() throws Exception {
-
-    loggerService = new LoggerDatabaseServiceImpl("", null);
 
     factoryMock = new FactoryMock();
 

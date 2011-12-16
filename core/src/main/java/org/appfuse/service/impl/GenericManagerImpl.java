@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.appfuse.service.GenericManager;
 import org.compass.core.CompassHit;
 import org.compass.core.support.search.CompassSearchCommand;
 import org.compass.core.support.search.CompassSearchHelper;
@@ -14,6 +13,7 @@ import org.compass.core.support.search.CompassSearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mapflow.geo.common.persistence.GenericDao;
+import com.mapflow.geo.common.service.GenericManager;
 import com.mapflow.model.BaseObject;
 
 /**

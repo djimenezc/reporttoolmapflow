@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.mapflow.geo.common.helper.dataaccess.DBHelper;
-import com.mapflow.geo.common.persistence.GenericDaoImpl;
+import com.mapflow.geo.common.persistence.GenericJdbcDaoImpl;
 
-public abstract class AbstractLogDaoImpl<T, PK> extends GenericDaoImpl<T, String> {
+public abstract class AbstractLogDaoImpl<T, PK> extends GenericJdbcDaoImpl<T, String> {
 
   protected static String pstmt =
     "INSERT INTO MF_SERVICE_LOG (transaction_id,service_host,service_name,ticket,"

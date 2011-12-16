@@ -1,35 +1,26 @@
 package com.mapflow.geo.logging.services.locator;
 
-import com.mapflow.geo.common.helper.dataaccess.DBHelper;
-import com.mapflow.geo.logging.services.LoggerDatabaseServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.mapflow.geo.logging.services.LoggerService;
 
 public class ServiceLocatorImpl implements ServiceLocator {
 
-  private static final String DATABASE_GEOUW_LOG = "DBDATASOURCE-LOG";
+  @Autowired
+  private LoggerService loggerService;
 
-  private final LoggerService loggerService;
-
-  private static ServiceLocatorImpl instance;
-
-  public static ServiceLocatorImpl getInstance() {
-
-    if (instance == null) {
-      instance = new ServiceLocatorImpl(new DBHelper());
-    }
-
-    return instance;
-  }
-
-  private ServiceLocatorImpl(final DBHelper dbHelper) {
-
-    loggerService = new LoggerDatabaseServiceImpl(DATABASE_GEOUW_LOG, dbHelper);
+  public LoggerService getLoggerService() {
+    return loggerService;
   }
 
   @Override
   public LoggerService loggerServiceFinder() {
 
-    return loggerService;
+    return getLoggerService();
+  }
+
+  public void setLoggerService(final LoggerService loggerService) {
+    this.loggerService = loggerService;
   }
 
 }

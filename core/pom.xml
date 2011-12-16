@@ -163,7 +163,6 @@
 			</plugins>
 		</pluginManagement>
 
-
 		<testResources>
 			<testResource>
 				<directory>src/test/resources</directory>
@@ -173,7 +172,6 @@
 	</build>
 
 	<dependencies>
-
 
 		<dependency>
 			<groupId>org.hibernate</groupId>

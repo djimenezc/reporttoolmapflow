@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.jws.WebService;
 
-import org.appfuse.service.UserExistsException;
-import org.appfuse.service.UserManager;
-import org.appfuse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.orm.jpa.JpaSystemException;
@@ -16,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.mapflow.geo.common.dao.UserDao;
 import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.service.UserExistsException;
+import com.mapflow.geo.common.service.UserManager;
+import com.mapflow.geo.common.service.UserService;
 
 /**
  * Implementation of UserManager interface.

@@ -7,7 +7,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.appfuse.service.UserManager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -18,6 +17,7 @@ import org.springframework.validation.DataBinder;
 
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.service.UserManager;
 
 public class UserFormControllerTest extends BaseControllerTestCase {
 
