@@ -1,4 +1,4 @@
-package org.appfuse.service.impl;
+package com.mapflow.geo.common.service.impl;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -16,6 +16,8 @@ import com.mapflow.geo.common.dao.UserDao;
 import com.mapflow.geo.common.model.Role;
 import com.mapflow.geo.common.model.User;
 import com.mapflow.geo.common.service.UserExistsException;
+import com.mapflow.geo.common.service.impl.RoleManagerImpl;
+import com.mapflow.geo.common.service.impl.UserManagerImpl;
 import com.mapflow.test.BaseManagerMockTestCase;
 
 public class UserManagerImplTest extends BaseManagerMockTestCase {

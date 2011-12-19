@@ -1,4 +1,4 @@
-package org.appfuse.dao;
+package com.mapflow.test.dao;
 
 import java.util.Enumeration;
 import java.util.HashMap;

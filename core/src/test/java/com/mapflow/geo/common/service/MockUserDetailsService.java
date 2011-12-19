@@ -1,4 +1,4 @@
-package org.appfuse.service;
+package com.mapflow.geo.common.service;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;

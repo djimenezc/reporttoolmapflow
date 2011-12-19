@@ -1,4 +1,4 @@
-package org.appfuse.dao;
+package com.mapflow.geo.common.dao;
 
 import static org.junit.Assert.assertTrue;
 
@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mapflow.geo.common.persistence.LookupDao;
+import com.mapflow.test.dao.BaseDaoTestCase;
 
 /**
  * This class tests the current LookupDao implementation class

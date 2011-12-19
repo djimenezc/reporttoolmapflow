@@ -1,4 +1,4 @@
-package org.appfuse.dao;
+package com.mapflow.geo.common.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -19,11 +19,10 @@ import org.springframework.test.annotation.ExpectedException;
 import org.springframework.test.annotation.NotTransactional;
 
 import com.mapflow.geo.common.constants.Constants;
-import com.mapflow.geo.common.dao.RoleDao;
-import com.mapflow.geo.common.dao.UserDao;
 import com.mapflow.geo.common.model.Address;
 import com.mapflow.geo.common.model.Role;
 import com.mapflow.geo.common.model.User;
+import com.mapflow.test.dao.BaseDaoTestCase;
 
 public class UserDaoTest extends BaseDaoTestCase {
 
@@ -35,82 +34,6 @@ public class UserDaoTest extends BaseDaoTestCase {
   private CompassTemplate compassTemplate;
   @Autowired
   private CompassGps compassGps;
-
-  @Test
-  @ExpectedException(DataAccessException.class)
-  public void testGetUserInvalid() throws Exception {
-    // should throw DataAccessException
-    dao.get(1000L);
-  }
-
-  @Test
-  public void testGetUser() throws Exception {
-    final User user = dao.get(-1L);
-
-    assertNotNull(user);
-    assertEquals(1, user.getRolesList().size());
-    assertTrue(user.isEnabled());
-  }
-
-  @Test
-  public void testGetUserPassword() throws Exception {
-    final User user = dao.get(-1L);
-    final String password = dao.getUserPassword(user.getUsername());
-    assertNotNull(password);
-    log.debug("password: " + password);
-  }
-
-  @Test
-  @NotTransactional
-  @ExpectedException(DataIntegrityViolationException.class)
-  public void testUpdateUser() throws Exception {
-    User user = dao.get(-1L);
-
-    final Address address = user.getAddress();
-    address.setAddress("new address");
-
-    dao.saveUser(user);
-    flush();
-
-    user = dao.get(-1L);
-    assertEquals(address, user.getAddress());
-    assertEquals("new address", user.getAddress().getAddress());
-
-    // verify that violation occurs when adding new user with same username
-    user.setId(null);
-
-    // should throw DataIntegrityViolationException
-    dao.saveUser(user);
-  }
-
-  @Test
-  public void testAddUserRole() throws Exception {
-    User user = dao.get(-1L);
-    assertEquals(1, user.getRolesList().size());
-
-    final Role role = rdao.getRoleByName(Constants.ADMIN_ROLE);
-    user.addRole(role);
-    dao.saveUser(user);
-    flush();
-
-    user = dao.get(-1L);
-    assertEquals(2, user.getRolesList().size());
-
-    // add the same role twice - should result in no additional role
-    user.addRole(role);
-    dao.saveUser(user);
-    flush();
-
-    user = dao.get(-1L);
-    assertEquals("more than 2 roles", 2, user.getRolesList().size());
-
-    user.getRolesList().remove(role);
-    dao.saveUser(user);
-    flush();
-
-    user = dao.get(-1L);
-    assertEquals(1, user.getRolesList().size());
-  }
 
   @Test
   @ExpectedException(DataAccessException.class)
@@ -144,6 +67,82 @@ public class UserDaoTest extends BaseDaoTestCase {
 
     // should throw DataAccessException
     dao.get(user.getId());
+  }
+
+  @Test
+  public void testAddUserRole() throws Exception {
+    User user = dao.get(-1L);
+    assertEquals(1, user.getRolesList().size());
+
+    final Role role = rdao.getRoleByName(Constants.ADMIN_ROLE);
+    user.addRole(role);
+    dao.saveUser(user);
+    flush();
+
+    user = dao.get(-1L);
+    assertEquals(2, user.getRolesList().size());
+
+    // add the same role twice - should result in no additional role
+    user.addRole(role);
+    dao.saveUser(user);
+    flush();
+
+    user = dao.get(-1L);
+    assertEquals("more than 2 roles", 2, user.getRolesList().size());
+
+    user.getRolesList().remove(role);
+    dao.saveUser(user);
+    flush();
+
+    user = dao.get(-1L);
+    assertEquals(1, user.getRolesList().size());
+  }
+
+  @Test
+  public void testGetUser() throws Exception {
+    final User user = dao.get(-1L);
+
+    assertNotNull(user);
+    assertEquals(1, user.getRolesList().size());
+    assertTrue(user.isEnabled());
+  }
+
+  @Test
+  @ExpectedException(DataAccessException.class)
+  public void testGetUserInvalid() throws Exception {
+    // should throw DataAccessException
+    dao.get(1000L);
+  }
+
+  @Test
+  public void testGetUserPassword() throws Exception {
+    final User user = dao.get(-1L);
+    final String password = dao.getUserPassword(user.getUsername());
+    assertNotNull(password);
+    log.debug("password: " + password);
+  }
+
+  @Test
+  @NotTransactional
+  @ExpectedException(DataIntegrityViolationException.class)
+  public void testUpdateUser() throws Exception {
+    User user = dao.get(-1L);
+
+    final Address address = user.getAddress();
+    address.setAddress("new address");
+
+    dao.saveUser(user);
+    flush();
+
+    user = dao.get(-1L);
+    assertEquals(address, user.getAddress());
+    assertEquals("new address", user.getAddress().getAddress());
+
+    // verify that violation occurs when adding new user with same username
+    user.setId(null);
+
+    // should throw DataIntegrityViolationException
+    dao.saveUser(user);
   }
 
   @Test

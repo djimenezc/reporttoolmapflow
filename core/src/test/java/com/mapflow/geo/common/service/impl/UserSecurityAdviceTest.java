@@ -1,4 +1,4 @@
-package org.appfuse.service.impl;
+package com.mapflow.geo.common.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

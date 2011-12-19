@@ -14,8 +14,9 @@ import com.mapflow.geo.logging.dao.LogMapdisplayDao;
 import com.mapflow.geo.logging.model.LogCounterFeaturesTo;
 import com.mapflow.geo.logging.model.LogMapdisplayTo;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
+import com.mapflow.test.dao.BaseDaoTestCase;
 
-public class LogDaoImplTest {
+public class LogDaoImplTest extends BaseDaoTestCase {
 
   private static final String TRANSACTION_ID = "46180";
 
