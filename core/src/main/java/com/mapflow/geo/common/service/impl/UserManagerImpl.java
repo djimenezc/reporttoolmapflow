@@ -23,7 +23,7 @@ import com.mapflow.geo.common.service.UserService;
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 @Service("userManager")
-@WebService(serviceName = "UserService", endpointInterface = "org.appfuse.service.UserService")
+@WebService(serviceName = "UserService", endpointInterface = "com.mapflow.service.UserService")
 public class UserManagerImpl extends GenericManagerImpl<User, Long> implements UserManager,
   UserService {
 

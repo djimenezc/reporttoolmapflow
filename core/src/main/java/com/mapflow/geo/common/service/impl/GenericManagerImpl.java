@@ -25,10 +25,10 @@ import com.mapflow.model.BaseObject;
  * To register this class in your Spring context file, use the following XML.
  * 
  * <pre>
- *     &lt;bean id="userManager" class="org.appfuse.service.impl.GenericManagerImpl"&gt;
+ *     &lt;bean id="userManager" class="com.mapflow.service.impl.GenericManagerImpl"&gt;
  *         &lt;constructor-arg&gt;
- *             &lt;bean class="org.appfuse.dao.hibernate.GenericDaoHibernate"&gt;
- *                 &lt;constructor-arg value="org.appfuse.model.User"/&gt;
+ *             &lt;bean class="com.mapflow.dao.hibernate.GenericDaoHibernate"&gt;
+ *                 &lt;constructor-arg value="com.mapflow.model.User"/&gt;
  *                 &lt;property name="sessionFactory" ref="sessionFactory"/&gt;
  *             &lt;/bean&gt;
  *         &lt;/constructor-arg&gt;
@@ -39,10 +39,10 @@ import com.mapflow.model.BaseObject;
  * If you're using iBATIS instead of Hibernate, use:
  * 
  * <pre>
- *     &lt;bean id="userManager" class="org.appfuse.service.impl.GenericManagerImpl"&gt;
+ *     &lt;bean id="userManager" class="com.mapflow.service.impl.GenericManagerImpl"&gt;
  *         &lt;constructor-arg&gt;
- *             &lt;bean class="org.appfuse.dao.ibatis.GenericDaoiBatis"&gt;
- *                 &lt;constructor-arg value="org.appfuse.model.User"/&gt;
+ *             &lt;bean class="com.mapflow.dao.ibatis.GenericDaoiBatis"&gt;
+ *                 &lt;constructor-arg value="com.mapflow.model.User"/&gt;
  *                 &lt;property name="dataSource" ref="dataSource"/&gt;
  *                 &lt;property name="sqlMapClient" ref="sqlMapClient"/&gt;
  *             &lt;/bean&gt;

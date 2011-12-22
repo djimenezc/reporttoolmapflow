@@ -38,6 +38,7 @@ public class UserDaoTest extends BaseDaoTestCase {
   @Test
   @ExpectedException(DataAccessException.class)
   public void testAddAndRemoveUser() throws Exception {
+
     User user = new User("testuser");
     user.setPassword("testpass");
     user.setFirstName("Test");

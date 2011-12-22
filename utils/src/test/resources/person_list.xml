@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persons>
+    <person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:com.mapflow.model.Person">
+        <ssn>222-222-2222</ssn>
+        <address>123 Foo Street</address>
+        <work-phone>(123) 123-1234</work-phone>
+        <home-phone>(123) 123-1234</home-phone>
+        <email>bob@harris.org</email>
+        <name>Bob Harris</name>
+    </person>
+    <person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:com.mapflow.model.Person">
+        <ssn>333-222-2222</ssn>
+        <address>10 Fowley Street</address>
+        <work-phone>(123) 123-1234</work-phone>
+        <home-phone>(123) 123-1234</home-phone>
+        <email>david.jimenez@mapflow.com</email>
+        <name>David Jimenez</name>
+    </person>
+</persons>

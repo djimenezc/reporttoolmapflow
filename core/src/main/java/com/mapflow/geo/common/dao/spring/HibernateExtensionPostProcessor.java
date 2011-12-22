@@ -21,15 +21,15 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
  * As an example consider the following Spring bean configuration:
  * 
  * <pre>
- * &lt;bean class=&quot;org.appfuse.dao.spring.HibernateExtensionPostProcessor&quot;&gt;
+ * &lt;bean class=&quot;com.mapflow.dao.spring.HibernateExtensionPostProcessor&quot;&gt;
  *     &lt;property name=&quot;mappingResources&quot;&gt;
  *         &lt;list&gt;
- *             &lt;value&gt;org/appfuse/model/Foo.hbm.xml&lt;/value&gt;
+ *             &lt;value&gt;com/mapflow/model/Foo.hbm.xml&lt;/value&gt;
  *         &lt;/list&gt;
  *     &lt;/property&gt;
  *     &lt;property name=&quot;annotatedClasses&quot;&gt;
  *         &lt;list&gt;
- *             &lt;value&gt;org.appfuse.model.Bar&lt;/value&gt;
+ *             &lt;value&gt;com.mapflow.model.Bar&lt;/value&gt;
  *         &lt;/list&gt;
  *     &lt;/property&gt;
  * &lt;/bean&gt;
@@ -126,27 +126,6 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
   }
 
   /**
-   * Set the name of the SessionFactory bean. By default this post processor looks for a bean of
-   * name &quot;sessionFactory&quot;
-   * 
-   * @param sessionFactoryBeanName
-   *          The name of the session factory bean.
-   */
-  public void setSessionFactoryBeanName(final String sessionFactoryBeanName) {
-    this.sessionFactoryBeanName = sessionFactoryBeanName;
-  }
-
-  /**
-   * Set the list of mapping resources (.hbm.xml files) to be added to the session factory.
-   * 
-   * @param mappingResources
-   *          The list of mapping resources.
-   */
-  public void setMappingResources(final List mappingResources) {
-    this.mappingResources = mappingResources;
-  }
-
-  /**
    * The list of annotated classes to add to the session factory.
    * 
    * @param annotatedClasses
@@ -175,5 +154,26 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
    */
   public void setHibernateProperties(final Properties hibernateProperties) {
     this.hibernateProperties = hibernateProperties;
+  }
+
+  /**
+   * Set the list of mapping resources (.hbm.xml files) to be added to the session factory.
+   * 
+   * @param mappingResources
+   *          The list of mapping resources.
+   */
+  public void setMappingResources(final List mappingResources) {
+    this.mappingResources = mappingResources;
+  }
+
+  /**
+   * Set the name of the SessionFactory bean. By default this post processor looks for a bean of
+   * name &quot;sessionFactory&quot;
+   * 
+   * @param sessionFactoryBeanName
+   *          The name of the session factory bean.
+   */
+  public void setSessionFactoryBeanName(final String sessionFactoryBeanName) {
+    this.sessionFactoryBeanName = sessionFactoryBeanName;
   }
 }

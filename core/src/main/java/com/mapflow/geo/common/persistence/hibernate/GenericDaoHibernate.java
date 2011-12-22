@@ -26,8 +26,8 @@ import com.mapflow.geo.common.persistence.GenericDao;
  * To register this class in your Spring context file, use the following XML.
  * 
  * <pre>
- *      &lt;bean id="fooDao" class="org.appfuse.dao.hibernate.GenericDaoHibernate"&gt;
- *          &lt;constructor-arg value="org.appfuse.model.Foo"/&gt;
+ *      &lt;bean id="fooDao" class="com.mapflow.dao.hibernate.GenericDaoHibernate"&gt;
+ *          &lt;constructor-arg value="com.mapflow.model.Foo"/&gt;
  *      &lt;/bean&gt;
  * </pre>
  * 

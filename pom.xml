@@ -24,7 +24,7 @@
 		<defaultGoal>install</defaultGoal>
 		<plugins>
 			<plugin>
-				<groupId>org.appfuse.plugins</groupId>
+				<groupId>com.mapflow.plugins</groupId>
 				<artifactId>appfuse-maven-plugin</artifactId>
 				<version>${appfuse.version}</version>
 				<configuration>

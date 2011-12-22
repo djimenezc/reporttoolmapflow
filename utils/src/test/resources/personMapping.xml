@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Mapping DTD Version 1.0//EN" "http://castor.codehaus.org/mapping.dtd">
+
+<mapping>
+
+    <description>Description of the mapping</description>
+
+    <!-- <include href="other_mapping_file.xml"/> -->
+
+    <class name="mypackage.OrderItem">
+
+        <map-to xml="item"/>
+
+        <field name="name" type="string">
+            <bind-xml name="name" node="element"/>
+        </field>
+        
+        <field name="address" type="string">
+            <bind-xml name="address" node="element"/>
+        </field>
+
+        <field name="ssn" type="string">
+            <bind-xml name="id" node="element"/>
+        </field>
+        
+        <field name="email" type="string">
+            <bind-xml name="email" node="element"/>
+        </field>
+        
+         <field name="phone" type="string">
+            <bind-xml name="phone" node="element"/>
+        </field>
+        
+         <field name="workPhone" type="string">
+            <bind-xml name="workPhone" node="element"/>
+        </field>
+
+    </class>
+</mapping>
