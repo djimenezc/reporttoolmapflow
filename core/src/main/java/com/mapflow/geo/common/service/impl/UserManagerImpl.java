@@ -23,23 +23,12 @@ import com.mapflow.geo.common.service.UserService;
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 @Service("userManager")
-@WebService(serviceName = "UserService", endpointInterface = "com.mapflow.service.UserService")
+@WebService(serviceName = "UserService", endpointInterface = "com.mapflow.geo.common.service.UserService")
 public class UserManagerImpl extends GenericManagerImpl<User, Long> implements UserManager,
   UserService {
 
   private PasswordEncoder passwordEncoder;
   private UserDao userDao;
-
-  @Autowired
-  public void setPasswordEncoder(final PasswordEncoder passwordEncoder) {
-    this.passwordEncoder = passwordEncoder;
-  }
-
-  @Autowired
-  public void setUserDao(final UserDao userDao) {
-    dao = userDao;
-    this.userDao = userDao;
-  }
 
   /**
    * {@inheritDoc}
@@ -51,10 +40,33 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
 
   /**
    * {@inheritDoc}
+   * 
+   * @param username
+   *          the login name of the human
+   * @return User the populated user object
+   * @throws UsernameNotFoundException
+   *           thrown when username not found
+   */
+  @Override
+  public User getUserByUsername(final String username) throws UsernameNotFoundException {
+    return (User) userDao.loadUserByUsername(username);
+  }
+
+  /**
+   * {@inheritDoc}
    */
   @Override
   public List<User> getUsers() {
     return userDao.getAllDistinct();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void removeUser(final String userId) {
+    log.debug("removing user: " + userId);
+    userDao.remove(new Long(userId));
   }
 
   /**
@@ -117,30 +129,19 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
    * {@inheritDoc}
    */
   @Override
-  public void removeUser(final String userId) {
-    log.debug("removing user: " + userId);
-    userDao.remove(new Long(userId));
-  }
-
-  /**
-   * {@inheritDoc}
-   * 
-   * @param username
-   *          the login name of the human
-   * @return User the populated user object
-   * @throws UsernameNotFoundException
-   *           thrown when username not found
-   */
-  @Override
-  public User getUserByUsername(final String username) throws UsernameNotFoundException {
-    return (User) userDao.loadUserByUsername(username);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public List<User> search(final String searchTerm) {
     return super.search(searchTerm, User.class);
+  }
+
+  @Autowired
+  public void setPasswordEncoder(final PasswordEncoder passwordEncoder) {
+    this.passwordEncoder = passwordEncoder;
+  }
+
+  @Override
+  @Autowired
+  public void setUserDao(final UserDao userDao) {
+    dao = userDao;
+    this.userDao = userDao;
   }
 }
