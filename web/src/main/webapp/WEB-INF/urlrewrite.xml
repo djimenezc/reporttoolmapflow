@@ -61,11 +61,11 @@
     </rule>
     <rule>
         <from>/login*</from>
-        <to>/login.jsp</to>
+        <to>/jsp/login.jsp</to>
     </rule>
     <rule>
         <from>/logout*</from>
-        <to>/logout.jsp</to>
+        <to>/jsp/logout.jsp</to>
     </rule>
 
     <!-- Spring MVC -->
