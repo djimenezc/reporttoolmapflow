@@ -6,10 +6,11 @@
  */
 package com.mapflow.geo.common.exceptions;
 
+public class MapflowRequestOverflowException extends MapflowAppException {
 
-public class MapflowRequestOverflowException extends MapflowAppException{
+  private static final long serialVersionUID = 985364263390458706L;
 
-    public MapflowRequestOverflowException(String message) {
-        super(message);
-    }
+  public MapflowRequestOverflowException(String message) {
+    super(message);
+  }
 }

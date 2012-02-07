@@ -26,7 +26,7 @@ public class DBHelper {
 
   private final Logger logger = Logger.getLogger(getClass());
 
-  private static HashMap datasources = new HashMap();
+  private static HashMap<String, DataSource> datasources = new HashMap<String, DataSource>();
 
   public Connection connectDatabase(final String driver, final String user, final String pass,
     final String url) throws MapflowAppException {

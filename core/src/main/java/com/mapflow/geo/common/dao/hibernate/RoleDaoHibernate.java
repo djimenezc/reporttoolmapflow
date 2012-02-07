@@ -28,12 +28,16 @@ public class RoleDaoHibernate extends GenericDaoHibernate<Role, Long> implements
    */
   @Override
   public Role getRoleByName(final String rolename) {
-    final List roles = getHibernateTemplate().find("from Role where name=?", rolename);
+
+    @SuppressWarnings("unchecked")
+    final List<Role> roles =
+      (List<Role>) getHibernateTemplate().find("from Role where name=?", rolename);
+
     if (roles.isEmpty()) {
       return null;
     }
     else {
-      return (Role) roles.get(0);
+      return roles.get(0);
     }
   }
 

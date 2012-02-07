@@ -125,7 +125,7 @@ public class GenericManagerImpl<T extends BaseObject, PK extends Serializable> i
    * Search implementation using Compass.
    */
   @Override
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public List<T> search(final String q, final Class clazz) {
     if ((q == null) || "".equals(q.trim())) {
       return getAll();

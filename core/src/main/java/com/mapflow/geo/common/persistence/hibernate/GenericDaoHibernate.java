@@ -77,7 +77,6 @@ public class GenericDaoHibernate<T extends com.mapflow.model.BaseObject, PK exte
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("unchecked")
   public boolean exists(final PK id) {
     final T entity = hibernateTemplate.get(this.persistentClass, id);
     return entity != null;
@@ -111,7 +110,6 @@ public class GenericDaoHibernate<T extends com.mapflow.model.BaseObject, PK exte
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("unchecked")
   public T get(final PK id) {
     final T entity = hibernateTemplate.get(this.persistentClass, id);
 
@@ -127,7 +125,6 @@ public class GenericDaoHibernate<T extends com.mapflow.model.BaseObject, PK exte
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("unchecked")
   public List<T> getAll() {
     return hibernateTemplate.loadAll(this.persistentClass);
   }
@@ -136,10 +133,11 @@ public class GenericDaoHibernate<T extends com.mapflow.model.BaseObject, PK exte
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("unchecked")
   public List<T> getAllDistinct() {
-    final Collection result = new LinkedHashSet(getAll());
-    return new ArrayList(result);
+   
+    final Collection<T> result = new LinkedHashSet<T>(getAll());
+    
+    return new ArrayList<T>(result);
   }
 
   public HibernateTemplate getHibernateTemplate() {
@@ -174,8 +172,8 @@ public class GenericDaoHibernate<T extends com.mapflow.model.BaseObject, PK exte
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("unchecked")
   public T save(final T object) {
+    
     return hibernateTemplate.merge(object);
   }
 

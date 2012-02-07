@@ -50,7 +50,7 @@ public class MailEngine {
      * @param templateName the Velocity template to use (relative to classpath)
      * @param model a map containing key/value pairs
      */
-    public void sendMessage(SimpleMailMessage msg, String templateName, Map model) {
+    public void sendMessage(SimpleMailMessage msg, String templateName, Map<?, ?> model) {
         String result = null;
 
         try {

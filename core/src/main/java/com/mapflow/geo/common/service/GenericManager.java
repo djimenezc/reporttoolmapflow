@@ -59,5 +59,6 @@ public interface GenericManager<T, PK extends Serializable> {
      * @param clazz type of class to search for.
      * @return a list of matched objects
      */
+    @SuppressWarnings("rawtypes")
     List<T> search(String searchTerm, Class clazz);
 }

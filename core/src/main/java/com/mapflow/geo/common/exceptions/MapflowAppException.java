@@ -4,25 +4,26 @@ package com.mapflow.geo.common.exceptions;
 import java.lang.RuntimeException;
 import java.text.ParseException;
 
-
 /**
  * @author Dave Conway
  */
 public class MapflowAppException extends Exception {
 
-    public MapflowAppException(String message) {
-        super(message);
-    }
+  private static final long serialVersionUID = 1L;
 
-    public MapflowAppException(String message, Throwable ex) {
-        super(message, ex);
-    }  
-    
-    public MapflowAppException(RuntimeException e, String message) {
-        super(e);
-    } 
-    
-    public MapflowAppException(ParseException e, String message) {
-        super(e);
-    } 
+  public MapflowAppException(String message) {
+    super(message);
+  }
+
+  public MapflowAppException(String message, Throwable ex) {
+    super(message, ex);
+  }
+
+  public MapflowAppException(RuntimeException e, String message) {
+    super(e);
+  }
+
+  public MapflowAppException(ParseException e, String message) {
+    super(e);
+  }
 }

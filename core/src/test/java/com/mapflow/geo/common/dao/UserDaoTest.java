@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.ExpectedException;
-import org.springframework.test.annotation.NotTransactional;
 
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.model.Address;
@@ -124,7 +123,7 @@ public class UserDaoTest extends BaseDaoTestCase {
   }
 
   @Test
-  @NotTransactional
+//  @NotTransactional
   @ExpectedException(DataIntegrityViolationException.class)
   public void testUpdateUser() throws Exception {
     User user = dao.get(-1L);

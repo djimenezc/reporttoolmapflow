@@ -22,8 +22,11 @@ public class LookupDaoTest extends BaseDaoTestCase {
 
   @Test
   public void testGetRoles() {
-    final List roles = lookupDao.getRoles();
+    
+    final List<?> roles = lookupDao.getRoles();
+    
     log.debug(roles);
+    
     assertTrue(roles.size() > 0);
   }
 }

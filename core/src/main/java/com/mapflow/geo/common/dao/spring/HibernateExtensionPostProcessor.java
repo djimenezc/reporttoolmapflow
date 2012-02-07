@@ -80,7 +80,7 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
         }
 
         // value is expected to be a list.
-        final List existingMappingResources = (List) propertyValue.getValue();
+        final List<?> existingMappingResources = (List<?>) propertyValue.getValue();
         existingMappingResources.addAll(mappingResources);
       }
 
@@ -94,7 +94,7 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
         }
 
         // value is expected to be a list.
-        final List existingMappingResources = (List) propertyValue.getValue();
+        final List<?> existingMappingResources = (List<?>) propertyValue.getValue();
         existingMappingResources.addAll(annotatedClasses);
       }
 
@@ -104,7 +104,7 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
           propertyValue = new PropertyValue("configLocations", new ArrayList());
           propertyValues.addPropertyValue(propertyValue);
         }
-        final List existingConfigLocations = (List) propertyValue.getValue();
+        final List<?> existingConfigLocations = (List<?>) propertyValue.getValue();
         existingConfigLocations.addAll(configLocations);
       }
 
@@ -131,7 +131,7 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
    * @param annotatedClasses
    *          The list of annotated classes that need to be added.
    */
-  public void setAnnotatedClasses(final List annotatedClasses) {
+  public void setAnnotatedClasses(final List<?> annotatedClasses) {
     this.annotatedClasses = annotatedClasses;
   }
 
@@ -142,7 +142,7 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
    * @param configLocations
    *          The list of configuration locations that need to be added.
    */
-  public void setConfigLocations(final List configLocations) {
+  public void setConfigLocations(final List<?> configLocations) {
     this.configLocations = configLocations;
   }
 
@@ -162,7 +162,7 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
    * @param mappingResources
    *          The list of mapping resources.
    */
-  public void setMappingResources(final List mappingResources) {
+  public void setMappingResources(final List<?> mappingResources) {
     this.mappingResources = mappingResources;
   }
 
