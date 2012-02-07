@@ -8,9 +8,9 @@
 
     <!-- <include href="other_mapping_file.xml"/> -->
 
-    <class name="mypackage.OrderItem">
+    <class name="com.mapflow.model.Person">
 
-        <map-to xml="item"/>
+        <map-to xml="person"/>
 
         <field name="name" type="string">
             <bind-xml name="name" node="element"/>
@@ -28,8 +28,8 @@
             <bind-xml name="email" node="element"/>
         </field>
         
-         <field name="phone" type="string">
-            <bind-xml name="phone" node="element"/>
+         <field name="homePhone" type="string">
+            <bind-xml name="homePhone" node="element"/>
         </field>
         
          <field name="workPhone" type="string">

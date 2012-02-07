@@ -9,6 +9,8 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.exolab.castor.mapping.Mapping;
+import org.exolab.castor.mapping.MappingException;
 import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.Marshaller;
 import org.exolab.castor.xml.Unmarshaller;
@@ -31,20 +33,34 @@ public class XmlPersonTest extends TestCase {
     System.out.println("Work Phone: " + person.getWorkPhone());
   }
 
-  public void testCreatePerson() throws MarshalException, ValidationException, IOException {
+  public void testCreatePerson() throws MarshalException, ValidationException, IOException, MappingException {
     // -- create a person to work with
     final Person person =
       new Person("Bob Harris", "123 Foo Street", "222-222-2222", "bob@harris.org",
         "(123) 123-1234", "(123) 123-1234");
 
+    Mapping mapping = new Mapping();
+    mapping.loadMapping("src/test/resources/personMapping.xml");
+    
     // -- marshal the person object out as a <person>
     final FileWriter file = new FileWriter("target/bob_person.xml");
-    Marshaller.marshal(person, file);
-
+    Marshaller marshaller = new Marshaller(file);
+    
+    marshaller.marshal(person);
+    marshaller.setMapping(mapping);
+      
     file.close();
 
+    Unmarshaller unmarshaller = new Unmarshaller(Person.class);
+    unmarshaller.setReuseObjects(true);
+    unmarshaller.setIgnoreExtraElements(true);
+    unmarshaller.setIgnoreExtraAttributes(true);
+    unmarshaller.setValidation(false);
+    unmarshaller.setMapping(mapping);
+
+    
     final Person personRetrieved =
-      (Person) Unmarshaller.unmarshal(Person.class, new FileReader("target/bob_person.xml"));
+      (Person) unmarshaller.unmarshal(new FileReader("target/bob_person.xml"));
 
     assertEquals(person, personRetrieved);
   }
@@ -77,36 +93,38 @@ public class XmlPersonTest extends TestCase {
     assertEquals(person1, personRetrieved);
   }
 
-  // public void testCreatePersonWithMapping() throws MarshalException, ValidationException,
-  // IOException {
-  //
-  // // -- create a person to work with
-  // final Person person =
-  // new Person("Bob Harris", "123 Foo Street", "222-222-2222", "bob@harris.org",
-  // "(123) 123-1234", "(123) 123-1234");
-  //
-  // // -- marshal the person object out as a <person>
-  // final FileWriter file = new FileWriter("target/bob_person_mapping.xml");
-  //
-  //
-  // final Mapping mapping = ... ;
-  // final FieldHandlerFactory factory = ...;
-  // final Marshaller m = new Marshaller(file);
-  // final ClassDescriptorResolverImpl cdr = new ClassDescriptorResolverImpl();
-  // cdr.getIntrospector().addFieldHandlerFactory(factory);
-  // m.setResolver(cdr);
-  // m.setMapping(mapping);
-  //
-  //
-  // Marshaller.marshal(person, file);
-  //
-  // file.close();
-  //
-  // final Person personRetrieved =
-  // (Person) Unmarshaller.unmarshal(Person.class, new FileReader("target/bob_person.xml"));
-  //
-  // assertEquals(person, personRetrieved);
-  // }
+  
+  public void testCreatePersonWithMapping() throws MarshalException, ValidationException, IOException, MappingException {
+    // -- create a person to work with
+    final Person person =
+      new Person("Bob Harris", "123 Foo Street", "222-222-2222", "bob@harris.org",
+        "(123) 123-1234", "(123) 123-1234");
+
+    Mapping mapping = new Mapping();
+    mapping.loadMapping("src/test/resources/personMapping.xml");
+    
+    // -- marshal the person object out as a <person>
+    final FileWriter file = new FileWriter("target/bob_person.xml");
+    Marshaller marshaller = new Marshaller(file);
+    
+    marshaller.marshal(person);
+    marshaller.setMapping(mapping);
+      
+    file.close();
+
+    Unmarshaller unmarshaller = new Unmarshaller(Person.class);
+    unmarshaller.setReuseObjects(true);
+    unmarshaller.setIgnoreExtraElements(true);
+    unmarshaller.setIgnoreExtraAttributes(true);
+    unmarshaller.setValidation(false);
+    unmarshaller.setMapping(mapping);
+
+    
+    final Person personRetrieved =
+      (Person) unmarshaller.unmarshal(new FileReader("target/bob_person.xml"));
+
+    assertEquals(person, personRetrieved);
+  }
 
   public void testModifyPerson() throws MarshalException, ValidationException, IOException {
 
