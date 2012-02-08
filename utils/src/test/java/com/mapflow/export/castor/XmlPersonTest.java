@@ -39,25 +39,15 @@ public class XmlPersonTest extends TestCase {
       new Person("Bob Harris", "123 Foo Street", "222-222-2222", "bob@harris.org",
         "(123) 123-1234", "(123) 123-1234");
 
-    Mapping mapping = new Mapping();
-    mapping.loadMapping("src/test/resources/personMapping.xml");
-    
     // -- marshal the person object out as a <person>
     final FileWriter file = new FileWriter("target/bob_person.xml");
     Marshaller marshaller = new Marshaller(file);
     
     marshaller.marshal(person);
-    marshaller.setMapping(mapping);
       
     file.close();
 
     Unmarshaller unmarshaller = new Unmarshaller(Person.class);
-    unmarshaller.setReuseObjects(true);
-    unmarshaller.setIgnoreExtraElements(true);
-    unmarshaller.setIgnoreExtraAttributes(true);
-    unmarshaller.setValidation(false);
-    unmarshaller.setMapping(mapping);
-
     
     final Person personRetrieved =
       (Person) unmarshaller.unmarshal(new FileReader("target/bob_person.xml"));
@@ -94,37 +84,37 @@ public class XmlPersonTest extends TestCase {
   }
 
   
-  public void testCreatePersonWithMapping() throws MarshalException, ValidationException, IOException, MappingException {
-    // -- create a person to work with
-    final Person person =
-      new Person("Bob Harris", "123 Foo Street", "222-222-2222", "bob@harris.org",
-        "(123) 123-1234", "(123) 123-1234");
-
-    Mapping mapping = new Mapping();
-    mapping.loadMapping("src/test/resources/personMapping.xml");
-    
-    // -- marshal the person object out as a <person>
-    final FileWriter file = new FileWriter("target/bob_person.xml");
-    Marshaller marshaller = new Marshaller(file);
-    
-    marshaller.marshal(person);
-    marshaller.setMapping(mapping);
-      
-    file.close();
-
-    Unmarshaller unmarshaller = new Unmarshaller(Person.class);
-    unmarshaller.setReuseObjects(true);
-    unmarshaller.setIgnoreExtraElements(true);
-    unmarshaller.setIgnoreExtraAttributes(true);
-    unmarshaller.setValidation(false);
-    unmarshaller.setMapping(mapping);
-
-    
-    final Person personRetrieved =
-      (Person) unmarshaller.unmarshal(new FileReader("target/bob_person.xml"));
-
-    assertEquals(person, personRetrieved);
-  }
+//  public void testCreatePersonWithMapping() throws MarshalException, ValidationException, IOException, MappingException {
+//    // -- create a person to work with
+//    final Person person =
+//      new Person("Bob Harris", "123 Foo Street", "222-222-2222", "bob@harris.org",
+//        "(123) 123-1234", "(123) 123-1234");
+//
+//    Mapping mapping = new Mapping();
+//    mapping.loadMapping("src/test/resources/personMapping.xml");
+//    
+//    // -- marshal the person object out as a <person>
+//    final FileWriter file = new FileWriter("target/bob_person.xml");
+//    Marshaller marshaller = new Marshaller(file);
+//    
+//    marshaller.marshal(person);
+//    marshaller.setMapping(mapping);
+//      
+//    file.close();
+//
+//    Unmarshaller unmarshaller = new Unmarshaller(Person.class);
+//    unmarshaller.setReuseObjects(true);
+//    unmarshaller.setIgnoreExtraElements(true);
+//    unmarshaller.setIgnoreExtraAttributes(true);
+//    unmarshaller.setValidation(false);
+//    unmarshaller.setMapping(mapping);
+//
+//    
+//    final Person personRetrieved =
+//      (Person) unmarshaller.unmarshal(new FileReader("target/bob_person.xml"));
+//
+//    assertEquals(person, personRetrieved);
+//  }
 
   public void testModifyPerson() throws MarshalException, ValidationException, IOException {
 
