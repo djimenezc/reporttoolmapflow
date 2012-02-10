@@ -7,8 +7,7 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mapflow.geo.logging.dao.LogCountPointsDao;
-import com.mapflow.geo.logging.dao.LogMapdisplayDao;
+import com.mapflow.geo.logging.dao.LogDao;
 import com.mapflow.geo.logging.model.LogCounterFeaturesTo;
 import com.mapflow.geo.logging.model.LogMapdisplayTo;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
@@ -18,10 +17,7 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
   private final Logger logger = Logger.getLogger(getClass());
 
   @Autowired
-  private LogMapdisplayDao logMapdisplayDao;
-
-  @Autowired
-  private LogCountPointsDao logCounterDao;
+  private LogDao logDao;
 
   private String extractDomain(final String serviceUrl) {
 
@@ -43,8 +39,8 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
     return serviceDomain;
   }
 
-  public LogMapdisplayDao getLogMapdisplayDao() {
-    return logMapdisplayDao;
+  public LogDao getLogDao() {
+    return logDao;
   }
 
   @Override
@@ -116,8 +112,8 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
     log.setYcoord(ycoord);
     log.setZoomLevel(zoomLevel);
 
-    if (logMapdisplayDao != null) {
-      log = logMapdisplayDao.save(log);
+    if (logDao != null) {
+      log = logDao.save(log);
     }
 
     if (log.getId() != null) {
@@ -133,8 +129,8 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
     this.logCounterDao = logCounterDao;
   }
 
-  public void setLogMapdisplayDao(final LogMapdisplayDao logDao) {
-    logMapdisplayDao = logDao;
+  public void setLogDao(final LogDao logDao) {
+    logDao = logDao;
   }
 
 }

@@ -25,8 +25,7 @@ public class LoggerDatabaseServiceImplTest {
 
     factoryMock = new FactoryMock();
 
-    loggerService.setLogMapdisplayDao(factoryMock.getLogMapdisplayDao());
-    loggerService.setLogCounterDao(factoryMock.getLogCounterDao());
+    loggerService.setLogDao(factoryMock.getLogMapdisplayDao());
   }
 
   /**

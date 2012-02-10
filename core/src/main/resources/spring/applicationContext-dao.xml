@@ -33,6 +33,7 @@
 
     <!-- Activates scanning of @Repository -->
     <context:component-scan base-package="com.mapflow.geo.common.dao"/>
+    <context:component-scan base-package="com.mapflow.geo.logging.dao"/>
 
     <!-- Compass Search Section -->
 

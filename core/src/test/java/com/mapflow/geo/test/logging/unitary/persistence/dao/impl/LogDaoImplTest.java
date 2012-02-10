@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mapflow.geo.common.exceptions.MapflowAppException;
 import com.mapflow.geo.logging.dao.LogCountPointsDao;
-import com.mapflow.geo.logging.dao.LogMapdisplayDao;
+import com.mapflow.geo.logging.dao.LogDao;
 import com.mapflow.geo.logging.model.LogCounterFeaturesTo;
 import com.mapflow.geo.logging.model.LogMapdisplayTo;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
@@ -21,10 +21,7 @@ public class LogDaoImplTest extends BaseDaoTestCase {
   private static final String TRANSACTION_ID = "46180";
 
   @Autowired
-  private LogMapdisplayDao logMapdisplayDao;
-
-  @Autowired
-  private LogCountPointsDao logCountPointsDao;
+  private LogDao logMapdisplayDao;
 
   private static final String SERVICE_NAME_EXPECTED = null;
 

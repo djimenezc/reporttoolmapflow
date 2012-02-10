@@ -9,7 +9,7 @@ import org.jmock.Mockery;
 
 import com.mapflow.geo.common.exceptions.MapflowAppException;
 import com.mapflow.geo.logging.dao.LogCountPointsDao;
-import com.mapflow.geo.logging.dao.LogMapdisplayDao;
+import com.mapflow.geo.logging.dao.LogDao;
 import com.mapflow.geo.logging.model.LogCounterFeaturesTo;
 import com.mapflow.geo.logging.model.LogMapdisplayTo;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
@@ -23,14 +23,14 @@ public class FactoryMock {
   }
 
   private final Mockery context = new Mockery();
-  private final LogMapdisplayDao logDao;
+  private final LogDao logDao;
   private final LogCountPointsDao logCounterDao;
 
   public FactoryMock() {
 
     final String name = "user";
 
-    logDao = context.mock(LogMapdisplayDao.class);
+    logDao = context.mock(LogDao.class);
     logCounterDao = context.mock(LogCountPointsDao.class);
 
     try {
@@ -136,7 +136,7 @@ public class FactoryMock {
   /**
    * @return the logDao
    */
-  public final LogMapdisplayDao getLogMapdisplayDao() {
+  public final LogDao getLogMapdisplayDao() {
     return logDao;
   }
 
