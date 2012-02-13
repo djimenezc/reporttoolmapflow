@@ -46,7 +46,7 @@ public class LoggerDatabaseServiceImplTest {
     final String count = "2";
     final String zoomLevel = "1";
 
-    final String result =
+    final Long result =
       loggerService.registerFeatureDisplay(clientIP, customerName, duration, count, mapStyle,
         xcoord, ycoord, zoomLevel, FeaturesCategoryType.Comah, "hello");
 
@@ -108,7 +108,7 @@ public class LoggerDatabaseServiceImplTest {
     final String width = "";
     final String zoomLevel = "1";
 
-    final String result =
+    final Long result =
       loggerService.registerMapDisplayRequest(clientIP, customerName, duration, heigth, width,
         layer, count, mapStyle, mineType, serviceHost, xcoord, ycoord, zoomLevel);
 
