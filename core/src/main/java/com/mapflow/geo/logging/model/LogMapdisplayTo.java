@@ -9,15 +9,20 @@ import com.mapflow.model.BaseObject;
 public class LogMapdisplayTo extends BaseObject {
 
   private static final long serialVersionUID = -6725055993229100539L;
-  
+
   private static final String SERVICE_NAME = "MAPDISPLAY";
-  
+
   private MfServiceLog mfServiceLog;
 
   public LogMapdisplayTo() {
 
     mfServiceLog = new MfServiceLog();
     mfServiceLog.setServiceHost(SERVICE_NAME);
+  }
+
+  public LogMapdisplayTo(MfServiceLog mfServiceLog2) {
+
+    this.setMfServiceLog(mfServiceLog2);
   }
 
   public MfServiceLog getMfServiceLog() {
@@ -243,6 +248,10 @@ public class LogMapdisplayTo extends BaseObject {
   @Override
   public String toString() {
     return "LogMapdisplayTo [mfServiceLog=" + mfServiceLog + "]";
+  }
+
+  public String getServiceName() {
+    return mfServiceLog.getServiceName();
   }
 
 }

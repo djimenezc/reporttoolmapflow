@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.mapflow.geo.logging.dao.LogDao;
 import com.mapflow.geo.logging.model.LogCounterFeaturesTo;
 import com.mapflow.geo.logging.model.LogMapdisplayTo;
+import com.mapflow.geo.logging.model.entities.MfServiceLog;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
 
 public class LoggerDatabaseServiceImpl implements LoggerService {
@@ -44,23 +45,22 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
   }
 
   @Override
-  public String registerFeatureDisplay(final String clientIP, final String customerName,
+  public Long registerFeatureDisplay(final String clientIP, final String customerName,
     final int duration, final String count, final String mapStyle, final String xcoord,
     final String ycoord, final String zoomLevel, final FeaturesCategoryType featureCategory,
     final String featureType) throws URISyntaxException {
 
-    String result = "-1";
+    Long result = -1L;
 
     LogCounterFeaturesTo log = new LogCounterFeaturesTo();
 
     log.setClientHostname(null);
-    log.setClientIP(clientIP);
+    log.setClientIp(clientIP);
     log.setCustomerName(customerName);
     log.setLayerCount(count);
     log.setMapStyle(mapStyle);
     log.setRequestDate(new Date());
     log.setServiceHost(null);
-    log.setServiceName("FEATURECOUNT");
     log.setXcoord(xcoord);
     log.setYcoord(ycoord);
     log.setZoomLevel(zoomLevel);
@@ -68,8 +68,10 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
     log.setFeaturesCategory(featureCategory);
     log.setFeaturesType(featureType);
 
-    if (logCounterDao != null) {
-      log = logCounterDao.save(log);
+    if (logDao != null) {
+      MfServiceLog mfServiceLog = logDao.save(log.getMfServiceLog());
+      
+      log.setMfServiceLog(mfServiceLog);
     }
 
     if (log.getId() != null) {
@@ -81,17 +83,17 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
   }
 
   @Override
-  public String registerMapDisplayRequest(final String clientIP, final String customerName,
+  public Long registerMapDisplayRequest(final String clientIP, final String customerName,
     final int duration, final String heigth, final String width, final String layer,
     final String count, final String mapStyle, final String mineType, final String serviceUrl,
     final String xcoord, final String ycoord, final String zoomLevel) {
 
-    String result = "-1";
+    Long result = -1L;
 
     LogMapdisplayTo log = new LogMapdisplayTo();
 
     log.setClientHostname(null);
-    log.setClientIP(clientIP);
+    log.setClientIp(clientIP);
     log.setCustomerName(customerName);
     log.setDuration(duration);
     log.setImageHeight(heigth);
@@ -105,15 +107,16 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
     final String serviceDomain = extractDomain(serviceUrl);
     log.setServiceHost(serviceDomain);
 
-    log.setServiceName("MAPDISPLAY");
     log.setTicket(null);
-    log.setUSER_FIELD_9(null);
+    log.setUserName(null);
     log.setXcoord(xcoord);
     log.setYcoord(ycoord);
     log.setZoomLevel(zoomLevel);
 
     if (logDao != null) {
-      log = logDao.save(log);
+      MfServiceLog mfServiceLog = logDao.save(log.getMfServiceLog());
+       
+      log.setMfServiceLog(mfServiceLog); 
     }
 
     if (log.getId() != null) {
@@ -124,13 +127,9 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
     return result;
   }
 
-  public void setLogCounterDao(final LogCountPointsDao logCounterDao) {
-
-    this.logCounterDao = logCounterDao;
-  }
-
   public void setLogDao(final LogDao logDao) {
-    logDao = logDao;
+
+    this.logDao = logDao;
   }
 
 }

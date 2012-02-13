@@ -42,7 +42,7 @@ public interface LoggerService {
    * @return Return the id of the event registered.
    * @throws URISyntaxException
    */
-  String registerFeatureDisplay(String clientIP, String customerName, int duration, String count,
+  Long registerFeatureDisplay(String clientIP, String customerName, int duration, String count,
     String mapStyle, String xcoord, String ycoord, String zoomLevel,
     FeaturesCategoryType featureCategory, String featureType) throws URISyntaxException;
 
@@ -80,7 +80,7 @@ public interface LoggerService {
    * @throws URISyntaxException
    *           Throw when the serviceHost
    */
-  String registerMapDisplayRequest(String clientIP, String customerName, int duration,
+  Long registerMapDisplayRequest(String clientIP, String customerName, int duration,
     String heigth, String width, String layer, String count, String mapStyle, String mineType,
     String serviceUrl, String xcoord, String ycoord, String zoomLevel) throws URISyntaxException;
 

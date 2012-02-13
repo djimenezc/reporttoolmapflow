@@ -20,6 +20,11 @@ public class LogCounterFeaturesTo extends BaseObject {
     mfServiceLog.setServiceHost(SERVICE_NAME);
   }
 
+  public LogCounterFeaturesTo(MfServiceLog mfServiceLog) {
+
+    this.setMfServiceLog(mfServiceLog);
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj) return true;
@@ -278,4 +283,7 @@ public class LogCounterFeaturesTo extends BaseObject {
     this.mfServiceLog = mfServiceLog;
   }
 
+  public String getServiceName() {
+    return mfServiceLog.getServiceName();
+  }
 }

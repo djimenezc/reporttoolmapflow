@@ -49,8 +49,11 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor {
 
   private String sessionFactoryBeanName = "sessionFactory";
+  @SuppressWarnings("rawtypes")
   private List mappingResources;
+  @SuppressWarnings("rawtypes")
   private List annotatedClasses;
+  @SuppressWarnings("rawtypes")
   private List configLocations;
   private Properties hibernateProperties;
 
@@ -75,7 +78,7 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
         PropertyValue propertyValue = propertyValues.getPropertyValue("mappingResources");
 
         if (propertyValue == null) {
-          propertyValue = new PropertyValue("mappingResources", new ArrayList());
+          propertyValue = new PropertyValue("mappingResources", new ArrayList<Object>());
           propertyValues.addPropertyValue(propertyValue);
         }
 
@@ -89,7 +92,7 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
         PropertyValue propertyValue = propertyValues.getPropertyValue("annotatedClasses");
 
         if (propertyValue == null) {
-          propertyValue = new PropertyValue("annotatedClasses", new ArrayList());
+          propertyValue = new PropertyValue("annotatedClasses", new ArrayList<Object>());
           propertyValues.addPropertyValue(propertyValue);
         }
 
@@ -101,7 +104,7 @@ public class HibernateExtensionPostProcessor implements BeanFactoryPostProcessor
       if (configLocations != null) {
         PropertyValue propertyValue = propertyValues.getPropertyValue("configLocations");
         if (propertyValue == null) {
-          propertyValue = new PropertyValue("configLocations", new ArrayList());
+          propertyValue = new PropertyValue("configLocations", new ArrayList<Object>());
           propertyValues.addPropertyValue(propertyValue);
         }
         final List<?> existingConfigLocations = (List<?>) propertyValue.getValue();
