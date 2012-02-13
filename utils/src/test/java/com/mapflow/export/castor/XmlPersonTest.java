@@ -9,7 +9,6 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.exolab.castor.mapping.Mapping;
 import org.exolab.castor.mapping.MappingException;
 import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.Marshaller;

@@ -8,16 +8,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import com.mapflow.geo.common.exceptions.MapflowAppException;
 import com.mapflow.geo.logging.services.LoggerDatabaseServiceImpl;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
 import com.mapflow.geo.test.logging.unitary.mock.FactoryMock;
+import com.mapflow.test.service.BaseManagerTestCase;
 
-@ContextConfiguration(locations = { "classpath:/spring/applicationContext-dao-mock.xml",
-  "classpath*:/spring/applicationContext.xml", "classpath:**/spring/applicationContext*.xml" })
-public class LoggerDatabaseServiceImplTest extends AbstractTransactionalJUnit4SpringContextTests {
+@ContextConfiguration(locations = { "classpath:/spring/applicationContext-dao-mock.xml" })
+public class LoggerDatabaseServiceImplTest extends BaseManagerTestCase {
 
   @Autowired
   private LoggerDatabaseServiceImpl loggerService;

@@ -1,24 +1,13 @@
 package com.mapflow.geo.common.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.HashMap;
-import java.util.List;
-
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mapflow.geo.common.constants.Constants;
-import com.mapflow.geo.common.model.Role;
 import com.mapflow.test.dao.BaseDaoTestCase;
 
 public class RoleDaoTest extends BaseDaoTestCase {
 
-  @Autowired
-  private RoleDao dao;
+//  @Autowired
+//  private RoleDao dao;
 
   @Test
   public void testAddAndRemoveRole() throws Exception {

@@ -15,8 +15,8 @@ import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.common.service.UserExistsException;
 import com.mapflow.geo.common.service.UserManager;
 
-@ContextConfiguration(locations = { "/applicationContext-service.xml",
-  "/applicationContext-resources.xml", "classpath:/applicationContext-dao.xml" })
+@ContextConfiguration(locations = { "/spring/applicationContext-service.xml",
+  "/spring/applicationContext-resources.xml", "classpath:/spring/applicationContext-dao.xml" })
 public class UserExistsExceptionTest extends AbstractTransactionalJUnit4SpringContextTests {
 
   @Autowired
@@ -29,7 +29,7 @@ public class UserExistsExceptionTest extends AbstractTransactionalJUnit4SpringCo
     log.debug("entered 'testAddExistingUser' method");
     assertNotNull(manager);
 
-    final User user = manager.getUser("-1");
+    final User user = manager.getUser("1");
 
     // create new object with null id - Hibernate doesn't like setId(null)
     final User user2 = new User();

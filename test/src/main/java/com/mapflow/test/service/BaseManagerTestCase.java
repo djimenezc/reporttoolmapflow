@@ -12,9 +12,9 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 
 import com.mapflow.util.ConvertUtil;
 
-@ContextConfiguration(locations = { "classpath:/applicationContext-resources.xml",
-  "classpath:/applicationContext-dao.xml", "classpath:/applicationContext-service.xml",
-  "classpath*:/**/applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath:/spring/applicationContext-resources.xml",
+  "classpath:/spring/applicationContext-dao.xml", "classpath:/spring/applicationContext-service.xml",
+  "classpath*:/**/spring/applicationContext.xml" })
 /**
  * Test classes can extend this manager based on a spring context.
  * This test class can be moved to the test tree.
@@ -60,7 +60,7 @@ public abstract class BaseManagerTestCase extends AbstractTransactionalJUnit4Spr
   protected Object populate(final Object obj) throws Exception {
     // loop through all the beans methods and set its properties from
     // its .properties file
-    final Map map = ConvertUtil.convertBundleToMap(rb);
+    final Map<?, ?> map = ConvertUtil.convertBundleToMap(rb);
 
     BeanUtils.copyProperties(obj, map);
 

@@ -1,6 +1,10 @@
 package com.mapflow.geo.common.service.impl;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +21,21 @@ import com.mapflow.geo.common.service.RoleManager;
 @Service("roleManager")
 public class RoleManagerImpl extends GenericManagerImpl<Role, Long> implements RoleManager {
 
-  RoleDao roleDao;
+  // RoleDao roleDao;
+  private Map<Long, Role> roles;
 
+  
   @Autowired
   public RoleManagerImpl(final RoleDao roleDao) {
     super(roleDao);
-    this.roleDao = roleDao;
+    // this.roleDao = roleDao;
+    roles = new HashMap<Long, Role>();
+      
+    Role role1 = new Role("admin");
+    roles.put(1L, role1);
+    
+    Role role2 = new Role("all");
+    roles.put(2L, role2);
   }
 
   /**
@@ -38,7 +51,21 @@ public class RoleManagerImpl extends GenericManagerImpl<Role, Long> implements R
    */
   @Override
   public Role getRole(final String rolename) {
-    return roleDao.getRoleByName(rolename);
+    
+    Iterator<Entry<Long, Role>> itr = roles.entrySet().iterator();
+
+    Role role = null;
+    
+    while (itr.hasNext()) {
+
+      final Map.Entry<Long, Role> e = itr.next();
+
+      if (e.getValue().getName().equals(rolename)) {
+        role = e.getValue();
+      }
+    }
+    
+    return role;
   }
 
   /**
@@ -46,7 +73,10 @@ public class RoleManagerImpl extends GenericManagerImpl<Role, Long> implements R
    */
   @Override
   public Role saveRole(final Role role) {
-    return dao.save(role);
+
+    roles.put(role.getId(), role);
+
+    return role;
   }
 
   /**
@@ -54,6 +84,16 @@ public class RoleManagerImpl extends GenericManagerImpl<Role, Long> implements R
    */
   @Override
   public void removeRole(final String rolename) {
-    roleDao.removeRole(rolename);
+
+    Iterator<Entry<Long, Role>> itr = roles.entrySet().iterator();
+
+    while (itr.hasNext()) {
+
+      final Map.Entry<Long, Role> e = itr.next();
+
+      if (e.getValue().getName().equals(rolename)) {
+        roles.remove(e.getKey());
+      }
+    }
   }
 }

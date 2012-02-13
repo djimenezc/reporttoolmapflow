@@ -46,13 +46,13 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
     user = (User) populate(user);
 
     // set expected behavior on role dao
-    context.checking(new Expectations() {
-
-      {
-        one(roleDao).getRoleByName(with(equal("ROLE_USER")));
-        will(returnValue(new Role("ROLE_USER")));
-      }
-    });
+//    context.checking(new Expectations() {
+//
+//      {
+//        one(roleDao).getRoleByName(with(equal("all")));
+//        will(returnValue(new Role("all")));
+//      }
+//    });
 
     final Role role = roleManager.getRole(Constants.USER_ROLE);
     user.addRole(role);
@@ -74,21 +74,21 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
     context.checking(new Expectations() {
 
       {
-        one(userDao).remove(with(equal(5L)));
+        one(userDao).remove(with(equal(4L)));
       }
     });
 
-    userManager.removeUser("5");
+    userManager.removeUser("4");
 
     context.checking(new Expectations() {
 
       {
-        one(userDao).get(with(equal(5L)));
+        one(userDao).get(with(equal(4L)));
         will(returnValue(null));
       }
     });
 
-    user = userManager.getUser("5");
+    user = userManager.getUser("4");
     assertNull(user);
   }
 

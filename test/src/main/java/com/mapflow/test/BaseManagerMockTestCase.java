@@ -47,7 +47,7 @@ public abstract class BaseManagerMockTestCase {
       rb = ResourceBundle.getBundle(className);
     }
     catch (final MissingResourceException mre) {
-      // log.debug("No resource bundle found for: " + className);
+       log.error("No resource bundle found for: " + className);
     }
   }
 
@@ -63,7 +63,7 @@ public abstract class BaseManagerMockTestCase {
   protected Object populate(final Object obj) throws Exception {
     // loop through all the beans methods and set its properties from
     // its .properties file
-    final Map map = ConvertUtil.convertBundleToMap(rb);
+    final Map<?, ?> map = ConvertUtil.convertBundleToMap(rb);
 
     BeanUtils.copyProperties(obj, map);
 

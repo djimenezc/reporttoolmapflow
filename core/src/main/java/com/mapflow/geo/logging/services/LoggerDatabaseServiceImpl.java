@@ -4,8 +4,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 
+import javax.jws.WebService;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.mapflow.geo.logging.dao.LogDao;
 import com.mapflow.geo.logging.model.LogCounterFeaturesTo;
@@ -13,6 +16,8 @@ import com.mapflow.geo.logging.model.LogMapdisplayTo;
 import com.mapflow.geo.logging.model.entities.MfServiceLog;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
 
+@Service("loggerService")
+@WebService(serviceName = "loggerService", endpointInterface = "com.mapflow.geo.logging.service.LoggerDatabaseService")
 public class LoggerDatabaseServiceImpl implements LoggerService {
 
   private final Logger logger = Logger.getLogger(getClass());
