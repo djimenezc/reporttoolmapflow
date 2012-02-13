@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.mapflow.geo.common.dao.UserDao;
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.common.service.UserExistsException;
 import com.mapflow.geo.common.service.UserManager;
 import com.mapflow.geo.common.service.UserService;

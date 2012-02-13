@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.common.service.MailEngine;
 import com.mapflow.geo.common.service.UserManager;
 import com.mapflow.webapp.util.RequestUtil;

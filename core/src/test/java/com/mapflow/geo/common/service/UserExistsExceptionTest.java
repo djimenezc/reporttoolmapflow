@@ -11,7 +11,7 @@ import org.springframework.test.annotation.ExpectedException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.common.service.UserExistsException;
 import com.mapflow.geo.common.service.UserManager;
 

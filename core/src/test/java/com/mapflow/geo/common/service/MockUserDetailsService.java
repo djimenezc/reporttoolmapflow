@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 
 public class MockUserDetailsService implements UserDetailsService {
 

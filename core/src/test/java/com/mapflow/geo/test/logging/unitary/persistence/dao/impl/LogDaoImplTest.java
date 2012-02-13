@@ -1,7 +1,6 @@
 package com.mapflow.geo.test.logging.unitary.persistence.dao.impl;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,24 +9,27 @@ import com.mapflow.geo.common.exceptions.MapflowAppException;
 import com.mapflow.geo.logging.dao.LogDao;
 import com.mapflow.geo.logging.model.LogCounterFeaturesTo;
 import com.mapflow.geo.logging.model.LogMapdisplayTo;
+import com.mapflow.geo.logging.model.entities.MfServiceLog;
 import com.mapflow.geo.test.logging.unitary.factory.LoggingFactoryObjects;
 import com.mapflow.test.dao.BaseDaoTestCase;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertNotNull;
 
 public class LogDaoImplTest extends BaseDaoTestCase {
 
-  private static final String TRANSACTION_ID = "46180";
+  private static final String TRANSACTION_ID = "461110";
 
   @Autowired
   private LogDao logDao;
 
-  private static final String SERVICE_NAME_EXPECTED = null;
-
   @Test
   public void testRetrieveLogRowFromDatabase() {
+    
+    List<MfServiceLog> mfServiceLog= logDao.getTransactionId(TRANSACTION_ID);
+    
 
-    final LogMapdisplayTo log = new LogMapdisplayTo(logDao.get(TRANSACTION_ID));
-
-    assertNull(SERVICE_NAME_EXPECTED, log.getServiceName());
+    assertThat(mfServiceLog.isEmpty(), is(false));
   }
 
   /**
@@ -42,7 +44,9 @@ public class LogDaoImplTest extends BaseDaoTestCase {
 
     System.out.println("Trying to save in database log bean");
 
-    log = new LogCounterFeaturesTo(logDao.save(log.getMfServiceLog()));
+    MfServiceLog mfServiceLog = logDao.save(log.getMfServiceLog());
+    
+    log = new LogCounterFeaturesTo(mfServiceLog);
 
     System.out.println("Saved in database log bean: " + log.toString());
 

@@ -16,7 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 
 import com.mapflow.geo.common.constants.Constants;
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.common.service.UserManager;
 
 public class UserFormControllerTest extends BaseControllerTestCase {

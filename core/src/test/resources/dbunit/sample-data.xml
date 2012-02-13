@@ -53,4 +53,51 @@
 			<value description="USER_ROLE_ID">1</value>
 		</row>
 	</table>
+	
+	<table name="MF_SERVICE_LOG">
+
+		<column>ID</column>
+		<column>TRANSACTION_ID</column>
+		<column>SERVICE_NAME</column>
+        <column>SERVICE_HOST</column>
+		<column>CLIENT_IP</column>
+		<column>CLIENT_HOSTNAME</column>
+		<column>REQUEST_DATE</column>
+		<column>DURATION</column>
+		<column>USER_FIELD_0</column>
+		<column>USER_FIELD_1</column>
+		<column>USER_FIELD_2</column>
+		<column>USER_FIELD_3</column>
+		<column>USER_FIELD_4</column>
+		<column>USER_FIELD_5</column>
+		<column>USER_FIELD_6</column>
+		<column>USER_FIELD_7</column>
+		<column>USER_FIELD_8</column>
+		<column>USER_FIELD_9</column>
+		<column>TICKET</column>
+
+		<row>
+			<value description="ID">1</value>
+			<value description="TRANSACTION_ID">461110</value>
+			<value description="SERVICE_NAME">LOCATE-QUERY</value>
+            <value description="SERVICE_HOST">MFGEOSRV1-IRL</value>
+			<value description="CLIENT_IP">192.168.1.1</value>
+			<value description="CLIENT_HOSTNAME"></value>
+			<value description="REQUEST_DATE">2010-08-23 13:27:00.0</value>
+			<value description="DURATION">111</value>
+			<value description="USER_FIELD_0">generic|GEOCODE|IRL_GEODIR</value>
+            <value description="USER_FIELD_1">128488.0</value>
+            <value description="USER_FIELD_2">224235.0</value>
+            <value description="USER_FIELD_3">400</value>
+            <value description="USER_FIELD_4">400</value>
+            <value description="USER_FIELD_5">image/jpeg</value>
+            <value description="USER_FIELD_6">10</value>
+            <value description="USER_FIELD_7">1</value>
+            <value description="USER_FIELD_8">1</value>
+            <value description="USER_FIELD_9">1</value>
+			<value description="TICKET"></value>
+		</row>
+		
+	</table>
+	
 </dataset>

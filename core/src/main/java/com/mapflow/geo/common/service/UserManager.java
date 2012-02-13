@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.mapflow.geo.common.dao.UserDao;
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 
 /**
  * Business Service Interface to handle communication between web and persistence layer.

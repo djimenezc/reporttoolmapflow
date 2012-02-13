@@ -7,9 +7,8 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 <!-- 		<class>com.mapflow.model.User</class> -->
 <!-- 		<class>com.mapflow.model.Role</class> -->
-		<class>com.mapflow.geo.common.model.User</class>
-        <class>com.mapflow.geo.logging.model.LogMapdisplayTo</class>
-        <class>com.mapflow.geo.logging.model.LogCounterFeaturesTo</class>
+		<class>com.mapflow.geo.common.model.entities.User</class>
+        <class>com.mapflow.geo.logging.model.entities.MfServiceLog</class>
 
 		<!-- Adding more <class>f.q.c.Name</class> elements here is not required. 
 			The annotated classes will still be detected, as can be observed in the following 

@@ -93,6 +93,11 @@ public class LogCounterFeaturesTo extends BaseObject {
     return getMfServiceLog().getUserField7();
   }
 
+  public String getTransactionId()
+  {
+    return mfServiceLog.getTransactionId();
+  }
+  
   /**
    * @return the mapStyle
    */

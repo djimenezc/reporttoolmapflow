@@ -62,6 +62,11 @@ public class LogMapdisplayTo extends BaseObject {
   public Long getId() {
     return mfServiceLog.getId();
   }
+  
+  public String getTransactionId()
+  {
+    return mfServiceLog.getTransactionId();
+  }
 
   public String getImageHeight() {
 

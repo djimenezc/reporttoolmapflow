@@ -1,5 +1,10 @@
 package com.mapflow.geo.logging.dao.impl;
 
+import java.util.List;
+
+import javax.persistence.Table;
+
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Repository;
 
 import com.mapflow.geo.common.persistence.hibernate.GenericDaoHibernate;
@@ -12,11 +17,21 @@ import com.mapflow.geo.logging.model.entities.MfServiceLog;
  * @author djimenez
  */
 @Repository("logMapdisplayDao")
-public class LogHibernateDao extends GenericDaoHibernate<MfServiceLog, String>
-  implements LogDao {
+public class LogHibernateDao extends GenericDaoHibernate<MfServiceLog, Long> implements LogDao {
 
   public LogHibernateDao() {
     super(MfServiceLog.class);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<MfServiceLog> getTransactionId(String transactionId) {
+
+    final String queryString = "from MfServiceLog where TRANSACTION_ID=?";
+
+    List<?> result = getHibernateTemplate().find(queryString, transactionId);
+    
+    return (List<MfServiceLog>) result;
   }
 
   @Override
@@ -24,18 +39,5 @@ public class LogHibernateDao extends GenericDaoHibernate<MfServiceLog, String>
     // TODO Auto-generated method stub
     return null;
   }
-
-  @Override
-  public void remove(MfServiceLog entity) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public MfServiceLog save(MfServiceLog object) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
 
 }

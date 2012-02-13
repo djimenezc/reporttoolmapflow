@@ -21,7 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.mapflow.geo.common.constants.Constants;
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 
 /**
  * This advice is responsible for enforcing security and only allowing administrators to modify

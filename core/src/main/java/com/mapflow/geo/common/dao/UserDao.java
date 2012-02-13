@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.common.persistence.GenericDao;
 
 /**

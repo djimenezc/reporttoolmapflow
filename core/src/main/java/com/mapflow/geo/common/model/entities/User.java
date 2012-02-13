@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.model;
+package com.mapflow.geo.common.model.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,6 +31,8 @@ import org.compass.annotations.SearchableProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.mapflow.geo.common.model.Address;
+import com.mapflow.geo.common.model.Role;
 import com.mapflow.model.BaseObject;
 
 /**

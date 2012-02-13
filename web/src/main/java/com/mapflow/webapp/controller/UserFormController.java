@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.model.Role;
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.common.service.RoleManager;
 import com.mapflow.geo.common.service.UserExistsException;
 import com.mapflow.geo.common.service.UserManager;

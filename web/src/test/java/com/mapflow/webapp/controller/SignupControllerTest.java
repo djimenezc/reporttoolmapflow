@@ -17,7 +17,7 @@ import org.subethamail.wiser.Wiser;
 
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.model.Address;
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 
 public class SignupControllerTest extends BaseControllerTestCase {
 

@@ -27,7 +27,7 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.mapflow.geo.common.constants.Constants;
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.common.service.MailEngine;
 import com.mapflow.geo.common.service.UserManager;
 

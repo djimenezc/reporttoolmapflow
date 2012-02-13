@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.common.persistence.GenericDao;
 import com.mapflow.geo.common.persistence.hibernate.GenericDaoHibernate;
 import com.mapflow.test.dao.BaseDaoTestCase;

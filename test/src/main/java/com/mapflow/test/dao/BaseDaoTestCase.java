@@ -22,8 +22,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 @ContextConfiguration(locations = { "classpath:/spring/applicationContext-resources.xml",
-  "classpath:/spring/applicationContext-dao.xml", "classpath*:/spring/applicationContext.xml",
-  "classpath:**/spring/applicationContext*.xml" })
+  "classpath:/spring/applicationContext-dao.xml" })
 public abstract class BaseDaoTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
   @Autowired

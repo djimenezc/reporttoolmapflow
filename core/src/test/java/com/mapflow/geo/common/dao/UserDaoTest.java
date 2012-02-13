@@ -20,7 +20,7 @@ import org.springframework.test.annotation.ExpectedException;
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.model.Address;
 import com.mapflow.geo.common.model.Role;
-import com.mapflow.geo.common.model.User;
+import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.test.dao.BaseDaoTestCase;
 
 public class UserDaoTest extends BaseDaoTestCase {
