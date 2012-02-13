@@ -30,6 +30,8 @@ public class MfServiceLog extends BaseObject implements java.io.Serializable {
 
   private static final long serialVersionUID = -1354408095266478208L;
 
+  public static final String USER_FIELD_SEPARATOR = ":";
+
   private Long id;
   private String transactionId;
   private String serviceHost;

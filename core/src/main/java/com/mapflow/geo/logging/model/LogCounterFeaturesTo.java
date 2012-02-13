@@ -2,131 +2,141 @@ package com.mapflow.geo.logging.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableId;
-
 import com.mapflow.geo.logging.model.entities.MfServiceLog;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
 import com.mapflow.model.BaseObject;
 
 public class LogCounterFeaturesTo extends BaseObject {
 
+
   private static final long serialVersionUID = -6725055993229100539L;
 
   private MfServiceLog mfServiceLog;
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+    if (getClass() != obj.getClass()) return false;
+    LogCounterFeaturesTo other = (LogCounterFeaturesTo) obj;
+    if (getMfServiceLog() == null) {
+      if (other.getMfServiceLog() != null) return false;
+    }
+    else if (!getMfServiceLog().equals(other.getMfServiceLog())) return false;
+    return true;
+  }
   
-
-
   /**
    * @return the clientHostname
    */
   public String getClientHostname() {
-    return mfServiceLog.getClientHostname();
+    return getMfServiceLog().getClientHostname();
   }
 
   /**
    * @return the clientIP
    */
   public String getClientIp() {
-    return mfServiceLog.getClientIp();
+    return getMfServiceLog().getClientIp();
   }
 
   /**
    * @return the customerName
    */
   public String getCustomerName() {
-    
-    return mfServiceLog.getUserField0().split(";")[0];
+
+    return getMfServiceLog().getUserField0().split(MfServiceLog.USER_FIELD_SEPARATOR)[0];
   }
 
   /**
    * @return the featuresTypes
    */
   public FeaturesCategoryType getFeaturesCategory() {
-    return mfServiceLog.getFeaturesCategory();
-  }
 
-  public String getFeaturesType() {
-    return mfServiceLog.getFeaturesType();
+    FeaturesCategoryType featureCategory =
+      FeaturesCategoryType.valueOf(getMfServiceLog().getUserField3());
+
+    return featureCategory;
   }
 
   /**
    * @return the id
    */
-  public String getId() {
-    
-    return Long.toString(mfServiceLog.getId());
+  public Long getId() {
+
+    return getMfServiceLog().getId();
   }
 
   /**
    * @return the layerCount
    */
   public String getLayerCount() {
-    return layerCount;
+    return getMfServiceLog().getUserField6();
   }
 
   /**
    * @return the mapStyle
    */
   public String getMapStyle() {
-    return mapStyle;
+    return getMfServiceLog().getUserField7();
   }
 
+  /**
+   * @return the mapStyle
+   */
+  public String getUserName() {
+    return getMfServiceLog().getUserField9();
+  }
+  
   /**
    * @return the requestDate
    */
   public Date getRequestDate() {
-    return requestDate;
+    return getMfServiceLog().getRequestDate();
   }
 
   /**
    * @return the serviceHost
    */
   public String getServiceHost() {
-    return serviceHost;
+
+    return getMfServiceLog().getServiceHost();
   }
 
   /**
    * @return the serviceName
    */
   public String getServiceName() {
-    return serviceName;
+    return getMfServiceLog().getServiceName();
   }
 
   /**
    * @return the xcoord
    */
   public String getXcoord() {
-    return xcoord;
+    return getMfServiceLog().getUserField1();
   }
 
   /**
    * @return the ycoord
    */
   public String getYcoord() {
-    return ycoord;
+    return getMfServiceLog().getUserField2();
   }
 
   /**
    * @return the zoomLevel
    */
   public String getZoomLevel() {
-    return zoomLevel;
+    return getMfServiceLog().getUserField5();
   }
 
   @Override
   public int hashCode() {
-    
-    return mfServiceLog.hashCode();
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((getMfServiceLog() == null) ? 0 : getMfServiceLog().hashCode());
+    return result;
   }
 
   /**
@@ -134,15 +144,17 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the clientHostname to set
    */
   public void setClientHostname(final String clientHostname) {
-    this.clientHostname = clientHostname;
+
+    getMfServiceLog().setClientHostname(clientHostname);
   }
 
   /**
    * @param clientIP
    *          the clientIP to set
    */
-  public void setClientIP(final String clientIP) {
-    this.clientIP = clientIP;
+  public void setClientIp(final String clientIP) {
+
+    getMfServiceLog().setClientIp(clientIP);
   }
 
   /**
@@ -150,7 +162,8 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the customerName to set
    */
   public void setCustomerName(final String customerName) {
-    this.customerName = customerName;
+
+    getMfServiceLog().setUserField0(customerName);
   }
 
   /**
@@ -158,19 +171,17 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the featuresTypes to set
    */
   public void setFeaturesCategory(final FeaturesCategoryType featuresTypes) {
-    featuresCategory = featuresTypes;
-  }
 
-  public void setFeaturesType(final String featuresType) {
-    this.featuresType = featuresType;
+    getMfServiceLog().setUserField3(featuresTypes.getValue());
   }
 
   /**
    * @param id
    *          the id to set
    */
-  public void setId(final String id) {
-    this.id = id;
+  public void setId(final Long id) {
+
+    getMfServiceLog().setId(id);
   }
 
   /**
@@ -178,7 +189,17 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the layerCount to set
    */
   public void setLayerCount(final String layerCount) {
-    this.layerCount = layerCount;
+
+    getMfServiceLog().setUserField6(layerCount);
+  }
+  
+  /**
+   * @param userName
+   *          the layerCount to set
+   */
+  public void setUserName(final String userName) {
+
+    getMfServiceLog().setUserField9(userName);
   }
 
   /**
@@ -186,7 +207,8 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the mapStyle to set
    */
   public void setMapStyle(final String mapStyle) {
-    this.mapStyle = mapStyle;
+
+    getMfServiceLog().setUserField7(mapStyle);
   }
 
   /**
@@ -194,7 +216,8 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the requestDate to set
    */
   public void setRequestDate(final Date requestDate) {
-    this.requestDate = requestDate;
+
+    getMfServiceLog().setRequestDate(requestDate);
   }
 
   /**
@@ -202,7 +225,8 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the serviceHost to set
    */
   public void setServiceHost(final String serviceHost) {
-    this.serviceHost = serviceHost;
+
+    getMfServiceLog().setServiceHost(serviceHost);
   }
 
   /**
@@ -210,7 +234,8 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the serviceName to set
    */
   public void setServiceName(final String serviceName) {
-    this.serviceName = serviceName;
+
+    getMfServiceLog().setServiceHost(serviceName);
   }
 
   /**
@@ -218,8 +243,8 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the xcoord to set
    */
   public void setXcoord(final String xcoord) {
-    
-    mfServiceLog.setUserField1(xcoord);
+
+    getMfServiceLog().setUserField1(xcoord);
   }
 
   /**
@@ -227,8 +252,8 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the ycoord to set
    */
   public void setYcoord(final String ycoord) {
-    
-    mfServiceLog.setUserField2(ycoord);
+
+    getMfServiceLog().setUserField2(ycoord);
   }
 
   /**
@@ -236,14 +261,31 @@ public class LogCounterFeaturesTo extends BaseObject {
    *          the zoomLevel to set
    */
   public void setZoomLevel(final String zoomLevel) {
-    
-    mfServiceLog.setUserField4(zoomLevel);
+
+    getMfServiceLog().setUserField5(zoomLevel);
   }
 
   @Override
   public String toString() {
-    
-    return mfServiceLog.toString();
+    return "LogCounterFeaturesTo [mfServiceLog=" + getMfServiceLog() + "]";
+  }
+
+  public String getFeaturesType()
+  {
+    return getMfServiceLog().getUserField4();
+  }
+  
+  public void setFeaturesType(String featureType) {
+   
+    getMfServiceLog().setUserField4(featureType);
+  }
+
+  public MfServiceLog getMfServiceLog() {
+    return mfServiceLog;
+  }
+
+  public void setMfServiceLog(MfServiceLog mfServiceLog) {
+    this.mfServiceLog = mfServiceLog;
   }
 
 }
