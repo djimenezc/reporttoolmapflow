@@ -9,8 +9,16 @@ import com.mapflow.model.BaseObject;
 public class LogMapdisplayTo extends BaseObject {
 
   private static final long serialVersionUID = -6725055993229100539L;
-
+  
+  private static final String SERVICE_NAME = "MAPDISPLAY";
+  
   private MfServiceLog mfServiceLog;
+
+  public LogMapdisplayTo() {
+
+    mfServiceLog = new MfServiceLog();
+    mfServiceLog.setServiceHost(SERVICE_NAME);
+  }
 
   public MfServiceLog getMfServiceLog() {
     return mfServiceLog;
@@ -31,16 +39,14 @@ public class LogMapdisplayTo extends BaseObject {
   }
 
   public String getCustomerName() {
-    
-    String customerName =
-      mfServiceLog.getUserField0().split(MfServiceLog.USER_FIELD_SEPARATOR)[0];
-      
-      if (customerName==null)
-      {
-        customerName = "";
-      }
-      
-      return customerName;
+
+    String customerName = mfServiceLog.getUserField0().split(MfServiceLog.USER_FIELD_SEPARATOR)[0];
+
+    if (customerName == null) {
+      customerName = "";
+    }
+
+    return customerName;
   }
 
   public int getDuration() {
@@ -62,15 +68,13 @@ public class LogMapdisplayTo extends BaseObject {
   }
 
   public String getLayer() {
-    
-    String layer =
-    mfServiceLog.getUserField0().split(MfServiceLog.USER_FIELD_SEPARATOR)[1];
-    
-    if (layer==null)
-    {
+
+    String layer = mfServiceLog.getUserField0().split(MfServiceLog.USER_FIELD_SEPARATOR)[1];
+
+    if (layer == null) {
       layer = "";
     }
-    
+
     return layer;
   }
 
@@ -92,10 +96,6 @@ public class LogMapdisplayTo extends BaseObject {
 
   public String getServiceHost() {
     return mfServiceLog.getServiceHost();
-  }
-
-  public String getServiceName() {
-    return mfServiceLog.getServiceName();
   }
 
   public String getTicket() {
@@ -133,7 +133,7 @@ public class LogMapdisplayTo extends BaseObject {
     }
     else {
 
-      String userField0 = buildUserField0(customerName,getLayer());
+      String userField0 = buildUserField0(customerName, getLayer());
 
       mfServiceLog.setUserField0(userField0);
     }
@@ -166,13 +166,13 @@ public class LogMapdisplayTo extends BaseObject {
   }
 
   public void setLayer(final String layer) {
-    
+
     if (mfServiceLog.getUserField0() == null || mfServiceLog.getUserField0().equals("")) {
-      mfServiceLog.setUserField0(MfServiceLog.USER_FIELD_SEPARATOR+layer);
+      mfServiceLog.setUserField0(MfServiceLog.USER_FIELD_SEPARATOR + layer);
     }
     else {
 
-      String userField0 = buildUserField0(getUserName(),layer);
+      String userField0 = buildUserField0(getUserName(), layer);
 
       mfServiceLog.setUserField0(userField0);
     }
@@ -197,10 +197,6 @@ public class LogMapdisplayTo extends BaseObject {
 
   public void setServiceHost(final String serviceHost) {
     mfServiceLog.setServiceHost(serviceHost);
-  }
-
-  public void setServiceName(final String serviceName) {
-    mfServiceLog.setServiceName(serviceName);
   }
 
   public void setTicket(final String ticket) {

@@ -8,10 +8,17 @@ import com.mapflow.model.BaseObject;
 
 public class LogCounterFeaturesTo extends BaseObject {
 
+  private static final String SERVICE_NAME = "FEATURECOUNT";
 
   private static final long serialVersionUID = -6725055993229100539L;
 
   private MfServiceLog mfServiceLog;
+
+  public LogCounterFeaturesTo() {
+
+    mfServiceLog = new MfServiceLog();
+    mfServiceLog.setServiceHost(SERVICE_NAME);
+  }
 
   @Override
   public boolean equals(Object obj) {
@@ -25,7 +32,7 @@ public class LogCounterFeaturesTo extends BaseObject {
     else if (!getMfServiceLog().equals(other.getMfServiceLog())) return false;
     return true;
   }
-  
+
   /**
    * @return the clientHostname
    */
@@ -87,7 +94,7 @@ public class LogCounterFeaturesTo extends BaseObject {
   public String getUserName() {
     return getMfServiceLog().getUserField9();
   }
-  
+
   /**
    * @return the requestDate
    */
@@ -101,13 +108,6 @@ public class LogCounterFeaturesTo extends BaseObject {
   public String getServiceHost() {
 
     return getMfServiceLog().getServiceHost();
-  }
-
-  /**
-   * @return the serviceName
-   */
-  public String getServiceName() {
-    return getMfServiceLog().getServiceName();
   }
 
   /**
@@ -192,7 +192,7 @@ public class LogCounterFeaturesTo extends BaseObject {
 
     getMfServiceLog().setUserField6(layerCount);
   }
-  
+
   /**
    * @param userName
    *          the layerCount to set
@@ -230,15 +230,6 @@ public class LogCounterFeaturesTo extends BaseObject {
   }
 
   /**
-   * @param serviceName
-   *          the serviceName to set
-   */
-  public void setServiceName(final String serviceName) {
-
-    getMfServiceLog().setServiceHost(serviceName);
-  }
-
-  /**
    * @param xcoord
    *          the xcoord to set
    */
@@ -270,13 +261,12 @@ public class LogCounterFeaturesTo extends BaseObject {
     return "LogCounterFeaturesTo [mfServiceLog=" + getMfServiceLog() + "]";
   }
 
-  public String getFeaturesType()
-  {
+  public String getFeaturesType() {
     return getMfServiceLog().getUserField4();
   }
-  
+
   public void setFeaturesType(String featureType) {
-   
+
     getMfServiceLog().setUserField4(featureType);
   }
 
