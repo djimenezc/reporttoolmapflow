@@ -84,6 +84,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
    * Default constructor - creates a new instance with no values set.
    */
   public User() {
+    roles = new String();
   }
 
   /**
@@ -93,12 +94,19 @@ public class User extends BaseObject implements Serializable, UserDetails {
    *          login name for user.
    */
   public User(final String username) {
+    this();
     this.username = username;
   }
 
   public void addRole(final Role role) {
 
-    roles += "," + role.getName();
+    if (!roles.contains(role.getName())) {
+      if(!roles.equals(""))
+      {
+        roles += "," ;
+      }
+      roles += role.getName();
+    }
   }
 
   /**
@@ -121,6 +129,12 @@ public class User extends BaseObject implements Serializable, UserDetails {
 
   @Transient
   public Address getAddress() {
+    
+    if(address == null)
+    {
+      address = new Address();
+    }
+    
     return address;
   }
 
@@ -146,6 +160,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
   }
 
   @Column(name = "COMMENTS", length = 100)
+  @SearchableProperty
   public String getComments() {
     return comments;
   }
@@ -250,6 +265,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
   }
 
   @Column(name = "ROLE_NAME", length = 20)
+  @SearchableProperty
   public String getRoles() {
     return roles;
   }
@@ -530,7 +546,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
       int i = 0;
       for (final Role role : getRolesList()) {
         if (i > 0) {
-          sb.append(", ");
+          sb.append(",");
         }
         sb.append(role.toString());
         i++;
@@ -540,5 +556,24 @@ public class User extends BaseObject implements Serializable, UserDetails {
       sb.append("No Granted Authorities");
     }
     return sb.toString();
+  }
+
+  public void removeRole(Role roleToRemoved) {
+
+    int i = 0;
+    String tempRoles = "";
+
+    for (final Role role : getRolesList()) {
+
+      if (role.getName().equals(roleToRemoved.getName())) {
+        if (i > 0) {
+          tempRoles += ",";
+        }
+        tempRoles += role.toString();
+        i++;
+      }
+    }
+
+    this.roles = tempRoles;
   }
 }

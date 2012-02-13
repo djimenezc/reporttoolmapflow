@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Table;
 
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -50,12 +51,18 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
    */
   @Override
   public User saveUser(final User user) {
+
     if (log.isDebugEnabled()) {
       log.debug("user's id: " + user.getId());
     }
-    getHibernateTemplate().saveOrUpdate(user);
-    // necessary to throw a DataIntegrityViolation and catch it in UserManager
-    getHibernateTemplate().flush();
+    try {
+      getHibernateTemplate().saveOrUpdate(user);
+      // necessary to throw a DataIntegrityViolation and catch it in UserManager
+      getHibernateTemplate().flush();
+    }
+    catch (Exception e) {
+      throw new DataIntegrityViolationException(e.getMessage());
+    }
     return user;
   }
 
@@ -77,10 +84,10 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
    */
   @Override
   public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-    
+
     @SuppressWarnings("unchecked")
     final List<User> users = getHibernateTemplate().find("from User where username=?", username);
-    
+
     if ((users == null) || users.isEmpty()) {
       throw new UsernameNotFoundException("user '" + username + "' not found...");
     }

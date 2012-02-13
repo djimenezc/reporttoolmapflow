@@ -25,10 +25,11 @@ import com.mapflow.test.dao.BaseDaoTestCase;
 
 public class UserDaoTest extends BaseDaoTestCase {
 
+  private static final String AAA_GMAIL_COM = "aaa@gmail.com";
   @Autowired
   private UserDao dao;
-  @Autowired
-  private RoleDao rdao;
+//  @Autowired
+//  private RoleDao rdao;
   @Autowired
   private CompassTemplate compassTemplate;
   @Autowired
@@ -51,8 +52,8 @@ public class UserDaoTest extends BaseDaoTestCase {
     user.setEmail("testuser@appfuse.org");
     user.setWebsite("http://raibledesigns.com");
 
-    final Role role = rdao.getRoleByName(Constants.USER_ROLE);
-    assertNotNull(role.getId());
+    final Role role = new Role(Constants.USER_ROLE);
+//    assertNotNull(role.getId());
     user.addRole(role);
 
     user = dao.saveUser(user);
@@ -71,36 +72,37 @@ public class UserDaoTest extends BaseDaoTestCase {
 
   @Test
   public void testAddUserRole() throws Exception {
-    User user = dao.get(-1L);
+    User user = dao.get(1L);
     assertEquals(1, user.getRolesList().size());
 
-    final Role role = rdao.getRoleByName(Constants.ADMIN_ROLE);
+    final Role role = new Role(Constants.ADMIN_ROLE);
     user.addRole(role);
     dao.saveUser(user);
     flush();
 
-    user = dao.get(-1L);
+    user = dao.get(1L);
     assertEquals(2, user.getRolesList().size());
 
     // add the same role twice - should result in no additional role
     user.addRole(role);
+
     dao.saveUser(user);
     flush();
 
-    user = dao.get(-1L);
+    user = dao.get(1L);
     assertEquals("more than 2 roles", 2, user.getRolesList().size());
 
-    user.getRolesList().remove(role);
+    user.removeRole(role);
     dao.saveUser(user);
     flush();
 
-    user = dao.get(-1L);
+    user = dao.get(1L);
     assertEquals(1, user.getRolesList().size());
   }
 
   @Test
   public void testGetUser() throws Exception {
-    final User user = dao.get(-1L);
+    final User user = dao.get(1L);
 
     assertNotNull(user);
     assertEquals(1, user.getRolesList().size());
@@ -116,7 +118,7 @@ public class UserDaoTest extends BaseDaoTestCase {
 
   @Test
   public void testGetUserPassword() throws Exception {
-    final User user = dao.get(-1L);
+    final User user = dao.get(1L);
     final String password = dao.getUserPassword(user.getUsername());
     assertNotNull(password);
     log.debug("password: " + password);
@@ -126,17 +128,15 @@ public class UserDaoTest extends BaseDaoTestCase {
 //  @NotTransactional
   @ExpectedException(DataIntegrityViolationException.class)
   public void testUpdateUser() throws Exception {
-    User user = dao.get(-1L);
+    User user = dao.get(1L);
 
-    final Address address = user.getAddress();
-    address.setAddress("new address");
+    user.setEmail(AAA_GMAIL_COM);
 
     dao.saveUser(user);
     flush();
 
-    user = dao.get(-1L);
-    assertEquals(address, user.getAddress());
-    assertEquals("new address", user.getAddress().getAddress());
+    user = dao.get(1L);
+    assertEquals(AAA_GMAIL_COM, user.getEmail());
 
     // verify that violation occurs when adding new user with same username
     user.setId(null);
@@ -147,7 +147,7 @@ public class UserDaoTest extends BaseDaoTestCase {
 
   @Test
   public void testUserExists() throws Exception {
-    final boolean b = dao.exists(-1L);
+    final boolean b = dao.exists(1L);
     assertTrue(b);
   }
 
@@ -162,32 +162,32 @@ public class UserDaoTest extends BaseDaoTestCase {
     // reindex all the data
     compassGps.index();
 
-    User user = compassTemplate.get(User.class, -2);
+    User user = compassTemplate.get(User.class, 2);
     assertNotNull(user);
-    assertEquals("Matt", user.getFirstName());
+    assertEquals("Admin user", user.getComments());
 
     compassTemplate.execute(new CompassCallbackWithoutResult() {
 
       @Override
       protected void doInCompassWithoutResult(final CompassSession compassSession)
         throws CompassException {
-        final CompassHits hits = compassSession.find("Matt");
+        final CompassHits hits = compassSession.find("Admin");
         assertEquals(1, hits.length());
-        assertEquals("Matt", ((User) hits.data(0)).getFirstName());
-        assertEquals("Matt", hits.resource(0).getValue("firstName"));
+        assertEquals("Admin user", ((User) hits.data(0)).getComments());
+        assertEquals("Admin user", hits.resource(0).getValue("comments"));
       }
     });
 
     // test mirroring
-    user = dao.get(-2L);
-    user.setFirstName("MattX");
+    user = dao.get(2L);
+    user.setComments("MattX");
     dao.saveUser(user);
     flush();
 
     // now verify it is reflected in the index
-    user = compassTemplate.get(User.class, -2);
+    user = compassTemplate.get(User.class, 2);
     assertNotNull(user);
-    assertEquals("MattX", user.getFirstName());
+    assertEquals("MattX", user.getComments());
 
     compassTemplate.execute(new CompassCallbackWithoutResult() {
 
@@ -196,7 +196,7 @@ public class UserDaoTest extends BaseDaoTestCase {
         throws CompassException {
         final CompassHits hits = compassSession.find("MattX");
         assertEquals(1, hits.length());
-        assertEquals("MattX", ((User) hits.data(0)).getFirstName());
+        assertEquals("MattX", ((User) hits.data(0)).getComments());
       }
     });
   }
