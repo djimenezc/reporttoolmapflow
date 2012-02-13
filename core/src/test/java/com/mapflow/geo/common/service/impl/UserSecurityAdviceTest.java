@@ -22,6 +22,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.test.annotation.ExpectedException;
 
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.dao.UserDao;
@@ -109,10 +110,11 @@ public class UserSecurityAdviceTest {
   }
 
   @Test
+  @ExpectedException(AccessDeniedException.class)
   public void testUpdateUserProfile() throws Exception {
     final UserManager userManager = makeInterceptedTarget();
     final User user = new User("user");
-    user.setId(1L);
+    user.setId(4L);
     user.getRolesList().add(new Role(Constants.USER_ROLE));
 
     context.checking(new Expectations() {
@@ -198,7 +200,7 @@ public class UserSecurityAdviceTest {
   public void testUpdateUserWithUserRole() throws Exception {
     final UserManager userManager = makeInterceptedTarget();
     final User user = new User("user");
-    user.setId(1L);
+    user.setId(3L);
     user.getRolesList().add(new Role(Constants.USER_ROLE));
 
     context.checking(new Expectations() {
@@ -212,13 +214,14 @@ public class UserSecurityAdviceTest {
   }
 
   private UserManager makeInterceptedTarget() {
-    ctx = new ClassPathXmlApplicationContext("/applicationContext-test.xml");
+    ctx = new ClassPathXmlApplicationContext("/spring/applicationContext-test.xml");
 
     final UserManager userManager = (UserManager) ctx.getBean("target");
 
     // Mock the userDao
     userDao = context.mock(UserDao.class);
     userManager.setUserDao(userDao);
+    
     return userManager;
   }
 }

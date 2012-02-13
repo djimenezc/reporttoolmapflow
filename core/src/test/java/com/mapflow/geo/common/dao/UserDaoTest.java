@@ -172,7 +172,7 @@ public class UserDaoTest extends BaseDaoTestCase {
       protected void doInCompassWithoutResult(final CompassSession compassSession)
         throws CompassException {
         final CompassHits hits = compassSession.find("Admin");
-        assertEquals(1, hits.length());
+        assertEquals(2, hits.length());
         assertEquals("Admin user", ((User) hits.data(0)).getComments());
         assertEquals("Admin user", hits.resource(0).getValue("comments"));
       }

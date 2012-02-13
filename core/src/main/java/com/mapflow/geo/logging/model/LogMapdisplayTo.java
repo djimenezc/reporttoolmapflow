@@ -210,7 +210,7 @@ public class LogMapdisplayTo extends BaseObject {
   }
 
   public void setTicket(final String ticket) {
-    this.setTicket(ticket);
+    mfServiceLog.setTicket(ticket);
   }
 
   public void setUserName(final String userName) {

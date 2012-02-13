@@ -7,23 +7,26 @@ import java.net.URISyntaxException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import com.mapflow.geo.common.exceptions.MapflowAppException;
 import com.mapflow.geo.logging.services.LoggerDatabaseServiceImpl;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
 import com.mapflow.geo.test.logging.unitary.mock.FactoryMock;
 
-public class LoggerDatabaseServiceImplTest {
+@ContextConfiguration(locations = { "classpath:/spring/applicationContext-dao-mock.xml",
+  "classpath*:/spring/applicationContext.xml", "classpath:**/spring/applicationContext*.xml" })
+public class LoggerDatabaseServiceImplTest extends AbstractTransactionalJUnit4SpringContextTests {
 
   @Autowired
   private LoggerDatabaseServiceImpl loggerService;
 
+  @Autowired
   private FactoryMock factoryMock;
 
   @Before
   public void setUp() throws Exception {
-
-    factoryMock = new FactoryMock();
 
     loggerService.setLogDao(factoryMock.getLogMapdisplayDao());
   }
