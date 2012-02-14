@@ -66,7 +66,7 @@ public class ConstantsTag extends TagSupport {
   @Override
   public int doStartTag() throws JspException {
     // Using reflection, get the available field names in the class
-    Class c = null;
+    Class<?> c = null;
     int toScope = PageContext.PAGE_SCOPE;
 
     if (scope != null) {

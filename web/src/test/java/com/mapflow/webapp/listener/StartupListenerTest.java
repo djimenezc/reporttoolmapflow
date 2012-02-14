@@ -54,7 +54,7 @@ public class StartupListenerTest extends TestCase {
     listener.contextInitialized(new ServletContextEvent(sc));
 
     assertTrue(sc.getAttribute(Constants.CONFIG) != null);
-    final Map config = (Map) sc.getAttribute(Constants.CONFIG);
+    final Map<?, ?> config = (Map<?, ?>) sc.getAttribute(Constants.CONFIG);
     assertEquals(config.get(Constants.CSS_THEME), "simplicity");
 
     assertTrue(sc.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null);

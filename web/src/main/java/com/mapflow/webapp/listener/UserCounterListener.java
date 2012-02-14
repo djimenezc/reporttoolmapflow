@@ -25,6 +25,7 @@ import com.mapflow.geo.common.model.entities.User;
  * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
+@SuppressWarnings("deprecation")
 public class UserCounterListener implements ServletContextListener, HttpSessionAttributeListener {
 
   /**

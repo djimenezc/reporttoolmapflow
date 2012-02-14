@@ -74,9 +74,9 @@ public class BaseFormController implements ServletContextAware {
 
   @SuppressWarnings("unchecked")
   public void saveError(final HttpServletRequest request, final String error) {
-    List errors = (List) request.getSession().getAttribute("errors");
+    List<String> errors = (List<String>) request.getSession().getAttribute("errors");
     if (errors == null) {
-      errors = new ArrayList();
+      errors = new ArrayList<String>();
     }
     errors.add(error);
     request.getSession().setAttribute("errors", errors);
@@ -84,10 +84,10 @@ public class BaseFormController implements ServletContextAware {
 
   @SuppressWarnings("unchecked")
   public void saveMessage(final HttpServletRequest request, final String msg) {
-    List messages = (List) request.getSession().getAttribute(MESSAGES_KEY);
+    List<String> messages = (List<String>) request.getSession().getAttribute(MESSAGES_KEY);
 
     if (messages == null) {
-      messages = new ArrayList();
+      messages = new ArrayList<String>();
     }
 
     messages.add(msg);
@@ -139,8 +139,9 @@ public class BaseFormController implements ServletContextAware {
    * 
    * @return the user's populated form from the session
    */
-  public Map getConfiguration() {
-    final Map config = (HashMap) servletContext.getAttribute(Constants.CONFIG);
+  @SuppressWarnings("rawtypes")
+  public Map<?, ?> getConfiguration() {
+    final Map<?, ?> config = (HashMap<?, ?>) servletContext.getAttribute(Constants.CONFIG);
 
     // so unit tests don't puke when nothing's been set
     if (config == null) {

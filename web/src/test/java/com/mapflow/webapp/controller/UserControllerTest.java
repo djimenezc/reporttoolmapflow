@@ -24,7 +24,7 @@ public class UserControllerTest extends BaseControllerTestCase {
   @Test
   public void testHandleRequest() throws Exception {
     final ModelAndView mav = c.handleRequest(null);
-    final Map m = mav.getModel();
+    final Map<?, ?> m = mav.getModel();
     assertNotNull(m.get(Constants.USER_LIST));
     assertEquals("admin/userList", mav.getViewName());
   }
@@ -33,8 +33,8 @@ public class UserControllerTest extends BaseControllerTestCase {
   public void testSearch() throws Exception {
     compassGps.index();
     final ModelAndView mav = c.handleRequest("admin");
-    final Map m = mav.getModel();
-    final List results = (List) m.get(Constants.USER_LIST);
+    final Map<?, ?> m = mav.getModel();
+    final List<?> results = (List<?>) m.get(Constants.USER_LIST);
     assertNotNull(results);
     assertTrue(results.size() >= 1);
     assertEquals("admin/userList", mav.getViewName());

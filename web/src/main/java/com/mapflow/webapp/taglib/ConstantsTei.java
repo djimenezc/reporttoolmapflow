@@ -43,7 +43,7 @@ public class ConstantsTei extends TagExtraInfo {
         clazz = Constants.class.getName();
       }
 
-      final Class c = Class.forName(clazz);
+      final Class<?> c = Class.forName(clazz);
 
       // if no var specified, get all
       if (data.getAttributeString("var") == null) {

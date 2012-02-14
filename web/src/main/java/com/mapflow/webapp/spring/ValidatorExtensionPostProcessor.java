@@ -42,6 +42,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 public class ValidatorExtensionPostProcessor implements BeanFactoryPostProcessor {
 
   private String validatorFactoryBeanName = "validatorFactory";
+  @SuppressWarnings("rawtypes")
   private List validationConfigLocations;
 
   /**
@@ -51,6 +52,7 @@ public class ValidatorExtensionPostProcessor implements BeanFactoryPostProcessor
    * @param configurableListableBeanFactory
    *          the bean factory
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void postProcessBeanFactory(
     final ConfigurableListableBeanFactory configurableListableBeanFactory) {
@@ -63,7 +65,7 @@ public class ValidatorExtensionPostProcessor implements BeanFactoryPostProcessor
         propertyValues.getPropertyValue("validationConfigLocations");
 
       // value is expected to be a list.
-      final List existingValidationConfigLocations = (List) propertyValue.getValue();
+      final List<?> existingValidationConfigLocations = (List<?>) propertyValue.getValue();
       existingValidationConfigLocations.addAll(validationConfigLocations);
     }
   }
@@ -74,7 +76,8 @@ public class ValidatorExtensionPostProcessor implements BeanFactoryPostProcessor
    * @param validationConfigLocations
    *          The list of additional validation configuration locations.
    */
-  public void setValidationConfigLocations(final List validationConfigLocations) {
+  public void setValidationConfigLocations(final List<?> validationConfigLocations) {
+    
     this.validationConfigLocations = validationConfigLocations;
   }
 

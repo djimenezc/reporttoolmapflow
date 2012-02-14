@@ -31,9 +31,9 @@ public class CountryTag extends TagSupport {
   /**
    * Class to compare LabelValues using their labels with locale-sensitive behaviour.
    */
-  public class LabelValueComparator implements Comparator {
+  public class LabelValueComparator implements Comparator<Object> {
 
-    private final Comparator c;
+    private final Comparator<Object> c;
 
     /**
      * Creates a new LabelValueComparator object.
@@ -78,11 +78,12 @@ public class CountryTag extends TagSupport {
    *          The Locale used to localize the country names.
    * @return List of LabelValues for all available countries.
    */
-  protected List buildCountryList(final Locale locale) {
+  protected List<LabelValue> buildCountryList(final Locale locale) {
+    
     final String EMPTY = "";
     final Locale[] available = Locale.getAvailableLocales();
 
-    final List countries = new ArrayList();
+    final List<LabelValue> countries = new ArrayList<LabelValue>();
 
     for (final Locale element : available) {
       final String iso = element.getCountry();
@@ -119,7 +120,7 @@ public class CountryTag extends TagSupport {
     }
 
     final Locale userLocale = pageContext.getRequest().getLocale();
-    final List countries = this.buildCountryList(userLocale);
+    final List<?> countries = this.buildCountryList(userLocale);
 
     if (scope != null) {
       if (scope.equals("page")) {
@@ -147,7 +148,7 @@ public class CountryTag extends TagSupport {
         sb.append(eval.evalString("prompt", prompt) + "</option>\n");
       }
 
-      for (final Iterator i = countries.iterator(); i.hasNext();) {
+      for (final Iterator<?> i = countries.iterator(); i.hasNext();) {
         final LabelValue country = (LabelValue) i.next();
         sb.append("    <option value=\"" + country.getValue() + "\"");
 
