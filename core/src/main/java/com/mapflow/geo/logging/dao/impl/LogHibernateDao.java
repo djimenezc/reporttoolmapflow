@@ -2,9 +2,6 @@ package com.mapflow.geo.logging.dao.impl;
 
 import java.util.List;
 
-import javax.persistence.Table;
-
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Repository;
 
 import com.mapflow.geo.common.persistence.hibernate.GenericDaoHibernate;
