@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.persistence.hibernate;
+package com.mapflow.geo.common.dao.hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
+import com.mapflow.geo.common.dao.LookupDao;
 import com.mapflow.geo.common.model.Role;
-import com.mapflow.geo.common.persistence.LookupDao;
 
 /**
  * Hibernate implementation of LookupDao.
@@ -27,8 +27,8 @@ public class LookupDaoHibernate implements LookupDao {
    
     roles = new ArrayList<Role>();
     
-    roles.add(new Role("ROLE_ADMIN"));
-    roles.add(new Role("ROLE_USER"));
+    roles.add(new Role("admin"));
+    roles.add(new Role("all"));
   }
   
   /**

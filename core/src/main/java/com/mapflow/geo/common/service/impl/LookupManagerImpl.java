@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mapflow.geo.common.dao.LookupDao;
 import com.mapflow.geo.common.model.Role;
-import com.mapflow.geo.common.persistence.LookupDao;
 import com.mapflow.geo.common.service.LookupManager;
 import com.mapflow.model.LabelValue;
 

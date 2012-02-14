@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mapflow.geo.common.persistence.LookupDao;
+import com.mapflow.geo.common.model.Role;
 import com.mapflow.test.dao.BaseDaoTestCase;
 
 /**
@@ -23,7 +23,7 @@ public class LookupDaoTest extends BaseDaoTestCase {
   @Test
   public void testGetRoles() {
     
-    final List<?> roles = lookupDao.getRoles();
+    final List<Role> roles = lookupDao.getRoles();
     
     log.debug(roles);
     
