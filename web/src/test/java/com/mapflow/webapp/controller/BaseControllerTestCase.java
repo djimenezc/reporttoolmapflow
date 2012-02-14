@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 @ContextConfiguration(locations = { "classpath:/spring/applicationContext-resources.xml",
   "classpath:/spring/applicationContext-dao.xml",
   "classpath:/spring/applicationContext-service.xml", "classpath*:/spring/applicationContext.xml",
-  "/WEB-INF/spring/applicationContext*.xml", "/WEB-INF/spring/dispatcher-servlet.xml" })
+  "/WEB-INF/spring/applicationContext*.xml", "/WEB-INF/dispatcher-servlet.xml" })
 public abstract class BaseControllerTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
   protected transient final Log log = LogFactory.getLog(getClass());
