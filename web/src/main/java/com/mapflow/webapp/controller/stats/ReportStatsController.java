@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.manager.UserManager;
+import com.mapflow.webapp.controller.BaseFormController;
 
 /**
  * Simple class to retrieve a list of users from the database.
@@ -21,7 +22,7 @@ import com.mapflow.geo.common.manager.UserManager;
  */
 @Controller
 @RequestMapping("/stats/reports*")
-public class ReportStatsController {
+public class ReportStatsController extends BaseFormController{
 
   private UserManager mgr = null;
 
@@ -33,6 +34,7 @@ public class ReportStatsController {
   @RequestMapping(method = RequestMethod.GET)
   public ModelAndView handleRequest(@RequestParam(required = false, value = "q") final String query)
     throws Exception {
-    return new ModelAndView("stats/report", Constants.USER_LIST, mgr.search(query));
+    
+    return new ModelAndView("stats/reports", Constants.USER_LIST, mgr.search(query));
   }
 }
