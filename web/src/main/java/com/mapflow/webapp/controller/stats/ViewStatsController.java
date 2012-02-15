@@ -1,4 +1,4 @@
-package com.mapflow.webapp.controller;
+package com.mapflow.webapp.controller.stats;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +20,8 @@ import com.mapflow.geo.common.manager.UserManager;
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 @Controller
-@RequestMapping("/admin/users*")
-public class UserController {
+@RequestMapping("/stats/view*")
+public class ViewStatsController {
 
   private UserManager mgr = null;
 
@@ -33,6 +33,6 @@ public class UserController {
   @RequestMapping(method = RequestMethod.GET)
   public ModelAndView handleRequest(@RequestParam(required = false, value = "q") final String query)
     throws Exception {
-    return new ModelAndView("admin/userList", Constants.USER_LIST, mgr.search(query));
+    return new ModelAndView("stats/viewStats", Constants.USER_LIST, mgr.search(query));
   }
 }

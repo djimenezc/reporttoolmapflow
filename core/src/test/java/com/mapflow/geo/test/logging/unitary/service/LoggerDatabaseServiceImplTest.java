@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mapflow.geo.common.exceptions.MapflowAppException;
-import com.mapflow.geo.logging.services.LoggerDatabaseServiceImpl;
+import com.mapflow.geo.logging.service.LoggerDatabaseServiceImpl;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
 import com.mapflow.geo.test.logging.unitary.mock.FactoryMock;
 import com.mapflow.test.service.BaseManagerTestCase;

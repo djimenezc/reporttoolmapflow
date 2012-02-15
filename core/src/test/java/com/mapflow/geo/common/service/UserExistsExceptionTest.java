@@ -11,9 +11,9 @@ import org.springframework.test.annotation.ExpectedException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
+import com.mapflow.geo.common.manager.UserManager;
 import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.common.service.UserExistsException;
-import com.mapflow.geo.common.service.UserManager;
 
 @ContextConfiguration(locations = { "/spring/applicationContext-service.xml",
   "/spring/applicationContext-resources.xml", "classpath:/spring/applicationContext-dao.xml" })

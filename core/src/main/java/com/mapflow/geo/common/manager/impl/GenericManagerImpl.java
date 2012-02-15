@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.service.impl;
+package com.mapflow.geo.common.manager.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,8 +12,8 @@ import org.compass.core.support.search.CompassSearchHelper;
 import org.compass.core.support.search.CompassSearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mapflow.geo.common.manager.GenericManager;
 import com.mapflow.geo.common.persistence.GenericDao;
-import com.mapflow.geo.common.service.GenericManager;
 import com.mapflow.model.BaseObject;
 
 /**

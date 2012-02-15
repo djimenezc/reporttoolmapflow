@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.service;
+package com.mapflow.geo.common.manager;
 
 import java.io.Serializable;
 import java.util.List;

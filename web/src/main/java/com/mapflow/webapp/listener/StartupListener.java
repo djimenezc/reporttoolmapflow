@@ -19,7 +19,7 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.mapflow.geo.common.constants.Constants;
-import com.mapflow.geo.common.service.LookupManager;
+import com.mapflow.geo.common.manager.LookupManager;
 
 /**
  * <p>

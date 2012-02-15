@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.service.impl;
+package com.mapflow.geo.common.manager.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mapflow.geo.common.dao.LookupDao;
+import com.mapflow.geo.common.manager.LookupManager;
 import com.mapflow.geo.common.model.Role;
-import com.mapflow.geo.common.service.LookupManager;
 import com.mapflow.model.LabelValue;
 
 /**

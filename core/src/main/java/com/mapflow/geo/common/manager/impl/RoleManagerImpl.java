@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.service.impl;
+package com.mapflow.geo.common.manager.impl;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mapflow.geo.common.dao.RoleDao;
+import com.mapflow.geo.common.manager.RoleManager;
 import com.mapflow.geo.common.model.Role;
-import com.mapflow.geo.common.service.RoleManager;
 
 /**
  * Implementation of RoleManager interface.

@@ -1,4 +1,4 @@
-package com.mapflow.geo.logging.services;
+package com.mapflow.geo.logging.service;
 
 import java.net.URISyntaxException;
 

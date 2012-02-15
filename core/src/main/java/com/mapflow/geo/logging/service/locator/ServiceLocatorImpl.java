@@ -1,8 +1,8 @@
-package com.mapflow.geo.logging.services.locator;
+package com.mapflow.geo.logging.service.locator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mapflow.geo.logging.services.LoggerService;
+import com.mapflow.geo.logging.service.LoggerService;
 
 public class ServiceLocatorImpl implements ServiceLocator {
 

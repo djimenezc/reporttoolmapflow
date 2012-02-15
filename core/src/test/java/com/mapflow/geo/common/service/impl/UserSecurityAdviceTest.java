@@ -26,9 +26,9 @@ import org.springframework.test.annotation.ExpectedException;
 
 import com.mapflow.geo.common.constants.Constants;
 import com.mapflow.geo.common.dao.UserDao;
+import com.mapflow.geo.common.manager.UserManager;
 import com.mapflow.geo.common.model.Role;
 import com.mapflow.geo.common.model.entities.User;
-import com.mapflow.geo.common.service.UserManager;
 import com.mapflow.geo.common.service.UserSecurityAdvice;
 
 @RunWith(JMock.class)
