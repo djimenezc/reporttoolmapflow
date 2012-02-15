@@ -28,14 +28,14 @@ import com.mapflow.geo.stats.facade.StatsFacade;
  * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
-public class AbstractStatsController implements ServletContextAware {
+public abstract class AbstractStatsController implements ServletContextAware {
 
   protected final transient Log log = LogFactory.getLog(getClass());
   public static final String MESSAGES_KEY = "successMessages";
   private UserManager userManager = null;
   protected String cancelView;
   protected String successView;
-
+  
   @Autowired
   protected StatsFacade statsFacade;
   
@@ -123,4 +123,5 @@ public class AbstractStatsController implements ServletContextAware {
   protected ServletContext getServletContext() {
     return servletContext;
   }
+
 }

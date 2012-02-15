@@ -17,8 +17,8 @@
         </Menu>
         
         <Menu name="StatsMenu" title="menu.stats" description="Statistics Menu" page="/statsMain" roles="ROLE_ADMIN,ROLE_USER">
-        	<Item name="ViewEvents" title="menu.stats.events.view" page="/stats/view"/>
-        	<Item name="ReportEvents" title="menu.stats.events.report" page="/stats/reports"/>
+        	<Item name="ViewStats" title="menu.stats.events.view" page="/stats/view"/>
+        	<Item name="ViewReports" title="menu.stats.events.report" page="/stats/reports"/>
         </Menu>
         
         <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>

@@ -1,6 +1,8 @@
 package com.mapflow.webapp.controller.stats;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mapflow.geo.common.constants.Constants;
-import com.mapflow.geo.common.manager.UserManager;
-import com.mapflow.webapp.controller.BaseFormController;
+import com.mapflow.geo.reporting.report.Report;
 
 /**
  * Simple class to retrieve a list of users from the database.
@@ -22,19 +23,14 @@ import com.mapflow.webapp.controller.BaseFormController;
  */
 @Controller
 @RequestMapping("/stats/reports*")
-public class ReportStatsController extends BaseFormController{
-
-  private UserManager mgr = null;
-
-  @Autowired
-  public void setUserManager(final UserManager userManager) {
-    mgr = userManager;
-  }
+public class ReportStatsController extends AbstractStatsController {
 
   @RequestMapping(method = RequestMethod.GET)
   public ModelAndView handleRequest(@RequestParam(required = false, value = "q") final String query)
     throws Exception {
-    
-    return new ModelAndView("stats/reports", Constants.USER_LIST, mgr.search(query));
+
+    final List<Report> model = new ArrayList<Report>();
+
+    return new ModelAndView("stats/reports", Constants.REPORT_LIST, model);
   }
 }

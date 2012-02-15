@@ -1,9 +1,9 @@
 <%@ include file="/common/taglibs.jsp"%>
 
 <head>
-    <title><fmt:message key="userList.title"/></title>
-    <meta name="heading" content="<fmt:message key='userList.heading'/>"/>
-    <meta name="menu" content="StatsMenu"/>
+    <title><fmt:message key="report.title"/></title>
+    <meta name="heading" content="<fmt:message key='report.title'/>"/>
+    <meta name="menu" content="ViewReports"/>
 </head>
 
 

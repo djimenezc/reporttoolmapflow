@@ -29,11 +29,6 @@
     
     <!-- Activates scanning of @Service -->
     <context:component-scan base-package="com.mapflow.geo"/>
-<!--     <context:component-scan base-package="com.mapflow.geo.common.service"/> -->
-<!--     <context:component-scan base-package="com.mapflow.geo.common.manager"/> -->
-<!--     <context:component-scan base-package="com.mapflow.geo.logging.service"/> -->
-<!--     <context:component-scan base-package="com.mapflow.geo.reporting.service"/> -->
-    
     
     <tx:advice id="txAdvice">
         <tx:attributes>

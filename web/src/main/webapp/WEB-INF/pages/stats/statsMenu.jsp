@@ -1,3 +1,7 @@
+<%@ include file="/common/taglibs.jsp"%>
 
-
-<h1>Mapflow Stats</h1>
+<head>
+    <title><fmt:message key="stats.mapflow.title"/></title>
+    <meta name="heading" content="<fmt:message key='stats.mapflow.title'/>"/>
+    <meta name="menu" content="StatsMenu"/>
+</head>
