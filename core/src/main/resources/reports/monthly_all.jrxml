@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="998"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.9330147604194667"/>
+	<property name="ireport.x" value="28"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.jasperserver.reportUnit" value="/reports/Monthly_all"/>
 	<property name="ireport.jasperserver.url" value="http://mfpc030dh:9091/jasperserver/services/repository"/>
@@ -141,11 +141,11 @@ FROM
 					<textElement>
 						<font size="20"/>
 					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{client_id}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{client_id}]]></textFieldExpression>
 				</textField>
-				<image>
+				<image onErrorType="Blank">
 					<reportElement x="738" y="0" width="64" height="50"/>
-					<imageExpression class="java.lang.String"><![CDATA["repo:newlogo.png"]]></imageExpression>
+					<imageExpression><![CDATA["newlogo.png"]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement x="558" y="19" width="180" height="31" forecolor="#CCCCCC"/>
@@ -171,14 +171,14 @@ FROM
 						<textElement textAlignment="Right">
 							<font size="12"/>
 						</textElement>
-						<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+						<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 					</textField>
 					<textField pattern="###0">
 						<reportElement x="79" y="12" width="120" height="20" forecolor="#FFFFFF"/>
 						<textElement>
 							<font fontName="Tahoma" size="14" isBold="true"/>
 						</textElement>
-						<textFieldExpression class="java.lang.Double"><![CDATA[$F{year}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$F{year}]]></textFieldExpression>
 					</textField>
 					<staticText>
 						<reportElement x="0" y="12" width="79" height="20" forecolor="#FFFFFF"/>
@@ -291,91 +291,91 @@ FROM
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{monthno}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{monthno}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months" pattern="###0;-###0" isBlankWhenNull="true">
 					<reportElement x="258" y="0" width="60" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{RW_POSTCODE_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{RW_POSTCODE_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months" pattern="###0;-###0" isBlankWhenNull="true">
 					<reportElement x="318" y="0" width="60" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{GEOCODE_ADDRESS_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{GEOCODE_ADDRESS_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months" pattern="###0;-###0" isBlankWhenNull="true">
 					<reportElement x="378" y="0" width="60" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{GET_RISK_SCORES_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{GET_RISK_SCORES_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months" pattern="###0;-###0" isBlankWhenNull="true">
 					<reportElement x="438" y="0" width="60" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{MOVE_POINTER_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{MOVE_POINTER_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months" pattern="###0;-###0" isBlankWhenNull="true">
 					<reportElement x="498" y="0" width="60" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{AUTOCOMPLETE_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{AUTOCOMPLETE_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months" pattern="###0;-###0" isBlankWhenNull="true">
 					<reportElement x="558" y="0" width="60" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{flood_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{flood_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months" pattern="###0;-###0" isBlankWhenNull="true">
 					<reportElement x="618" y="0" width="60" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{BGS_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{BGS_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months" pattern="###0;-###0" isBlankWhenNull="true">
 					<reportElement x="678" y="0" width="60" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{COMAH_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{COMAH_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months" pattern="###0;-###0" isBlankWhenNull="true">
 					<reportElement x="738" y="0" width="64" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{FIRE_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{FIRE_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months">
 					<reportElement x="199" y="0" width="59" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{Folio_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{Folio_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months">
 					<reportElement x="139" y="0" width="60" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SFTP_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{SFTP_1}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="Months">
 					<reportElement x="79" y="0" width="60" height="16"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{BUILDING_RISK_REQS_2}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{BUILDING_RISK_REQS_2}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -385,19 +385,21 @@ FROM
 	</background>
 	<pageFooter>
 		<band height="171" splitType="Stretch">
-			<image scaleImage="FillFrame">
+			<image scaleImage="FillFrame" onErrorType="Blank">
 				<reportElement mode="Opaque" x="36" y="14" width="762" height="86"/>
-				<imageExpression class="java.lang.String"><![CDATA["repo:02.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["02.jpg"]]></imageExpression>
 			</image>
 			<lineChart>
 				<chart renderType="draw">
-					<reportElement x="1" y="14" width="802" height="132"/>
+					<reportElement key="Chart" x="1" y="14" width="802" height="132"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<categoryDataset>
-					<dataset resetType="Page" incrementType="Group" incrementGroup="Months"/>
+					<dataset resetType="Page" incrementType="Group" incrementGroup="Client">
+						<incrementWhenExpression><![CDATA[true]]></incrementWhenExpression>
+					</dataset>
 					<categorySeries>
 						<seriesExpression><![CDATA["Riskwidget"]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
@@ -465,14 +467,14 @@ FROM
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement style="Column header" x="497" y="0" width="180" height="20" forecolor="#FFFFFF"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 				</textField>
 			</frame>
 			<textField evaluationTime="Page" pattern="EEEEE dd MMMMM yyyy">
@@ -480,7 +482,7 @@ FROM
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
