@@ -69,8 +69,10 @@ public abstract class AbstractReportService {
     switch (reportExportType) {
       case PDF:
         result = JasperExportManager.exportReportToPdf(jasperprint);
+        break;
       case XML:
         result = JasperExportManager.exportReportToXml(jasperprint).getBytes();
+        break;
     }
 
     return result;

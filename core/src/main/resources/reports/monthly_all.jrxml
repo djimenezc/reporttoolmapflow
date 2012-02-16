@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="0.9330147604194667"/>
-	<property name="ireport.x" value="28"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.jasperserver.reportUnit" value="/reports/Monthly_all"/>
 	<property name="ireport.jasperserver.url" value="http://mfpc030dh:9091/jasperserver/services/repository"/>
@@ -389,77 +389,6 @@ FROM
 				<reportElement mode="Opaque" x="36" y="14" width="762" height="86"/>
 				<imageExpression><![CDATA["02.jpg"]]></imageExpression>
 			</image>
-			<lineChart>
-				<chart renderType="draw">
-					<reportElement key="Chart" x="1" y="14" width="802" height="132"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend/>
-				</chart>
-				<categoryDataset>
-					<dataset resetType="Page" incrementType="Group" incrementGroup="Client">
-						<incrementWhenExpression><![CDATA[true]]></incrementWhenExpression>
-					</dataset>
-					<categorySeries>
-						<seriesExpression><![CDATA["Riskwidget"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{RW_POSTCODE_1}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Geocode"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{GEOCODE_ADDRESS_1}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["GetRisks"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{GET_RISK_SCORES_1}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["MovePointer"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{MOVE_POINTER_1}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Autocomplete"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{AUTOCOMPLETE_1}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Nafra"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{NAFRA_1}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["BGS"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{BGS_1}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["COMAH"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{COMAH_1}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Fire"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{FIRE_1}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Folio"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{Folio_1}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Flood"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{monthno}]]></categoryExpression>
-						<valueExpression><![CDATA[$V{flood_1}]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<linePlot isShowShapes="false">
-					<plot backgroundAlpha="0.5"/>
-				</linePlot>
-			</lineChart>
 			<frame>
 				<reportElement mode="Opaque" x="1" y="146" width="802" height="25" forecolor="#D0B48E" backcolor="#000000"/>
 				<textField evaluationTime="Report">
