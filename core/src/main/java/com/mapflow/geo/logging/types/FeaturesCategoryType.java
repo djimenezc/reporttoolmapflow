@@ -20,7 +20,7 @@ public enum FeaturesCategoryType {
    */
   Policies("POLICY"),
   /**
-   * (not live with any clients currently, but logging should be implemented for future use)
+   * (not live with any clients currently, but logging should be implemented for future use) a
    */
   Claims("CLAIM"),
   /**
