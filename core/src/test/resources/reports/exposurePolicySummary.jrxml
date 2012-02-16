@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.8264462809917368"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="DejaVu Sans" fontSize="50" isBold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Arial"/>
+	<style name="Row" mode="Transparent" fontName="Arial">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<style name="Sans_Normal" isDefault="true" fontName="DejaVu Sans" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="TableHeader" mode="Opaque" backcolor="#808080"/>
+	<style name="TableFooter" mode="Opaque" backcolor="#C0C0C0"/>
+	<subDataset name="TableData">
+		<field name="number" class="java.lang.String"/>
+		<field name="name" class="java.lang.String"/>
+		<field name="tsi" class="java.lang.String"/>
+		<field name="lat" class="java.lang.Double"/>
+		<field name="lng" class="java.lang.Double"/>
+		<field name="matchLevel" class="java.lang.String"/>
+		<field name="policyType" class="java.lang.String"/>
+		<field name="riskType" class="java.lang.String"/>
+		<field name="address" class="java.lang.String"/>
+		<field name="coordSys" class="java.lang.String"/>
+		<field name="exposure" class="java.lang.String"/>
+		<field name="chainScore" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="AVG_SI" class="java.lang.String"/>
+	<parameter name="NUM_POLICIES" class="java.lang.Integer"/>
+	<parameter name="TOTAL_SI" class="java.lang.String"/>
+	<parameter name="LOGO_PATH" class="java.lang.String"/>
+	<parameter name="PATH_MAP_IMAGE" class="java.lang.String"/>
+	<parameter name="DATASET" class="java.lang.String"/>
+	<parameter name="AREA" class="java.lang.String"/>
+	<parameter name="POLICY_TYPE" class="java.lang.String"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Map">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/10)]]></groupExpression>
+		<groupHeader>
+			<band height="147">
+				<frame>
+					<reportElement mode="Opaque" x="-20" y="-3" width="822" height="52" forecolor="#006699" backcolor="#006699">
+						<printWhenExpression><![CDATA[Boolean.valueOf(true)]]></printWhenExpression>
+					</reportElement>
+					<box bottomPadding="0"/>
+					<staticText>
+						<reportElement style="Title" x="393" y="0" width="416" height="49"/>
+						<textElement textAlignment="Right">
+							<font size="40" isBold="false" isUnderline="false"/>
+						</textElement>
+						<text><![CDATA[Accumulation Report]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="20" y="9" width="253" height="36" forecolor="#B6BEC4"/>
+						<textElement>
+							<font size="30"/>
+						</textElement>
+						<text><![CDATA[exposure]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="227" y="50" width="575" height="15"/>
+				</frame>
+			</band>
+			<band height="278">
+				<frame>
+					<reportElement mode="Opaque" x="13" y="36" width="256" height="27" forecolor="#B89F7D" backcolor="#FFFFFF"/>
+					<textField isBlankWhenNull="true">
+						<reportElement x="131" y="0" width="125" height="23"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{NUM_POLICIES}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" x="0" y="0" width="131" height="23" forecolor="#000000"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="18" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Policy Count"]]></textFieldExpression>
+					</textField>
+				</frame>
+				<elementGroup/>
+				<elementGroup>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" x="13" y="79" width="131" height="23" forecolor="#000000"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="18" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Total SI"]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="144" y="79" width="122" height="24"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{TOTAL_SI}]]></textFieldExpression>
+					</textField>
+				</elementGroup>
+				<elementGroup/>
+				<frame>
+					<reportElement mode="Opaque" x="13" y="123" width="256" height="24" forecolor="#B89F7D" backcolor="#FFFFFF"/>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" x="0" y="1" width="131" height="23" forecolor="#000000"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="18" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Average SI"]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="131" y="0" width="125" height="24" forecolor="#000000"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{AVG_SI}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement mode="Opaque" x="13" y="165" width="256" height="24" forecolor="#B89F7D" backcolor="#FFFFFF"/>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" x="0" y="1" width="131" height="23" forecolor="#000000"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="18" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Policy Type"]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="131" y="0" width="122" height="24" forecolor="#000000"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{POLICY_TYPE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement mode="Opaque" x="13" y="206" width="256" height="24" forecolor="#B89F7D" backcolor="#FFFFFF"/>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" x="0" y="1" width="131" height="23" forecolor="#000000"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="18" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Area"]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="131" y="0" width="120" height="24" forecolor="#000000"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{AREA}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+			<band/>
+		</groupHeader>
+	</group>
+	<background>
+		<band height="555" splitType="Stretch">
+			<image onErrorType="Blank">
+				<reportElement x="1" y="102" width="210" height="65">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{LOGO_PATH}]]></imageExpression>
+			</image>
+			<image onErrorType="Blank">
+				<reportElement x="274" y="114" width="528" height="421">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{PATH_MAP_IMAGE}]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band splitType="Stretch">
+			<printWhenExpression><![CDATA[Boolean.valueOf(true)]]></printWhenExpression>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="197" splitType="Stretch">
+			<componentElement>
+				<reportElement style="Table" positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="10" width="569" height="149"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="TableData">
+						<datasetParameter name="REPORT_DATA_SOURCE">
+							<datasetParameterExpression><![CDATA[$P{REPORT_DATA_SOURCE}]]></datasetParameterExpression>
+						</datasetParameter>
+					</datasetRun>
+					<jr:column width="65">
+						<jr:columnHeader style="TableHeader" height="30" rowSpan="1">
+							<box leftPadding="0">
+								<pen lineColor="#000000"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Number]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box leftPadding="0">
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98">
+						<jr:columnHeader style="TableHeader" height="30" rowSpan="1">
+							<box leftPadding="0">
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Name]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box leftPadding="0">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50">
+						<jr:columnHeader style="TableHeader" height="30" rowSpan="1">
+							<box leftPadding="0">
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TSI]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box leftPadding="0">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tsi}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100">
+						<jr:columnHeader style="TableHeader" height="30" rowSpan="1">
+							<box leftPadding="0">
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="100" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Policy Type]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box leftPadding="0">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="100" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{policyType}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="109">
+						<jr:columnHeader style="TableHeader" height="30" rowSpan="1">
+							<box leftPadding="0">
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="109" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Latitude]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box leftPadding="0">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="109" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{lat}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="91">
+						<jr:columnHeader style="TableHeader" height="30" rowSpan="1">
+							<box leftPadding="0">
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="91" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Longitude]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box leftPadding="0">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="91" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{lng}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="TableHeader" height="30" rowSpan="1">
+							<box leftPadding="0">
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Match Level]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box leftPadding="0">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{matchLevel}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="75">
+						<jr:columnHeader style="TableHeader" height="30" rowSpan="1">
+							<box leftPadding="0">
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="75" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Risk Type]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box leftPadding="0">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="75" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{riskType}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="135">
+						<jr:columnHeader style="TableHeader" height="30" rowSpan="1">
+							<box leftPadding="0">
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="135" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Address]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30" rowSpan="1">
+							<box leftPadding="0">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="135" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="800" height="16" forecolor="#D0B48E" backcolor="#006699"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="753" y="0" width="40" height="16" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="673" y="0" width="80" height="16" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="16" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

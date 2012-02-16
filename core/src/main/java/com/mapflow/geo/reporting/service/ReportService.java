@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.service.reporting;
+package com.mapflow.geo.reporting.service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,10 +8,12 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperReport;
 
 import com.mapflow.geo.reporting.report.Report;
+import com.mapflow.geo.reporting.type.ReportExportType;
 
-public abstract interface PdfReportService<T extends Report> {
+public abstract interface ReportService<T extends Report> {
 
-  byte[] generateReport(String workDir, T data, Map<String, Object> parameters) throws Exception;
+  byte[] generateReport(String workDir, T data, final ReportExportType reportExportType)
+    throws Exception;
 
   public abstract void toPdf(final byte[] pdf, final String fileName) throws FileNotFoundException,
     IOException;

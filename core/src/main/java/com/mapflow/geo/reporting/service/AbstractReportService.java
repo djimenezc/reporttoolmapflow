@@ -1,4 +1,4 @@
-package com.mapflow.geo.common.service.reporting;
+package com.mapflow.geo.reporting.service;
 
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
@@ -8,8 +8,16 @@ import java.sql.Connection;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
+import com.mapflow.geo.reporting.report.Report;
+import com.mapflow.geo.reporting.type.ReportExportType;
 
 public abstract class AbstractReportService {
 
@@ -32,6 +40,40 @@ public abstract class AbstractReportService {
     bufferedOutput.write(pdf, 0, sizePdf);
 
     bufferedOutput.close();
+  }
+
+  /**
+   * Export the jasper report to pdf or xml
+   * 
+   * @param workDir
+   * @param data
+   * @param reportExportType
+   * @return
+   * @throws Exception
+   */
+  protected byte[] generateReportImpl(final String workDir, final Report data,
+    final ReportExportType reportExportType, final String templateFile) throws Exception {
+
+    final JasperReport jasperReport =
+      JasperCompileManager.compileReport(workDir + "/" + templateFile);
+
+    final JRBeanCollectionDataSource datasource =
+      new JRBeanCollectionDataSource(data.getDatasources());
+
+    // fill the report
+    final JasperPrint jasperprint =
+      JasperFillManager.fillReport(jasperReport, data.getParameters(), datasource);
+
+    byte[] result = null;
+
+    switch (reportExportType) {
+      case PDF:
+        result = JasperExportManager.exportReportToPdf(jasperprint);
+      case XML:
+        result = JasperExportManager.exportReportToXml(jasperprint).getBytes();
+    }
+
+    return result;
   }
 
   public Connection getConnection() {
@@ -57,5 +99,4 @@ public abstract class AbstractReportService {
 
     createFile(fileName, pdf);
   }
-
 }
