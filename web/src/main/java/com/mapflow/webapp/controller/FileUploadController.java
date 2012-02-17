@@ -30,84 +30,88 @@ import com.mapflow.geo.common.constants.Constants;
 @RequestMapping("/fileupload*")
 public class FileUploadController extends BaseFormController {
 
-  public FileUploadController() {
-    setCancelView("redirect:/mainMenu");
-    setSuccessView("uploadDisplay");
-  }
+	public FileUploadController() {
+		setCancelView("redirect:/mainMenu");
+		setSuccessView("uploadDisplay");
+	}
 
-  @ModelAttribute
-  @RequestMapping(method = RequestMethod.GET)
-  public FileUpload showForm() {
-    return new FileUpload();
-  }
+	@ModelAttribute
+	@RequestMapping(method = RequestMethod.GET)
+	public FileUpload showForm() {
+		return new FileUpload();
+	}
 
-  @RequestMapping(method = RequestMethod.POST)
-  public String onSubmit(final FileUpload fileUpload, final BindingResult errors,
-    final HttpServletRequest request) throws Exception {
+	@RequestMapping(method = RequestMethod.POST)
+	public String onSubmit(final FileUpload fileUpload,
+			final BindingResult errors, final HttpServletRequest request)
+			throws Exception {
 
-    if (request.getParameter("cancel") != null) {
-      return getCancelView();
-    }
+		if (request.getParameter("cancel") != null) {
+			return getCancelView();
+		}
 
-    if (validator != null) { // validator is null during testing
-      validator.validate(fileUpload, errors);
+		if (validator != null) { // validator is null during testing
+			validator.validate(fileUpload, errors);
 
-      if (errors.hasErrors()) {
-        return "fileupload";
-      }
-    }
+			if (errors.hasErrors()) {
+				return "fileupload";
+			}
+		}
 
-    // validate a file was entered
-    if (fileUpload.getFile().length == 0) {
-      final Object[] args = new Object[] { getText("uploadForm.file", request.getLocale()) };
-      errors.rejectValue("file", "errors.required", args, "File");
+		// validate a file was entered
+		if (fileUpload.getFile().length == 0) {
+			final Object[] args = new Object[] { getText("uploadForm.file",
+					request.getLocale()) };
+			errors.rejectValue("file", "errors.required", args, "File");
 
-      return "fileupload";
-    }
+			return "fileupload";
+		}
 
-    final MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-    final CommonsMultipartFile file = (CommonsMultipartFile) multipartRequest.getFile("file");
+		final MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		final CommonsMultipartFile file = (CommonsMultipartFile) multipartRequest
+				.getFile("file");
 
-    // the directory to upload to
-    final String uploadDir =
-      getServletContext().getRealPath("/resources") + "/" + request.getRemoteUser() + "/";
+		// the directory to upload to
+		final String uploadDir = getServletContext().getRealPath("/resources")
+				+ "/" + request.getRemoteUser() + "/";
 
-    // Create the directory if it doesn't exist
-    final File dirPath = new File(uploadDir);
+		// Create the directory if it doesn't exist
+		final File dirPath = new File(uploadDir);
 
-    if (!dirPath.exists()) {
-      dirPath.mkdirs();
-    }
+		if (!dirPath.exists()) {
+			dirPath.mkdirs();
+		}
 
-    // retrieve the file data
-    final InputStream stream = file.getInputStream();
+		// retrieve the file data
+		final InputStream stream = file.getInputStream();
 
-    // write the file to the file specified
-    final OutputStream bos = new FileOutputStream(uploadDir + file.getOriginalFilename());
-    int bytesRead;
-    final byte[] buffer = new byte[8192];
+		// write the file to the file specified
+		final OutputStream bos = new FileOutputStream(uploadDir
+				+ file.getOriginalFilename());
+		int bytesRead;
+		final byte[] buffer = new byte[8192];
 
-    while ((bytesRead = stream.read(buffer, 0, 8192)) != -1) {
-      bos.write(buffer, 0, bytesRead);
-    }
+		while ((bytesRead = stream.read(buffer, 0, 8192)) != -1) {
+			bos.write(buffer, 0, bytesRead);
+		}
 
-    bos.close();
+		bos.close();
 
-    // close the stream
-    stream.close();
+		// close the stream
+		stream.close();
 
-    // place the data into the request for retrieval on next page
-    request.setAttribute("friendlyName", fileUpload.getName());
-    request.setAttribute("fileName", file.getOriginalFilename());
-    request.setAttribute("contentType", file.getContentType());
-    request.setAttribute("size", file.getSize() + " bytes");
-    request.setAttribute("location",
-      dirPath.getAbsolutePath() + Constants.FILE_SEP + file.getOriginalFilename());
+		// place the data into the request for retrieval on next page
+		request.setAttribute("friendlyName", fileUpload.getName());
+		request.setAttribute("fileName", file.getOriginalFilename());
+		request.setAttribute("contentType", file.getContentType());
+		request.setAttribute("size", file.getSize() + " bytes");
+		request.setAttribute("location", dirPath.getAbsolutePath()
+				+ Constants.FILE_SEP + file.getOriginalFilename());
 
-    final String link =
-      request.getContextPath() + "/resources" + "/" + request.getRemoteUser() + "/";
-    request.setAttribute("link", link + file.getOriginalFilename());
+		final String link = request.getContextPath() + "/resources" + "/"
+				+ request.getRemoteUser() + "/";
+		request.setAttribute("link", link + file.getOriginalFilename());
 
-    return getSuccessView();
-  }
+		return getSuccessView();
+	}
 }

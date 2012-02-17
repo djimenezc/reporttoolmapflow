@@ -134,9 +134,9 @@ public class GenericDaoHibernate<T extends com.mapflow.model.BaseObject, PK exte
    */
   @Override
   public List<T> getAllDistinct() {
-   
+
     final Collection<T> result = new LinkedHashSet<T>(getAll());
-    
+
     return new ArrayList<T>(result);
   }
 
@@ -173,7 +173,7 @@ public class GenericDaoHibernate<T extends com.mapflow.model.BaseObject, PK exte
    */
   @Override
   public T save(final T object) {
-    
+
     return hibernateTemplate.merge(object);
   }
 

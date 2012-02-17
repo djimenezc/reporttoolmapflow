@@ -16,27 +16,27 @@ import com.mapflow.geo.common.constants.Constants;
 
 public class UserControllerTest extends BaseControllerTestCase {
 
-  @Autowired
-  private CompassGps compassGps;
-  @Autowired
-  private UserController c;
+	@Autowired
+	private CompassGps compassGps;
+	@Autowired
+	private UserController c;
 
-  @Test
-  public void testHandleRequest() throws Exception {
-    final ModelAndView mav = c.handleRequest(null);
-    final Map<?, ?> m = mav.getModel();
-    assertNotNull(m.get(Constants.USER_LIST));
-    assertEquals("admin/userList", mav.getViewName());
-  }
+	@Test
+	public void testHandleRequest() throws Exception {
+		final ModelAndView mav = c.handleRequest(null);
+		final Map<?, ?> m = mav.getModel();
+		assertNotNull(m.get(Constants.USER_LIST));
+		assertEquals("admin/userList", mav.getViewName());
+	}
 
-  @Test
-  public void testSearch() throws Exception {
-    compassGps.index();
-    final ModelAndView mav = c.handleRequest("admin");
-    final Map<?, ?> m = mav.getModel();
-    final List<?> results = (List<?>) m.get(Constants.USER_LIST);
-    assertNotNull(results);
-    assertTrue(results.size() >= 1);
-    assertEquals("admin/userList", mav.getViewName());
-  }
+	@Test
+	public void testSearch() throws Exception {
+		compassGps.index();
+		final ModelAndView mav = c.handleRequest("admin");
+		final Map<?, ?> m = mav.getModel();
+		final List<?> results = (List<?>) m.get(Constants.USER_LIST);
+		assertNotNull(results);
+		assertTrue(results.size() >= 1);
+		assertEquals("admin/userList", mav.getViewName());
+	}
 }

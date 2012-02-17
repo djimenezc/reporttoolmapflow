@@ -62,9 +62,8 @@ public class LogMapdisplayTo extends BaseObject {
   public Long getId() {
     return mfServiceLog.getId();
   }
-  
-  public String getTransactionId()
-  {
+
+  public String getTransactionId() {
     return mfServiceLog.getTransactionId();
   }
 

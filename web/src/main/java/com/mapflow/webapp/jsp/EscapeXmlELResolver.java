@@ -21,7 +21,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
 ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 package com.mapflow.webapp.jsp;
 
 import java.beans.FeatureDescriptor;
@@ -37,74 +37,72 @@ import javax.el.PropertyNotWritableException;
  */
 public class EscapeXmlELResolver extends ELResolver {
 
-    private ELResolver originalResolver;
-    private ThreadLocal<Boolean> gettingValue = new ThreadLocal<Boolean>() {
-        @Override
-        protected Boolean initialValue() {
-            return Boolean.FALSE;
-        }
-    };
-    
-    private ELResolver getOriginalResolver(ELContext context) {
-        if (originalResolver == null) {
-            originalResolver = context.getELResolver();
-        }
-        return originalResolver;
-    }
-    
-    @Override
-    public Class<?> getCommonPropertyType(ELContext context, Object base) {
-        return getOriginalResolver(context).getCommonPropertyType(context, base);
-    }
+	private ELResolver originalResolver;
+	private ThreadLocal<Boolean> gettingValue = new ThreadLocal<Boolean>() {
+		@Override
+		protected Boolean initialValue() {
+			return Boolean.FALSE;
+		}
+	};
 
-    @Override
-    public Iterator<FeatureDescriptor> getFeatureDescriptors(
-            ELContext context, Object base)
-    {
-        return getOriginalResolver(context).getFeatureDescriptors(context, base);
-    }
+	private ELResolver getOriginalResolver(ELContext context) {
+		if (originalResolver == null) {
+			originalResolver = context.getELResolver();
+		}
+		return originalResolver;
+	}
 
-    @Override
-    public Class<?> getType(ELContext context, Object base, Object property)
-        throws NullPointerException, PropertyNotFoundException, ELException
-    {
-        return getOriginalResolver(context).getType(context, base, property);
-    }
+	@Override
+	public Class<?> getCommonPropertyType(ELContext context, Object base) {
+		return getOriginalResolver(context)
+				.getCommonPropertyType(context, base);
+	}
 
-    @Override
-    public Object getValue(ELContext context, Object base, Object property)
-        throws NullPointerException, PropertyNotFoundException, ELException
-    {
-        if (gettingValue.get()) {
-            return null;
-        }
-        
-        // This resolver is in the original resolver chain.  When this resolver
-        // invokes the original resolver chain, set a flag so when execution
-        // reaches this resolver, act like this resolver is not in the chain.
-        gettingValue.set(true);
-        Object value =
-                getOriginalResolver(context).getValue(context, base, property);
-        gettingValue.set(false);
+	@Override
+	public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context,
+			Object base) {
+		return getOriginalResolver(context)
+				.getFeatureDescriptors(context, base);
+	}
 
-        if (value instanceof String) {
-            value = EscapeXml.escape((String) value);
-        }
-        return value;
-    }
+	@Override
+	public Class<?> getType(ELContext context, Object base, Object property)
+			throws NullPointerException, PropertyNotFoundException, ELException {
+		return getOriginalResolver(context).getType(context, base, property);
+	}
 
-    @Override
-    public boolean isReadOnly(ELContext context, Object base, Object property)
-        throws NullPointerException, PropertyNotFoundException, ELException
-    {
-        return getOriginalResolver(context).isReadOnly(context, base, property);
-    }
+	@Override
+	public Object getValue(ELContext context, Object base, Object property)
+			throws NullPointerException, PropertyNotFoundException, ELException {
+		if (gettingValue.get()) {
+			return null;
+		}
 
-    @Override
-    public void setValue(
-            ELContext context, Object base, Object property, Object value)
-        throws NullPointerException, PropertyNotFoundException, PropertyNotWritableException, ELException
-    {
-        getOriginalResolver(context).setValue(context, base, property, value);
-    }
+		// This resolver is in the original resolver chain. When this resolver
+		// invokes the original resolver chain, set a flag so when execution
+		// reaches this resolver, act like this resolver is not in the chain.
+		gettingValue.set(true);
+		Object value = getOriginalResolver(context).getValue(context, base,
+				property);
+		gettingValue.set(false);
+
+		if (value instanceof String) {
+			value = EscapeXml.escape((String) value);
+		}
+		return value;
+	}
+
+	@Override
+	public boolean isReadOnly(ELContext context, Object base, Object property)
+			throws NullPointerException, PropertyNotFoundException, ELException {
+		return getOriginalResolver(context).isReadOnly(context, base, property);
+	}
+
+	@Override
+	public void setValue(ELContext context, Object base, Object property,
+			Object value) throws NullPointerException,
+			PropertyNotFoundException, PropertyNotWritableException,
+			ELException {
+		getOriginalResolver(context).setValue(context, base, property, value);
+	}
 }

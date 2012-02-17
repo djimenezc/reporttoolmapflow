@@ -15,49 +15,51 @@ import org.springframework.web.context.WebApplicationContext;
 import com.mapflow.geo.common.constants.Constants;
 
 /**
- * This class tests the StartupListener class to verify that variables are placed into the servlet
- * context.
+ * This class tests the StartupListener class to verify that variables are
+ * placed into the servlet context.
  * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 public class StartupListenerTest extends TestCase {
 
-  private MockServletContext sc = null;
-  private ServletContextListener listener = null;
-  private ContextLoaderListener springListener = null;
+	private MockServletContext sc = null;
+	private ServletContextListener listener = null;
+	private ContextLoaderListener springListener = null;
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    sc = new MockServletContext("");
-    sc.addInitParameter(Constants.CSS_THEME, "simplicity");
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		sc = new MockServletContext("");
+		sc.addInitParameter(Constants.CSS_THEME, "simplicity");
 
-    // initialize Spring
-    sc.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM,
-      "classpath:/spring/applicationContext-dao.xml, " + "classpath:/spring/applicationContext-service.xml, "
-        + "classpath:/spring/applicationContext-resources.xml");
+		// initialize Spring
+		sc.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM,
+				"classpath:/spring/applicationContext-dao.xml, "
+						+ "classpath:/spring/applicationContext-service.xml, "
+						+ "classpath:/spring/applicationContext-resources.xml");
 
-    springListener = new ContextLoaderListener();
-    springListener.contextInitialized(new ServletContextEvent(sc));
-    listener = new StartupListener();
-  }
+		springListener = new ContextLoaderListener();
+		springListener.contextInitialized(new ServletContextEvent(sc));
+		listener = new StartupListener();
+	}
 
-  @Override
-  protected void tearDown() throws Exception {
-    super.tearDown();
-    springListener = null;
-    listener = null;
-    sc = null;
-  }
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		springListener = null;
+		listener = null;
+		sc = null;
+	}
 
-  public void testContextInitialized() {
-    listener.contextInitialized(new ServletContextEvent(sc));
+	public void testContextInitialized() {
+		listener.contextInitialized(new ServletContextEvent(sc));
 
-    assertTrue(sc.getAttribute(Constants.CONFIG) != null);
-    final Map<?, ?> config = (Map<?, ?>) sc.getAttribute(Constants.CONFIG);
-    assertEquals(config.get(Constants.CSS_THEME), "simplicity");
+		assertTrue(sc.getAttribute(Constants.CONFIG) != null);
+		final Map<?, ?> config = (Map<?, ?>) sc.getAttribute(Constants.CONFIG);
+		assertEquals(config.get(Constants.CSS_THEME), "simplicity");
 
-    assertTrue(sc.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null);
-    assertTrue(sc.getAttribute(Constants.AVAILABLE_ROLES) != null);
-  }
+		assertTrue(sc
+				.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null);
+		assertTrue(sc.getAttribute(Constants.AVAILABLE_ROLES) != null);
+	}
 }

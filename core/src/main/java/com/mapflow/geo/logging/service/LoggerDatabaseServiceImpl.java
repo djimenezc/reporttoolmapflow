@@ -75,7 +75,7 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
 
     if (logDao != null) {
       MfServiceLog mfServiceLog = logDao.save(log.getMfServiceLog());
-      
+
       log.setMfServiceLog(mfServiceLog);
     }
 
@@ -120,8 +120,8 @@ public class LoggerDatabaseServiceImpl implements LoggerService {
 
     if (logDao != null) {
       MfServiceLog mfServiceLog = logDao.save(log.getMfServiceLog());
-       
-      log.setMfServiceLog(mfServiceLog); 
+
+      log.setMfServiceLog(mfServiceLog);
     }
 
     if (log.getId() != null) {

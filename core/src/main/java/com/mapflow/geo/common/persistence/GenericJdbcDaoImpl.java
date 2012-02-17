@@ -10,7 +10,8 @@ import org.apache.log4j.Logger;
 import com.mapflow.geo.common.exceptions.MapflowAppException;
 import com.mapflow.geo.common.helper.dataaccess.DBHelper;
 
-public abstract class GenericJdbcDaoImpl<T, PK extends Serializable> implements GenericDaoExtend<T, PK> {
+public abstract class GenericJdbcDaoImpl<T, PK extends Serializable> implements
+  GenericDaoExtend<T, PK> {
 
   // private final Log log = LogFactory.getLog(getClass());
   private final Logger logger = Logger.getLogger(getClass());

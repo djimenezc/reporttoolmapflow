@@ -78,6 +78,8 @@ public final class Constants {
 
   public static final String REPORT_LIST = "reportList";
 
+  public static final String ADMIN_ROLE_SECURITY = "ROLE_ADMIN";
+
   private Constants() {
     // hide me
   }

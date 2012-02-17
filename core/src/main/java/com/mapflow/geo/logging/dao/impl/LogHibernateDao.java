@@ -27,7 +27,7 @@ public class LogHibernateDao extends GenericDaoHibernate<MfServiceLog, Long> imp
     final String queryString = "from MfServiceLog where TRANSACTION_ID=?";
 
     List<?> result = getHibernateTemplate().find(queryString, transactionId);
-    
+
     return (List<MfServiceLog>) result;
   }
 

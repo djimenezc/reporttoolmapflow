@@ -46,13 +46,13 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
     user = (User) populate(user);
 
     // set expected behavior on role dao
-//    context.checking(new Expectations() {
-//
-//      {
-//        one(roleDao).getRoleByName(with(equal("all")));
-//        will(returnValue(new Role("all")));
-//      }
-//    });
+    // context.checking(new Expectations() {
+    //
+    // {
+    // one(roleDao).getRoleByName(with(equal("all")));
+    // will(returnValue(new Role("all")));
+    // }
+    // });
 
     final Role role = roleManager.getRole(Constants.USER_ROLE);
     user.addRole(role);
@@ -69,7 +69,7 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
 
     user = userManager.saveUser(user);
     assertTrue(user.getUsername().equals("john"));
-    assertTrue(user.getRolesList().size() == 1);
+    assertTrue(user.getObjectRolesList().size() == 1);
 
     context.checking(new Expectations() {
 
@@ -95,7 +95,7 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
   @Test
   public void testGetUser() throws Exception {
     final User testData = new User("1");
-    testData.getRolesList().add(new Role("user"));
+    testData.getObjectRolesList().add(new Role("user"));
 
     // set expected behavior on dao
     context.checking(new Expectations() {
@@ -109,13 +109,13 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
     final User user = userManager.getUser("1");
     assertTrue(user != null);
     assert user != null;
-    assertTrue(user.getRolesList().size() == 1);
+    assertTrue(user.getObjectRolesList().size() == 1);
   }
 
   @Test
   public void testSaveUser() throws Exception {
     final User testData = new User("1");
-    testData.getRolesList().add(new Role("user"));
+    testData.getObjectRolesList().add(new Role("user"));
 
     // set expected behavior on dao
     context.checking(new Expectations() {
@@ -139,7 +139,7 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
 
     final User returned = userManager.saveUser(user);
     assertTrue(returned.getPhoneNumber().equals("303-555-1212"));
-    assertTrue(returned.getRolesList().size() == 1);
+    assertTrue(returned.getObjectRolesList().size() == 1);
   }
 
   @Test

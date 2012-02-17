@@ -7,7 +7,6 @@ import com.mapflow.geo.logging.model.LogCounterFeaturesTo;
 import com.mapflow.geo.logging.model.LogMapdisplayTo;
 import com.mapflow.geo.logging.types.FeaturesCategoryType;
 
-
 public class LoggingFactoryObjects {
 
   public static LogMapdisplayTo buildLogMapdisplayExample() throws MapflowAppException {
@@ -38,7 +37,7 @@ public class LoggingFactoryObjects {
 
     return log;
   }
-  
+
   public static LogCounterFeaturesTo buildLogCountFeaturesExample() throws MapflowAppException {
 
     final LogCounterFeaturesTo log = new LogCounterFeaturesTo();
@@ -58,5 +57,5 @@ public class LoggingFactoryObjects {
 
     return log;
   }
-  
+
 }

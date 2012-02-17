@@ -25,9 +25,8 @@ public class LogDaoImplTest extends BaseDaoTestCase {
 
   @Test
   public void testRetrieveLogRowFromDatabase() {
-    
-    List<MfServiceLog> mfServiceLog= logDao.getTransactionId(TRANSACTION_ID);
-    
+
+    List<MfServiceLog> mfServiceLog = logDao.getTransactionId(TRANSACTION_ID);
 
     assertThat(mfServiceLog.isEmpty(), is(false));
   }
@@ -45,7 +44,7 @@ public class LogDaoImplTest extends BaseDaoTestCase {
     System.out.println("Trying to save in database log bean");
 
     MfServiceLog mfServiceLog = logDao.save(log.getMfServiceLog());
-    
+
     log = new LogCounterFeaturesTo(mfServiceLog);
 
     System.out.println("Saved in database log bean: " + log.toString());

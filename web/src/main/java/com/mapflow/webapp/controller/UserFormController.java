@@ -29,8 +29,8 @@ import com.mapflow.geo.common.service.UserExistsException;
 import com.mapflow.webapp.util.RequestUtil;
 
 /**
- * Implementation of <strong>SimpleFormController</strong> that interacts with the
- * {@link UserManager} to retrieve/persist values to the database.
+ * Implementation of <strong>SimpleFormController</strong> that interacts with
+ * the {@link UserManager} to retrieve/persist values to the database.
  * <p>
  * <a href="UserFormController.java.html"><i>View Source</i></a>
  * 
@@ -40,182 +40,198 @@ import com.mapflow.webapp.util.RequestUtil;
 @RequestMapping("/userform*")
 public class UserFormController extends BaseFormController {
 
-  private RoleManager roleManager;
+	private RoleManager roleManager;
 
-  @Autowired
-  public void setRoleManager(final RoleManager roleManager) {
-    this.roleManager = roleManager;
-  }
+	public UserFormController() {
+		setCancelView("redirect:/mainMenu");
+		setSuccessView("redirect:/admin/users");
+	}
 
-  public UserFormController() {
-    setCancelView("redirect:/mainMenu");
-    setSuccessView("redirect:/admin/users");
-  }
+	protected boolean isAdd(final HttpServletRequest request) {
+		final String method = request.getParameter("method");
+		return ((method != null) && method.equalsIgnoreCase("add"));
+	}
 
-  @RequestMapping(method = RequestMethod.POST)
-  public String onSubmit(final User user, final BindingResult errors,
-    final HttpServletRequest request, final HttpServletResponse response) throws Exception {
-    if (request.getParameter("cancel") != null) {
-      if (!StringUtils.equals(request.getParameter("from"), "list")) {
-        return getCancelView();
-      }
-      else {
-        return getSuccessView();
-      }
-    }
+	private boolean isFormSubmission(final HttpServletRequest request) {
+		return request.getMethod().equalsIgnoreCase("post");
+	}
 
-    if (validator != null) { // validator is null during testing
-      validator.validate(user, errors);
+	@RequestMapping(method = RequestMethod.POST)
+	public String onSubmit(final User user, final BindingResult errors,
+			final HttpServletRequest request, final HttpServletResponse response)
+			throws Exception {
+		if (request.getParameter("cancel") != null) {
+			if (!StringUtils.equals(request.getParameter("from"), "list")) {
+				return getCancelView();
+			} else {
+				return getSuccessView();
+			}
+		}
 
-      if (errors.hasErrors() && (request.getParameter("delete") == null)) { // don't validate when
-                                                                            // deleting
-        return "userform";
-      }
-    }
+		if (validator != null) { // validator is null during testing
+			validator.validate(user, errors);
 
-    log.debug("entering 'onSubmit' method...");
+			if (errors.hasErrors() && (request.getParameter("delete") == null)) { // don't
+																					// validate
+																					// when
+																					// deleting
+				return "userform";
+			}
+		}
 
-    final Locale locale = request.getLocale();
+		log.debug("entering 'onSubmit' method...");
 
-    if (request.getParameter("delete") != null) {
-      getUserManager().removeUser(user.getId().toString());
-      saveMessage(request, getText("user.deleted", user.getFullName(), locale));
+		final Locale locale = request.getLocale();
 
-      return getSuccessView();
-    }
-    else {
+		if (request.getParameter("delete") != null) {
+			getUserManager().removeUser(user.getId().toString());
+			saveMessage(request,
+					getText("user.deleted", user.getFullName(), locale));
 
-      // only attempt to change roles if user is admin for other users,
-      // showForm() method will handle populating
-      if (request.isUserInRole(Constants.ADMIN_ROLE)) {
-        final String[] userRoles = request.getParameterValues("userRoles");
+			return getSuccessView();
+		} else {
 
-        if (userRoles != null) {
-          user.getRolesList().clear();
-          for (final String roleName : userRoles) {
-            user.addRole(roleManager.getRole(roleName));
-          }
-        }
-      }
+			// only attempt to change roles if user is admin for other users,
+			// showForm() method will handle populating
+			if (request.isUserInRole(Constants.ADMIN_ROLE)) {
+				final String[] userRoles = request
+						.getParameterValues("userRoles");
 
-      final Integer originalVersion = user.getVersion();
+				if (userRoles != null) {
+					user.getObjectRolesList().clear();
+					for (final String roleName : userRoles) {
+						user.addRole(roleManager.getRole(roleName));
+					}
+				}
+			}
 
-      try {
-        getUserManager().saveUser(user);
-      }
-      catch (final AccessDeniedException ade) {
-        // thrown by UserSecurityAdvice configured in aop:advisor userManagerSecurity
-        log.warn(ade.getMessage());
-        response.sendError(HttpServletResponse.SC_FORBIDDEN);
-        return null;
-      }
-      catch (final UserExistsException e) {
-        errors.rejectValue("username", "errors.existing.user", new Object[] { user.getUsername(),
-          user.getEmail() }, "duplicate user");
+			final Integer originalVersion = user.getVersion();
 
-        // redisplay the unencrypted passwords
-        user.setPassword(user.getConfirmPassword());
-        // reset the version # to what was passed in
-        user.setVersion(originalVersion);
+			try {
+				getUserManager().saveUser(user);
+			} catch (final AccessDeniedException ade) {
+				// thrown by UserSecurityAdvice configured in aop:advisor
+				// userManagerSecurity
+				log.warn(ade.getMessage());
+				response.sendError(HttpServletResponse.SC_FORBIDDEN);
+				return null;
+			} catch (final UserExistsException e) {
+				errors.rejectValue("username", "errors.existing.user",
+						new Object[] { user.getUsername(), user.getEmail() },
+						"duplicate user");
 
-        return "userform";
-      }
+				// redisplay the unencrypted passwords
+				user.setPassword(user.getConfirmPassword());
+				// reset the version # to what was passed in
+				user.setVersion(originalVersion);
 
-      if (!StringUtils.equals(request.getParameter("from"), "list")) {
-        saveMessage(request, getText("user.saved", user.getFullName(), locale));
+				return "userform";
+			}
 
-        // return to main Menu
-        return getCancelView();
-      }
-      else {
-        if (StringUtils.isBlank(request.getParameter("version"))) {
-          saveMessage(request, getText("user.added", user.getFullName(), locale));
+			if (!StringUtils.equals(request.getParameter("from"), "list")) {
+				saveMessage(request,
+						getText("user.saved", user.getFullName(), locale));
 
-          // Send an account information e-mail
-          message.setSubject(getText("signup.email.subject", locale));
+				// return to main Menu
+				return getCancelView();
+			} else {
+				if (StringUtils.isBlank(request.getParameter("version"))) {
+					saveMessage(request,
+							getText("user.added", user.getFullName(), locale));
 
-          try {
-            sendUserMessage(user, getText("newuser.email.message", user.getFullName(), locale),
-              RequestUtil.getAppURL(request));
-          }
-          catch (final MailException me) {
-            saveError(request, me.getCause().getLocalizedMessage());
-          }
+					// Send an account information e-mail
+					message.setSubject(getText("signup.email.subject", locale));
 
-          return getSuccessView();
-        }
-        else {
-          saveMessage(request, getText("user.updated.byAdmin", user.getFullName(), locale));
-        }
-      }
-    }
+					try {
+						sendUserMessage(
+								user,
+								getText("newuser.email.message",
+										user.getFullName(), locale),
+								RequestUtil.getAppURL(request));
+					} catch (final MailException me) {
+						saveError(request, me.getCause().getLocalizedMessage());
+					}
 
-    return "userform";
-  }
+					return getSuccessView();
+				} else {
+					saveMessage(
+							request,
+							getText("user.updated.byAdmin", user.getFullName(),
+									locale));
+				}
+			}
+		}
 
-  @ModelAttribute
-  @RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
-  protected User showForm(final HttpServletRequest request, final HttpServletResponse response)
-    throws Exception {
-    // If not an administrator, make sure user is not trying to add or edit another user
-    if (!request.isUserInRole(Constants.ADMIN_ROLE) && !isFormSubmission(request)) {
-      if (isAdd(request) || (request.getParameter("id") != null)) {
-        response.sendError(HttpServletResponse.SC_FORBIDDEN);
-        log.warn("User '" + request.getRemoteUser() + "' is trying to edit user with id '"
-          + request.getParameter("id") + "'");
+		return "userform";
+	}
 
-        throw new AccessDeniedException("You do not have permission to modify other users.");
-      }
-    }
+	@Autowired
+	public void setRoleManager(final RoleManager roleManager) {
+		this.roleManager = roleManager;
+	}
 
-    if (!isFormSubmission(request)) {
-      final String userId = request.getParameter("id");
+	@ModelAttribute
+	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
+	protected User showForm(final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// If not an administrator, make sure user is not trying to add or edit
+		// another user
+		if (!request.isUserInRole(Constants.ADMIN_ROLE_SECURITY)
+				&& !isFormSubmission(request)) {
+			if (isAdd(request) || (request.getParameter("id") != null)) {
+				response.sendError(HttpServletResponse.SC_FORBIDDEN);
+				log.warn("User '" + request.getRemoteUser()
+						+ "' is trying to edit user with id '"
+						+ request.getParameter("id") + "'");
 
-      // if user logged in with remember me, display a warning that they can't change passwords
-      log.debug("checking for remember me login...");
+				throw new AccessDeniedException(
+						"You do not have permission to modify other users.");
+			}
+		}
 
-      final AuthenticationTrustResolver resolver = new AuthenticationTrustResolverImpl();
-      final SecurityContext ctx = SecurityContextHolder.getContext();
+		if (!isFormSubmission(request)) {
+			final String userId = request.getParameter("id");
 
-      if (ctx.getAuthentication() != null) {
-        final Authentication auth = ctx.getAuthentication();
+			// if user logged in with remember me, display a warning that they
+			// can't change passwords
+			log.debug("checking for remember me login...");
 
-        if (resolver.isRememberMe(auth)) {
-          request.getSession().setAttribute("cookieLogin", "true");
+			final AuthenticationTrustResolver resolver = new AuthenticationTrustResolverImpl();
+			final SecurityContext ctx = SecurityContextHolder.getContext();
 
-          // add warning message
-          saveMessage(request, getText("userProfile.cookieLogin", request.getLocale()));
-        }
-      }
+			if (ctx.getAuthentication() != null) {
+				final Authentication auth = ctx.getAuthentication();
 
-      User user;
-      if ((userId == null) && !isAdd(request)) {
-        user = getUserManager().getUserByUsername(request.getRemoteUser());
-      }
-      else if (!StringUtils.isBlank(userId) && !"".equals(request.getParameter("version"))) {
-        user = getUserManager().getUser(userId);
-      }
-      else {
-        user = new User();
-        user.addRole(new Role(Constants.USER_ROLE));
-      }
+				if (resolver.isRememberMe(auth)) {
+					request.getSession().setAttribute("cookieLogin", "true");
 
-      user.setConfirmPassword(user.getPassword());
+					// add warning message
+					saveMessage(
+							request,
+							getText("userProfile.cookieLogin",
+									request.getLocale()));
+				}
+			}
 
-      return user;
-    }
-    else {
-      // populate user object from database, so all fields don't need to be hidden fields in form
-      return getUserManager().getUser(request.getParameter("id"));
-    }
-  }
+			User user;
+			if ((userId == null) && !isAdd(request)) {
+				user = getUserManager().getUserByUsername(
+						request.getRemoteUser());
+			} else if (!StringUtils.isBlank(userId)
+					&& !"".equals(request.getParameter("version"))) {
+				user = getUserManager().getUser(userId);
+			} else {
+				user = new User();
+				user.addRole(new Role(Constants.USER_ROLE));
+			}
 
-  private boolean isFormSubmission(final HttpServletRequest request) {
-    return request.getMethod().equalsIgnoreCase("post");
-  }
+			user.setConfirmPassword(user.getPassword());
 
-  protected boolean isAdd(final HttpServletRequest request) {
-    final String method = request.getParameter("method");
-    return ((method != null) && method.equalsIgnoreCase("add"));
-  }
+			return user;
+		} else {
+			// populate user object from database, so all fields don't need to
+			// be hidden fields in form
+			return getUserManager().getUser(request.getParameter("id"));
+		}
+	}
 }

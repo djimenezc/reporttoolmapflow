@@ -19,35 +19,34 @@ import com.mapflow.geo.common.model.Role;
 public class LookupDaoHibernate implements LookupDao {
 
   private final Log log = LogFactory.getLog(LookupDaoHibernate.class);
-//  private final HibernateTemplate hibernateTemplate;
+  // private final HibernateTemplate hibernateTemplate;
   private List<Role> roles;
 
-  
   public LookupDaoHibernate() {
-   
+
     roles = new ArrayList<Role>();
-    
+
     roles.add(new Role("admin"));
     roles.add(new Role("all"));
   }
-  
+
   /**
    * Initialize LookupDaoHibernate with Hibernate SessionFactory.
    * 
    * @param sessionFactory
    */
-//  @Autowired
-//  public LookupDaoHibernate(final SessionFactory sessionFactory) {
-//    hibernateTemplate = new HibernateTemplate(sessionFactory);
-//  }
+  // @Autowired
+  // public LookupDaoHibernate(final SessionFactory sessionFactory) {
+  // hibernateTemplate = new HibernateTemplate(sessionFactory);
+  // }
 
   /**
    * {@inheritDoc}
    */
   public List<Role> getRoles() {
     log.debug("Retrieving all role names...");
-    
-    //    return hibernateTemplate.find("from Role order by name");
+
+    // return hibernateTemplate.find("from Role order by name");
     return roles;
   }
 }

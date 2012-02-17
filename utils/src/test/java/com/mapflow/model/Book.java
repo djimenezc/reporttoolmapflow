@@ -12,7 +12,8 @@ public class Book {
   /** The authors' names */
   private List<Author> authors;
 
-  public Book() { }
+  public Book() {
+  }
 
   public Book(String isbn, String title, List<Author> authors) {
     this.isbn = isbn;

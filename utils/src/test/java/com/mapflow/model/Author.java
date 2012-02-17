@@ -5,7 +5,8 @@ public class Author {
   private String firstName, lastName;
   private int totalSales;
 
-  public Author() { }
+  public Author() {
+  }
 
   public Author(String firstName, String lastName) {
     this.firstName = firstName;
@@ -23,7 +24,7 @@ public class Author {
   public String getFirstName() {
     return firstName;
   }
-  
+
   public String getLastName() {
     return lastName;
   }

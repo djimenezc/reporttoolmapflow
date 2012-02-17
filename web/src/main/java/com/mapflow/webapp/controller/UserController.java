@@ -23,16 +23,18 @@ import com.mapflow.geo.common.manager.UserManager;
 @RequestMapping("/admin/users*")
 public class UserController {
 
-  private UserManager mgr = null;
+	private UserManager mgr = null;
 
-  @Autowired
-  public void setUserManager(final UserManager userManager) {
-    mgr = userManager;
-  }
+	@Autowired
+	public void setUserManager(final UserManager userManager) {
+		mgr = userManager;
+	}
 
-  @RequestMapping(method = RequestMethod.GET)
-  public ModelAndView handleRequest(@RequestParam(required = false, value = "q") final String query)
-    throws Exception {
-    return new ModelAndView("admin/userList", Constants.USER_LIST, mgr.search(query));
-  }
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView handleRequest(
+			@RequestParam(required = false, value = "q") final String query)
+			throws Exception {
+		return new ModelAndView("admin/userList", Constants.USER_LIST,
+				mgr.search(query));
+	}
 }

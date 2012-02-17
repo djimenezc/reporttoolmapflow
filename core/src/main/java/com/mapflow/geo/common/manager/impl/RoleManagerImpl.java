@@ -24,16 +24,15 @@ public class RoleManagerImpl extends GenericManagerImpl<Role, Long> implements R
   // RoleDao roleDao;
   private Map<Long, Role> roles;
 
-  
   @Autowired
   public RoleManagerImpl(final RoleDao roleDao) {
     super(roleDao);
     // this.roleDao = roleDao;
     roles = new HashMap<Long, Role>();
-      
+
     Role role1 = new Role("admin");
     roles.put(1L, role1);
-    
+
     Role role2 = new Role("all");
     roles.put(2L, role2);
   }
@@ -51,11 +50,11 @@ public class RoleManagerImpl extends GenericManagerImpl<Role, Long> implements R
    */
   @Override
   public Role getRole(final String rolename) {
-    
+
     Iterator<Entry<Long, Role>> itr = roles.entrySet().iterator();
 
     Role role = null;
-    
+
     while (itr.hasNext()) {
 
       final Map.Entry<Long, Role> e = itr.next();
@@ -64,7 +63,7 @@ public class RoleManagerImpl extends GenericManagerImpl<Role, Long> implements R
         role = e.getValue();
       }
     }
-    
+
     return role;
   }
 

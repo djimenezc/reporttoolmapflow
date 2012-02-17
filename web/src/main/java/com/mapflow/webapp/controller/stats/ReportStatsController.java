@@ -25,12 +25,13 @@ import com.mapflow.geo.reporting.report.Report;
 @RequestMapping("/stats/reports*")
 public class ReportStatsController extends AbstractStatsController {
 
-  @RequestMapping(method = RequestMethod.GET)
-  public ModelAndView handleRequest(@RequestParam(required = false, value = "q") final String query)
-    throws Exception {
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView handleRequest(
+			@RequestParam(required = false, value = "q") final String query)
+			throws Exception {
 
-    final List<Report> model = new ArrayList<Report>();
+		final List<Report> model = new ArrayList<Report>();
 
-    return new ModelAndView("stats/reports", Constants.REPORT_LIST, model);
-  }
+		return new ModelAndView("stats/reports", Constants.REPORT_LIST, model);
+	}
 }

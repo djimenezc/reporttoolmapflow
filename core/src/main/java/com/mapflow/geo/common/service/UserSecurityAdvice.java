@@ -39,6 +39,43 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
   private final Log log = LogFactory.getLog(UserSecurityAdvice.class);
 
   /**
+   * After returning, grab the user, check if they've been modified and reset the SecurityContext if
+   * they have.
+   * 
+   * @param returnValue
+   *          the user object
+   * @param method
+   *          the name of the method executed
+   * @param args
+   *          the arguments to the method
+   * @param target
+   *          the target class
+   * @throws Throwable
+   *           thrown when args[0] is null or not a User object
+   */
+  @Override
+  public void afterReturning(final Object returnValue, final Method method, final Object[] args,
+    final Object target) throws Throwable {
+    final User user = (User) args[0];
+
+    if (user.getVersion() != null) {
+      // reset the authentication object if current user
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      final AuthenticationTrustResolver resolver = new AuthenticationTrustResolverImpl();
+      // allow new users to signup - this is OK b/c Signup doesn't allow setting of roles
+      final boolean signupUser = resolver.isAnonymous(auth);
+      if ((auth != null) && !signupUser) {
+        final User currentUser = getCurrentUser(auth);
+        if (currentUser.getId().equals(user.getId())) {
+          auth =
+            new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+          SecurityContextHolder.getContext().setAuthentication(auth);
+        }
+      }
+    }
+  }
+
+  /**
    * Method to enforce security and only allow administrators to modify users. Regular users are
    * allowed to modify themselves.
    * 
@@ -85,7 +122,7 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
           && !administrator) {
           // get the list of roles the user is trying add
           final Set<String> userRoles = new HashSet<String>();
-          if (user.getRolesList() != null) {
+          if (user.getObjectRolesList() != null) {
             // TODO proccess roles
             // for (final Object o : user.getRoles()) {
             // final Role role = (Role) o;
@@ -111,43 +148,6 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
       else {
         if (log.isDebugEnabled()) {
           log.debug("Registering new user '" + user.getUsername() + "'");
-        }
-      }
-    }
-  }
-
-  /**
-   * After returning, grab the user, check if they've been modified and reset the SecurityContext if
-   * they have.
-   * 
-   * @param returnValue
-   *          the user object
-   * @param method
-   *          the name of the method executed
-   * @param args
-   *          the arguments to the method
-   * @param target
-   *          the target class
-   * @throws Throwable
-   *           thrown when args[0] is null or not a User object
-   */
-  @Override
-  public void afterReturning(final Object returnValue, final Method method, final Object[] args,
-    final Object target) throws Throwable {
-    final User user = (User) args[0];
-
-    if (user.getVersion() != null) {
-      // reset the authentication object if current user
-      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-      final AuthenticationTrustResolver resolver = new AuthenticationTrustResolverImpl();
-      // allow new users to signup - this is OK b/c Signup doesn't allow setting of roles
-      final boolean signupUser = resolver.isAnonymous(auth);
-      if ((auth != null) && !signupUser) {
-        final User currentUser = getCurrentUser(auth);
-        if (currentUser.getId().equals(user.getId())) {
-          auth =
-            new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
-          SecurityContextHolder.getContext().setAuthentication(auth);
         }
       }
     }

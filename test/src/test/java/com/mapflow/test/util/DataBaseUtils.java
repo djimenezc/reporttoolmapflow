@@ -23,8 +23,8 @@ public class DataBaseUtils {
    * @param userName
    * @param password
    */
-  public DataBaseUtils(final String dbUrl, final String dbDriver,
-    final String userName, final String password) {
+  public DataBaseUtils(final String dbUrl, final String dbDriver, final String userName,
+    final String password) {
     this.dbUrl = dbUrl;
     this.dbDriver = dbDriver;
     this.userName = userName;
@@ -80,8 +80,7 @@ public class DataBaseUtils {
     }
 
     try {
-      final Connection con =
-        DriverManager.getConnection(this.dbUrl, userName, password);
+      final Connection con = DriverManager.getConnection(this.dbUrl, userName, password);
       return con;
     }
     catch (final SQLException sqle) {

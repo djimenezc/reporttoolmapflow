@@ -80,8 +80,8 @@ public interface LoggerService {
    * @throws URISyntaxException
    *           Throw when the serviceHost
    */
-  Long registerMapDisplayRequest(String clientIP, String customerName, int duration,
-    String heigth, String width, String layer, String count, String mapStyle, String mineType,
-    String serviceUrl, String xcoord, String ycoord, String zoomLevel) throws URISyntaxException;
+  Long registerMapDisplayRequest(String clientIP, String customerName, int duration, String heigth,
+    String width, String layer, String count, String mapStyle, String mineType, String serviceUrl,
+    String xcoord, String ycoord, String zoomLevel) throws URISyntaxException;
 
 }

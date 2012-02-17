@@ -47,7 +47,7 @@ public abstract class BaseManagerMockTestCase {
       rb = ResourceBundle.getBundle(className);
     }
     catch (final MissingResourceException mre) {
-       log.error("No resource bundle found for: " + className);
+      log.error("No resource bundle found for: " + className);
     }
   }
 

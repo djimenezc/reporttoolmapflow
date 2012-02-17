@@ -14,32 +14,36 @@ import java.io.IOException;
 
 /**
  * Borrowed from the Display Tag project:
- * http://displaytag.sourceforge.net/xref-test/org/displaytag/filter/MockFilterSupport.html
- *
+ * http://displaytag.sourceforge.net/xref-
+ * test/org/displaytag/filter/MockFilterSupport.html
+ * 
  * Todo: look into using Spring's MockFilterChain:
- * http://www.springframework.org/docs/api/org/springframework/mock/web/MockFilterChain.html
+ * http://www.springframework.org
+ * /docs/api/org/springframework/mock/web/MockFilterChain.html
  */
 public class MockFilterChain implements FilterChain {
-    private final Log log = LogFactory.getLog(MockFilterChain.class);
-    private String forwardURL;
+	private final Log log = LogFactory.getLog(MockFilterChain.class);
+	private String forwardURL;
 
-    public void doFilter(ServletRequest request, ServletResponse response)
-    throws IOException, ServletException {
-        String uri = ((HttpServletRequest) request).getRequestURI();
-        String requestContext = ((HttpServletRequest) request).getContextPath();
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response)
+			throws IOException, ServletException {
+		String uri = ((HttpServletRequest) request).getRequestURI();
+		String requestContext = ((HttpServletRequest) request).getContextPath();
 
-        if (StringUtils.isNotEmpty(requestContext) && uri.startsWith(requestContext)) {
-            uri = uri.substring(requestContext.length());
-        }
+		if (StringUtils.isNotEmpty(requestContext)
+				&& uri.startsWith(requestContext)) {
+			uri = uri.substring(requestContext.length());
+		}
 
-        this.forwardURL = uri;
-        log.debug("Forwarding to: " + uri);
+		this.forwardURL = uri;
+		log.debug("Forwarding to: " + uri);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher(uri);
-        dispatcher.forward(request, response);
-    }
+		RequestDispatcher dispatcher = request.getRequestDispatcher(uri);
+		dispatcher.forward(request, response);
+	}
 
-    public String getForwardURL() {
-        return this.forwardURL;
-    }
+	public String getForwardURL() {
+		return this.forwardURL;
+	}
 }

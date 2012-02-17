@@ -13,7 +13,8 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import com.mapflow.util.ConvertUtil;
 
 @ContextConfiguration(locations = { "classpath:/spring/applicationContext-resources.xml",
-  "classpath:/spring/applicationContext-dao.xml", "classpath:/spring/applicationContext-service.xml",
+  "classpath:/spring/applicationContext-dao.xml",
+  "classpath:/spring/applicationContext-service.xml",
   "classpath*:/**/spring/applicationContext.xml" })
 /**
  * Test classes can extend this manager based on a spring context.

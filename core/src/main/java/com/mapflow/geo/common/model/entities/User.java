@@ -34,6 +34,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.mapflow.geo.common.model.Address;
 import com.mapflow.geo.common.model.Role;
 import com.mapflow.model.BaseObject;
+import com.mapflow.model.LabelValue;
 
 /**
  * This class represents the basic "user" object in AppFuse that allows for authentication and user
@@ -101,9 +102,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
   public void addRole(final Role role) {
 
     if (!roles.contains(role.getName())) {
-      if(!roles.equals(""))
-      {
-        roles += "," ;
+      if (!roles.equals("")) {
+        roles += ",";
       }
       roles += role.getName();
     }
@@ -129,12 +129,11 @@ public class User extends BaseObject implements Serializable, UserDetails {
 
   @Transient
   public Address getAddress() {
-    
-    if(address == null)
-    {
+
+    if (address == null) {
       address = new Address();
     }
-    
+
     return address;
   }
 
@@ -232,6 +231,26 @@ public class User extends BaseObject implements Serializable, UserDetails {
     return lastName;
   }
 
+  @Transient
+  public List<Role> getObjectRolesList() {
+
+    final String[] stringList = roles.split(",");
+
+    final List<Role> rolesList = new ArrayList<Role>();
+
+    Long i = 0L;
+
+    for (final String roleName : stringList) {
+      final Role role = new Role();
+      role.setId(++i);
+      role.setName(roleName);
+
+      rolesList.add(role);
+    }
+
+    return rolesList;
+  }
+
   @Override
   @Column(name = "PASSWORD", length = 150, nullable = false)
   @XmlTransient
@@ -264,6 +283,21 @@ public class User extends BaseObject implements Serializable, UserDetails {
     return pwSalt;
   }
 
+  @Transient
+  public List<LabelValue> getRoleList() {
+
+    final String[] stringList = roles.split(",");
+
+    final List<LabelValue> userRoles = new ArrayList<LabelValue>();
+
+    for (final String roleName : stringList) {
+
+      userRoles.add(new LabelValue(roleName, roleName));
+    }
+
+    return userRoles;
+  }
+
   @Column(name = "ROLE_NAME", length = 20)
   @SearchableProperty
   public String getRoles() {
@@ -292,26 +326,6 @@ public class User extends BaseObject implements Serializable, UserDetails {
     }
 
     return rolesArray;
-  }
-
-  @Transient
-  public List<Role> getRolesList() {
-
-    final String[] stringList = roles.split(",");
-
-    final List<Role> rolesList = new ArrayList<Role>();
-
-    Long i = 0L;
-
-    for (final String roleName : stringList) {
-      final Role role = new Role();
-      role.setId(++i);
-      role.setName(roleName);
-
-      rolesList.add(role);
-    }
-
-    return rolesList;
   }
 
   @Override
@@ -404,6 +418,25 @@ public class User extends BaseObject implements Serializable, UserDetails {
 
     return true;
     // return enabled;
+  }
+
+  public void removeRole(final Role roleToRemoved) {
+
+    int i = 0;
+    String tempRoles = "";
+
+    for (final Role role : getObjectRolesList()) {
+
+      if (role.getName().equals(roleToRemoved.getName())) {
+        if (i > 0) {
+          tempRoles += ",";
+        }
+        tempRoles += role.toString();
+        i++;
+      }
+    }
+
+    roles = tempRoles;
   }
 
   public void setAccountExpired(final boolean accountExpired) {
@@ -540,11 +573,11 @@ public class User extends BaseObject implements Serializable, UserDetails {
         .append("enabled", enabled).append("accountExpired", accountExpired)
         .append("credentialsExpired", credentialsExpired).append("accountLocked", accountLocked);
 
-    if (getRolesList() != null) {
+    if (getObjectRolesList() != null) {
       sb.append("Granted Authorities: ");
 
       int i = 0;
-      for (final Role role : getRolesList()) {
+      for (final Role role : getObjectRolesList()) {
         if (i > 0) {
           sb.append(",");
         }
@@ -556,24 +589,5 @@ public class User extends BaseObject implements Serializable, UserDetails {
       sb.append("No Granted Authorities");
     }
     return sb.toString();
-  }
-
-  public void removeRole(Role roleToRemoved) {
-
-    int i = 0;
-    String tempRoles = "";
-
-    for (final Role role : getRolesList()) {
-
-      if (role.getName().equals(roleToRemoved.getName())) {
-        if (i > 0) {
-          tempRoles += ",";
-        }
-        tempRoles += role.toString();
-        i++;
-      }
-    }
-
-    this.roles = tempRoles;
   }
 }

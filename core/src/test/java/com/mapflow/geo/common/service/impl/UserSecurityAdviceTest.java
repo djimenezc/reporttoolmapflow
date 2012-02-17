@@ -39,6 +39,18 @@ public class UserSecurityAdviceTest {
   ApplicationContext ctx = null;
   SecurityContext initialSecurityContext = null;
 
+  private UserManager makeInterceptedTarget() {
+    ctx = new ClassPathXmlApplicationContext("/spring/applicationContext-test.xml");
+
+    final UserManager userManager = (UserManager) ctx.getBean("target");
+
+    // Mock the userDao
+    userDao = context.mock(UserDao.class);
+    userManager.setUserDao(userDao);
+
+    return userManager;
+  }
+
   @Before
   public void setUp() throws Exception {
     // store initial security context for later restoration
@@ -63,13 +75,14 @@ public class UserSecurityAdviceTest {
     SecurityContextHolder.setContext(initialSecurityContext);
   }
 
+  // Test fix to http://issues.appfuse.org/browse/APF-96
   @Test
-  public void testAddUserWithoutAdminRole() throws Exception {
-    final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    assertTrue(auth.isAuthenticated());
+  public void testAddAdminRoleWhenAlreadyHasUserRole() throws Exception {
     final UserManager userManager = makeInterceptedTarget();
-    final User user = new User("admin");
-    user.setId(2L);
+    final User user = new User("user");
+    user.setId(1L);
+    user.getObjectRolesList().add(new Role(Constants.ADMIN_ROLE));
+    user.getObjectRolesList().add(new Role(Constants.USER_ROLE));
 
     try {
       userManager.saveUser(user);
@@ -77,7 +90,7 @@ public class UserSecurityAdviceTest {
     }
     catch (final AccessDeniedException expected) {
       assertNotNull(expected);
-      Assert.assertEquals(expected.getMessage(), UserSecurityAdvice.ACCESS_DENIED);
+      assertEquals(expected.getMessage(), UserSecurityAdvice.ACCESS_DENIED);
     }
   }
 
@@ -109,65 +122,6 @@ public class UserSecurityAdviceTest {
     userManager.saveUser(adminUser);
   }
 
-  @Test
-  @ExpectedException(AccessDeniedException.class)
-  public void testUpdateUserProfile() throws Exception {
-    final UserManager userManager = makeInterceptedTarget();
-    final User user = new User("user");
-    user.setId(4L);
-    user.getRolesList().add(new Role(Constants.USER_ROLE));
-
-    context.checking(new Expectations() {
-
-      {
-//        one(userDao).saveUser(with(same(user)));
-      }
-    });
-
-    try {
-      userManager.saveUser(user);
-    }
-    catch (AccessDeniedException e) {
-    }
-  }
-
-  // Test fix to http://issues.appfuse.org/browse/APF-96
-  @Test
-  public void testChangeToAdminRoleFromUserRole() throws Exception {
-    final UserManager userManager = makeInterceptedTarget();
-    final User user = new User("user");
-    user.setId(1L);
-    user.getRolesList().add(new Role(Constants.ADMIN_ROLE));
-
-    try {
-      userManager.saveUser(user);
-      fail("AccessDeniedException not thrown");
-    }
-    catch (final AccessDeniedException expected) {
-      assertNotNull(expected);
-      assertEquals(expected.getMessage(), UserSecurityAdvice.ACCESS_DENIED);
-    }
-  }
-
-  // Test fix to http://issues.appfuse.org/browse/APF-96
-  @Test
-  public void testAddAdminRoleWhenAlreadyHasUserRole() throws Exception {
-    final UserManager userManager = makeInterceptedTarget();
-    final User user = new User("user");
-    user.setId(1L);
-    user.getRolesList().add(new Role(Constants.ADMIN_ROLE));
-    user.getRolesList().add(new Role(Constants.USER_ROLE));
-
-    try {
-      userManager.saveUser(user);
-      fail("AccessDeniedException not thrown");
-    }
-    catch (final AccessDeniedException expected) {
-      assertNotNull(expected);
-      assertEquals(expected.getMessage(), UserSecurityAdvice.ACCESS_DENIED);
-    }
-  }
-
   // Test fix to http://issues.appfuse.org/browse/APF-96
   @Test
   public void testAddUserRoleWhenHasAdminRole() throws Exception {
@@ -186,8 +140,8 @@ public class UserSecurityAdviceTest {
     final UserManager userManager = makeInterceptedTarget();
     final User user = new User("user");
     user.setId(1L);
-    user.getRolesList().add(new Role(Constants.ADMIN_ROLE));
-    user.getRolesList().add(new Role(Constants.USER_ROLE));
+    user.getObjectRolesList().add(new Role(Constants.ADMIN_ROLE));
+    user.getObjectRolesList().add(new Role(Constants.USER_ROLE));
 
     context.checking(new Expectations() {
 
@@ -199,14 +153,49 @@ public class UserSecurityAdviceTest {
     userManager.saveUser(user);
   }
 
+  @Test
+  public void testAddUserWithoutAdminRole() throws Exception {
+    final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    assertTrue(auth.isAuthenticated());
+    final UserManager userManager = makeInterceptedTarget();
+    final User user = new User("admin");
+    user.setId(2L);
+
+    try {
+      userManager.saveUser(user);
+      fail("AccessDeniedException not thrown");
+    }
+    catch (final AccessDeniedException expected) {
+      assertNotNull(expected);
+      Assert.assertEquals(expected.getMessage(), UserSecurityAdvice.ACCESS_DENIED);
+    }
+  }
+
   // Test fix to http://issues.appfuse.org/browse/APF-96
   @Test
-  @ExpectedException(AccessDeniedException.class)
-  public void testUpdateUserWithUserRole() throws Exception {
+  public void testChangeToAdminRoleFromUserRole() throws Exception {
     final UserManager userManager = makeInterceptedTarget();
     final User user = new User("user");
-    user.setId(3L);
-    user.getRolesList().add(new Role(Constants.USER_ROLE));
+    user.setId(1L);
+    user.getObjectRolesList().add(new Role(Constants.ADMIN_ROLE));
+
+    try {
+      userManager.saveUser(user);
+      fail("AccessDeniedException not thrown");
+    }
+    catch (final AccessDeniedException expected) {
+      assertNotNull(expected);
+      assertEquals(expected.getMessage(), UserSecurityAdvice.ACCESS_DENIED);
+    }
+  }
+
+  @Test
+  @ExpectedException(AccessDeniedException.class)
+  public void testUpdateUserProfile() throws Exception {
+    final UserManager userManager = makeInterceptedTarget();
+    final User user = new User("user");
+    user.setId(4L);
+    user.getObjectRolesList().add(new Role(Constants.USER_ROLE));
 
     context.checking(new Expectations() {
 
@@ -218,19 +207,30 @@ public class UserSecurityAdviceTest {
     try {
       userManager.saveUser(user);
     }
-    catch (AccessDeniedException e) {
+    catch (final AccessDeniedException e) {
     }
   }
 
-  private UserManager makeInterceptedTarget() {
-    ctx = new ClassPathXmlApplicationContext("/spring/applicationContext-test.xml");
+  // Test fix to http://issues.appfuse.org/browse/APF-96
+  @Test
+  @ExpectedException(AccessDeniedException.class)
+  public void testUpdateUserWithUserRole() throws Exception {
+    final UserManager userManager = makeInterceptedTarget();
+    final User user = new User("user");
+    user.setId(3L);
+    user.getObjectRolesList().add(new Role(Constants.USER_ROLE));
 
-    final UserManager userManager = (UserManager) ctx.getBean("target");
+    context.checking(new Expectations() {
 
-    // Mock the userDao
-    userDao = context.mock(UserDao.class);
-    userManager.setUserDao(userDao);
+      {
+        // one(userDao).saveUser(with(same(user)));
+      }
+    });
 
-    return userManager;
+    try {
+      userManager.saveUser(user);
+    }
+    catch (final AccessDeniedException e) {
+    }
   }
 }

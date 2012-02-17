@@ -28,8 +28,8 @@ public class UserDaoTest extends BaseDaoTestCase {
   private static final String AAA_GMAIL_COM = "aaa@gmail.com";
   @Autowired
   private UserDao dao;
-//  @Autowired
-//  private RoleDao rdao;
+  // @Autowired
+  // private RoleDao rdao;
   @Autowired
   private CompassTemplate compassTemplate;
   @Autowired
@@ -53,7 +53,7 @@ public class UserDaoTest extends BaseDaoTestCase {
     user.setWebsite("http://raibledesigns.com");
 
     final Role role = new Role(Constants.USER_ROLE);
-//    assertNotNull(role.getId());
+    // assertNotNull(role.getId());
     user.addRole(role);
 
     user = dao.saveUser(user);
@@ -73,7 +73,7 @@ public class UserDaoTest extends BaseDaoTestCase {
   @Test
   public void testAddUserRole() throws Exception {
     User user = dao.get(1L);
-    assertEquals(1, user.getRolesList().size());
+    assertEquals(1, user.getObjectRolesList().size());
 
     final Role role = new Role(Constants.ADMIN_ROLE);
     user.addRole(role);
@@ -81,7 +81,7 @@ public class UserDaoTest extends BaseDaoTestCase {
     flush();
 
     user = dao.get(1L);
-    assertEquals(2, user.getRolesList().size());
+    assertEquals(2, user.getObjectRolesList().size());
 
     // add the same role twice - should result in no additional role
     user.addRole(role);
@@ -90,14 +90,14 @@ public class UserDaoTest extends BaseDaoTestCase {
     flush();
 
     user = dao.get(1L);
-    assertEquals("more than 2 roles", 2, user.getRolesList().size());
+    assertEquals("more than 2 roles", 2, user.getObjectRolesList().size());
 
     user.removeRole(role);
     dao.saveUser(user);
     flush();
 
     user = dao.get(1L);
-    assertEquals(1, user.getRolesList().size());
+    assertEquals(1, user.getObjectRolesList().size());
   }
 
   @Test
@@ -105,7 +105,7 @@ public class UserDaoTest extends BaseDaoTestCase {
     final User user = dao.get(1L);
 
     assertNotNull(user);
-    assertEquals(1, user.getRolesList().size());
+    assertEquals(1, user.getObjectRolesList().size());
     assertTrue(user.isEnabled());
   }
 
@@ -125,7 +125,7 @@ public class UserDaoTest extends BaseDaoTestCase {
   }
 
   @Test
-//  @NotTransactional
+  // @NotTransactional
   @ExpectedException(DataIntegrityViolationException.class)
   public void testUpdateUser() throws Exception {
     User user = dao.get(1L);

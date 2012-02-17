@@ -22,8 +22,8 @@ public class Person implements Serializable {
   }
 
   // -- allows us to create a Person via the constructor
-  public Person(final String name, final String address, final String ssn,
-    final String email, final String homePhone, final String workPhone) {
+  public Person(final String name, final String address, final String ssn, final String email,
+    final String homePhone, final String workPhone) {
     this.name = name;
     this.address = address;
     this.ssn = ssn;
@@ -53,55 +53,49 @@ public class Person implements Serializable {
         return false;
       }
     }
-    else
-      if (!address.equals(other.address)) {
-        return false;
-      }
+    else if (!address.equals(other.address)) {
+      return false;
+    }
     if (email == null) {
       if (other.email != null) {
         return false;
       }
     }
-    else
-      if (!email.equals(other.email)) {
-        return false;
-      }
+    else if (!email.equals(other.email)) {
+      return false;
+    }
     if (homePhone == null) {
       if (other.homePhone != null) {
         return false;
       }
     }
-    else
-      if (!homePhone.equals(other.homePhone)) {
-        return false;
-      }
+    else if (!homePhone.equals(other.homePhone)) {
+      return false;
+    }
     if (name == null) {
       if (other.name != null) {
         return false;
       }
     }
-    else
-      if (!name.equals(other.name)) {
-        return false;
-      }
+    else if (!name.equals(other.name)) {
+      return false;
+    }
     if (ssn == null) {
       if (other.ssn != null) {
         return false;
       }
     }
-    else
-      if (!ssn.equals(other.ssn)) {
-        return false;
-      }
+    else if (!ssn.equals(other.ssn)) {
+      return false;
+    }
     if (workPhone == null) {
       if (other.workPhone != null) {
         return false;
       }
     }
-    else
-      if (!workPhone.equals(other.workPhone)) {
-        return false;
-      }
+    else if (!workPhone.equals(other.workPhone)) {
+      return false;
+    }
     return true;
   }
 

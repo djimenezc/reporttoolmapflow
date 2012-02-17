@@ -36,8 +36,7 @@ public final class FileUtil {
     }
   }
 
-  public static void copy(final String fileIn, final String fileOut)
-    throws IOException {
+  public static void copy(final String fileIn, final String fileOut) throws IOException {
 
     final byte[] bytes = new byte[4096];
 
@@ -79,8 +78,7 @@ public final class FileUtil {
 
   public static File[] list(final File dir, final String regex) {
     if (!dir.isDirectory()) {
-      throw new IllegalArgumentException(dir.getAbsolutePath()
-        + " is not a directory");
+      throw new IllegalArgumentException(dir.getAbsolutePath() + " is not a directory");
     }
 
     final FilenameFilter filter = new FilenameFilter() {
@@ -95,19 +93,17 @@ public final class FileUtil {
 
   public static void move(final File from, final File to) {
     if (!from.renameTo(to)) {
-      throw new FileUtilException("Could not move from "
-        + from.getAbsolutePath() + " to " + to.getAbsolutePath());
+      throw new FileUtilException("Could not move from " + from.getAbsolutePath() + " to "
+        + to.getAbsolutePath());
     }
   }
 
-  public static String readBytes(final InputStream inputStream, final int count)
-    throws Exception {
+  public static String readBytes(final InputStream inputStream, final int count) throws Exception {
 
     final byte[] buffer = new byte[BUFFER_SIZE];
 
     if (inputStream.read(buffer, 0, count) < count) {
-      throw new FileUtilException("Expected to read " + count
-        + " bytes from file but EOF");
+      throw new FileUtilException("Expected to read " + count + " bytes from file but EOF");
     }
 
     return new String(buffer, 0, count);

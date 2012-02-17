@@ -19,9 +19,10 @@ import com.mapflow.geo.common.manager.UserManager;
 import com.mapflow.geo.stats.facade.StatsFacade;
 
 /**
- * Implementation of <strong>SimpleFormController</strong> that contains convenience methods for
- * subclasses. For example, getting the current user and saving messages/errors. This class is
- * intended to be a base class for all Form controllers.
+ * Implementation of <strong>SimpleFormController</strong> that contains
+ * convenience methods for subclasses. For example, getting the current user and
+ * saving messages/errors. This class is intended to be a base class for all
+ * Form controllers.
  * <p>
  * <a href="BaseFormController.java.html"><i>View Source</i></a>
  * </p>
@@ -30,98 +31,101 @@ import com.mapflow.geo.stats.facade.StatsFacade;
  */
 public abstract class AbstractStatsController implements ServletContextAware {
 
-  protected final transient Log log = LogFactory.getLog(getClass());
-  public static final String MESSAGES_KEY = "successMessages";
-  private UserManager userManager = null;
-  protected String cancelView;
-  protected String successView;
-  
-  @Autowired
-  protected StatsFacade statsFacade;
-  
-  private ServletContext servletContext;
+	protected final transient Log log = LogFactory.getLog(getClass());
+	public static final String MESSAGES_KEY = "successMessages";
+	private UserManager userManager = null;
+	protected String cancelView;
+	protected String successView;
 
-  @Autowired(required = false)
-  Validator validator;
+	@Autowired
+	protected StatsFacade statsFacade;
 
+	private ServletContext servletContext;
 
-  @Autowired
-  public void setUserManager(final UserManager userManager) {
-    this.userManager = userManager;
-  }
+	@Autowired(required = false)
+	Validator validator;
 
-  public UserManager getUserManager() {
-    return userManager;
-  }
+	@Autowired
+	public void setUserManager(final UserManager userManager) {
+		this.userManager = userManager;
+	}
 
-  @SuppressWarnings("unchecked")
-  public void saveError(final HttpServletRequest request, final String error) {
-    List<String> errors = (List<String>) request.getSession().getAttribute("errors");
-    if (errors == null) {
-      errors = new ArrayList<String>();
-    }
-    errors.add(error);
-    request.getSession().setAttribute("errors", errors);
-  }
+	public UserManager getUserManager() {
+		return userManager;
+	}
 
-  @SuppressWarnings("unchecked")
-  public void saveMessage(final HttpServletRequest request, final String msg) {
-    List<String> messages = (List<String>) request.getSession().getAttribute(MESSAGES_KEY);
+	@SuppressWarnings("unchecked")
+	public void saveError(final HttpServletRequest request, final String error) {
+		List<String> errors = (List<String>) request.getSession().getAttribute(
+				"errors");
+		if (errors == null) {
+			errors = new ArrayList<String>();
+		}
+		errors.add(error);
+		request.getSession().setAttribute("errors", errors);
+	}
 
-    if (messages == null) {
-      messages = new ArrayList<String>();
-    }
+	@SuppressWarnings("unchecked")
+	public void saveMessage(final HttpServletRequest request, final String msg) {
+		List<String> messages = (List<String>) request.getSession()
+				.getAttribute(MESSAGES_KEY);
 
-    messages.add(msg);
-    request.getSession().setAttribute(MESSAGES_KEY, messages);
-  }
+		if (messages == null) {
+			messages = new ArrayList<String>();
+		}
 
-  /**
-   * Convenience method to get the Configuration HashMap from the servlet context.
-   * 
-   * @return the user's populated form from the session
-   */
-  @SuppressWarnings("rawtypes")
-  public Map<?, ?> getConfiguration() {
-    final Map<?, ?> config = (HashMap<?, ?>) servletContext.getAttribute(Constants.CONFIG);
+		messages.add(msg);
+		request.getSession().setAttribute(MESSAGES_KEY, messages);
+	}
 
-    // so unit tests don't puke when nothing's been set
-    if (config == null) {
-      return new HashMap();
-    }
+	/**
+	 * Convenience method to get the Configuration HashMap from the servlet
+	 * context.
+	 * 
+	 * @return the user's populated form from the session
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map<?, ?> getConfiguration() {
+		final Map<?, ?> config = (HashMap<?, ?>) servletContext
+				.getAttribute(Constants.CONFIG);
 
-    return config;
-  }
+		// so unit tests don't puke when nothing's been set
+		if (config == null) {
+			return new HashMap();
+		}
 
-  public final AbstractStatsController setCancelView(final String cancelView) {
-    this.cancelView = cancelView;
-    return this;
-  }
+		return config;
+	}
 
-  public final String getCancelView() {
-    // Default to successView if cancelView is invalid
-    if ((cancelView == null) || (cancelView.length() == 0)) {
-      return getSuccessView();
-    }
-    return cancelView;
-  }
+	public final AbstractStatsController setCancelView(final String cancelView) {
+		this.cancelView = cancelView;
+		return this;
+	}
 
-  public final String getSuccessView() {
-    return successView;
-  }
+	public final String getCancelView() {
+		// Default to successView if cancelView is invalid
+		if ((cancelView == null) || (cancelView.length() == 0)) {
+			return getSuccessView();
+		}
+		return cancelView;
+	}
 
-  public final AbstractStatsController setSuccessView(final String successView) {
-    this.successView = successView;
-    return this;
-  }
+	public final String getSuccessView() {
+		return successView;
+	}
 
-  @Override
-  public void setServletContext(final ServletContext servletContext) {
-    this.servletContext = servletContext;
-  }
+	public final AbstractStatsController setSuccessView(final String successView) {
+		this.successView = successView;
+		return this;
+	}
 
-  protected ServletContext getServletContext() {
-    return servletContext;
-  }
+	@Override
+	public void setServletContext(final ServletContext servletContext) {
+		this.servletContext = servletContext;
+	}
+
+	protected ServletContext getServletContext() {
+		return servletContext;
+	}
 
 }
