@@ -25,7 +25,14 @@ Ext.define('Pandora.view.Viewport', {
                 }, {
                     xtype: 'component',
                     html: 'Pandora<br>Internet Radio'
-                }]
+                },{
+                    xtype: 'button',
+                    text: 'Logout',
+                    handler : function() {
+                    	location.href='logout';
+                    }
+                }
+                ]
             }],
             layout: {
                 type: 'hbox',

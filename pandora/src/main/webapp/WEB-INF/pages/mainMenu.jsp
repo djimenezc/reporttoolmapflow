@@ -13,10 +13,6 @@
     
 </head>
 
-<p><fmt:message key="mainMenu.message"/></p>
-
-<div class="separator"></div>
-
     <script type="text/javascript">
     Ext.Loader.setConfig({
         enabled: true,
