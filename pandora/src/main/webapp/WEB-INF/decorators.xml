@@ -3,6 +3,8 @@
         <pattern>/40*.jsp</pattern>
         <pattern>/*ajax=true*</pattern>
         <pattern>/scripts/dojo/*</pattern>
+        <pattern>/scripts/pandora/*</pattern>
+        <pattern>/scripts/extjs/*</pattern>
         <pattern>/struts/dojo/*</pattern> 
         <pattern>/resources/*</pattern>
     </excludes> 
