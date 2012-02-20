@@ -4,7 +4,7 @@ Ext.define('Pandora.model.Station', {
     
     proxy: {
         type: 'ajax',
-        url: 'data/stations.json',
+        url: 'scripts/pandora/data/stations.json',
         reader: {
             type: 'json',
             root: 'results'

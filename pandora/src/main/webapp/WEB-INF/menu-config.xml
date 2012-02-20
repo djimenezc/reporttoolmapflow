@@ -16,11 +16,6 @@
             <Item name="FileUpload" title="menu.selectFile" page="/fileupload"/>
         </Menu>
         
-        <Menu name="StatsMenu" title="menu.stats" description="Statistics Menu" page="/statsMain" roles="ROLE_ADMIN,ROLE_USER">
-        	<Item name="ViewStats" title="menu.stats.events.view" page="/stats/view"/>
-        	<Item name="ViewReports" title="menu.stats.events.report" page="/stats/reports"/>
-        </Menu>
-        
         <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>
     </Menus>
 </MenuConfig>

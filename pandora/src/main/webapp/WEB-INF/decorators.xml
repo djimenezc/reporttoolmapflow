@@ -7,6 +7,7 @@
         <pattern>/scripts/extjs/*</pattern>
         <pattern>/struts/dojo/*</pattern> 
         <pattern>/resources/*</pattern>
+        <pattern>/mainMenu</pattern>
     </excludes> 
     <decorator name="default" page="default.jsp">
         <pattern>/*</pattern>
