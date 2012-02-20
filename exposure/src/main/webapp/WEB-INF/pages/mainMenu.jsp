@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" type="text/css" href="scripts/extjs/resources/css/ext-all.css">
     <script type="text/javascript" src="scripts/extjs/bootstrap.js"></script>
-    <script type="text/javascript" src="scripts/pandora/app/app.js"></script>
+    <script type="text/javascript" src="scripts/exposure/app/app.js"></script>
     
 </head>
     
@@ -18,7 +18,7 @@
         enabled: true,
         paths: {
             'Ext': '/scripts/extjs/ext-all-dev.js',
-            'Pandora': '/scripts/pandora'
+            'Pandora': '/scripts/exposure'
         }
     });
     
