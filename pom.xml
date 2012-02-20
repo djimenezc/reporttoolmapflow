@@ -679,5 +679,7 @@
         <module>test</module>
         <module>core</module>
         <module>web</module>
+        <module>pandora</module>
+        <module>exposure</module>
     </modules>
 </project>
