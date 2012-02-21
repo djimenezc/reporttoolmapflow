@@ -21,14 +21,7 @@ Ext.define('Exposure.view.Viewport', {
 				//region: 'north',
 				xtype : 'toolbar',
 				height : 33,
-				// contentEl: 'header'
-				items : [{
-					xtype : 'button',
-					text : 'Logout',
-					handler : function() {
-						location.href = 'logout';
-					}
-				}]
+				contentEl: 'header'
 			}],
 			layout : {
 				type : 'hbox',

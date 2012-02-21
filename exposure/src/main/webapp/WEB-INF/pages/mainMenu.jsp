@@ -6,6 +6,8 @@
     <meta name="menu" content="MainMenu"/>
     
     <link rel="stylesheet" type="text/css" href="scripts/extjs/resources/css/ext-all.css">
+    <link rel="stylesheet" type="text/css" href="scripts/exposure/styles/exposure.css" />
+    
     <script type="text/javascript" src="scripts/extjs/bootstrap.js"></script>
     <script type="text/javascript" src="scripts/exposure/app/app.js"></script>
     
@@ -24,3 +26,13 @@
     
     </script>
 
+
+<body>
+    <div id="header">
+      <div id="header-logo"></div>
+      <div id="header-right">
+                <div><b>Welcome, ${USERNAME}.</b>&nbsp;|&nbsp;<script>printDate();</script>&nbsp;|&nbsp;<!-- <a href="../content/start.do">GEO:underwriting</a>&nbsp;-->&nbsp;<a href="logout">Logout</a></div>
+      </div>
+      <br style="clear:both"/>
+    </div>
+  </body>

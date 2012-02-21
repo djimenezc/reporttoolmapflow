@@ -1,0 +1,85 @@
+#login-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+  height: 200px;
+  width: 400px;
+  background-color: #0F6EC0;
+  border: 3px solid black;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+#header-right {
+  font-size: 13px;
+}
+
+body {
+  background: url(../img/exposure-bg.png) 0px 100px #d1d1d1 no-repeat;
+  font-family: 'Arial';
+  color: #fff;
+}
+
+.error {
+  padding: 5px 0px 5px 22px;
+  font-size: 12px;
+  background: 0px 5px url("../../../images/icons/red_x.gif") no-repeat;
+  margin-left: 82px;
+}
+
+input.button {
+  padding: 3px 10px !important;
+  cursor: pointer;
+}
+
+input.button:hover {
+  background: #c0c0c0;
+}
+
+#login-form {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 50px 0px 50px;
+    width: 240px;
+}
+
+#button-container {
+  width: 70px;
+  float:left;
+}
+
+#loading-container {
+    display: none;
+    float: left;
+    font-size: 12px;
+    padding: 10px 0 0;
+    width: 150px;
+}
+
+#login-form p {
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#login-form input {
+  margin: 0px 0px 5px 0px;
+  border: 1px solid black;
+  border-radius: 0px;
+  font-size: 15px;
+  padding: 0px 2px;
+  height: 30px;
+}
+
+#powered-by {
+    background: url("../../../images/Powered-by-logo-small.gif") no-repeat scroll 5px 9px #C0C0C0;
+    bottom: 0;
+    float: right;
+    height: 45px;
+    position: absolute;
+    text-align: right;
+    width: 100%;
+}
+

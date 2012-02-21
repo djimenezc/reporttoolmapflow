@@ -1,0 +1,244 @@
+
+.noPrint { 
+  display: none; 
+} 
+
+#header {
+  background: #0F6EC0;
+}
+
+#header-logo {
+  width: 250px;
+  height: 36px;
+  background: url(../img/logo.png) no-repeat 10px 3px;
+  float:left;
+}
+
+#header-right {
+  width: 500px;
+  float:right;
+  text-align: right;
+  color: #fff;
+  padding-top: 10px;
+  margin-right: 10px;
+}
+
+#header-right a {
+  color: #fff;
+}
+
+.information {
+  background: url(../img/info.png) no-repeat;
+  width: 95%;
+  display:block;
+  font-size: 11px;
+  text-align: left;
+  padding:0 0 0 20px;
+  margin: 0 0 10px 5px;
+}
+
+.map-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.search {
+  background-image:url(../img/icons/search.png);
+}
+
+.forecast {
+  background-image:url(../img/icons/forecast.png);
+}
+
+.administration {
+  background-image:url(../img/icons/cog.png);
+}
+
+.portfolio {
+  background-image:url(../img/icons/report.png);
+}
+
+.map {
+  background-image:url(../img/icons/world.png);
+}
+
+.print {
+  background-image:url(../img/icons/printer.png);
+}
+
+.pdf {
+  background-image:url(../img/icons/pdf.png);
+}
+
+.csv {
+  background-image:url(../img/icons/csv.png);
+}
+
+.tools {
+  background-image:url(../img/icons/tools.png);
+}
+
+.results-ok {
+  background-image:url(../img/icons/accept.png);
+}
+
+.button-new {
+  background-image:url(../img/icons/add.png);
+}
+
+.button-done {
+  background-image:url(../img/icons/accept.png);
+}
+
+.results-breach {
+  background-image:url(../img/icons/exclamation.png);
+  cursor: pointer;
+}
+
+.import {
+  background-image:url(../img/icons/publish.png);
+}
+
+.rule {
+  background-image:url(../img/rule.png);
+}
+
+.draw-circle {
+  background-image:url(../img/circle.png);
+}
+
+.draw-rectangle {
+  background-image:url(../img/rectangle.png);
+}
+
+.draw-polygon {
+  background-image:url(../img/polygon.png);
+}
+
+.draw-dragzoom {
+  background-image:url(../img/dragzoom.png);
+}
+
+.draw-draw {
+  background-image:url(../img/draw.png);
+}
+
+.aux-rotate {
+  background-image:url(../img/rotate.png);
+}
+
+.aux-drag {
+  background-image:url(../img/drag.png);
+}
+
+.aux-delete {
+  background-image:url(../img/delete.png);
+}
+
+.aux-refresh {
+  background-image:url(../img/refresh.png);
+}
+
+.aux-resize {
+  background-image:url(../img/resize.png);
+}
+
+.aux-reshape {
+  background-image:url(../img/reshape.png);
+}
+
+.draw-tool, .toolbox {
+  background-repeat: no-repeat;
+  background-position: 5px 5px;
+}
+
+.draw-tool-aux {
+  background-repeat: no-repeat;
+  background-position: 4px 4px;
+}
+
+.button-icon {
+  background-repeat: no-repeat;
+  background-position: 2px 2px;
+}
+
+.display-markers {
+  background-image:url(../img/icons/marker.png);
+}
+
+.display-heatmap {
+  background-image:url(../img/icons/map.png);
+}
+
+.display-icon {
+  background-repeat: no-repeat;
+  background-position: 4px 4px;
+}
+
+.score {
+  height: 20px;
+  width: 20px;
+}
+
+.score.red {
+  background-color: red;
+}
+
+.score.blue {
+  background-color: blue;
+}
+
+.score.green {
+  background-color: green;
+}
+
+.score.gray {
+  background-color: gray;
+}
+
+.shape-info {
+  padding: 5px;
+}
+
+.shape-info div {
+  font-weight: bold;
+}
+
+.legend  {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  float: left;
+  border: 1px solid black;
+}
+
+.legend-text {
+  font-size: 11px;
+  float: left;
+}
+
+.legend.red {
+  background-color:red;
+}
+
+.legend.green {
+  background-color:green;
+}
+
+div.panel-title {
+  font-weight: bold;
+  padding: 3px 0px;
+}
+
+.distance-label {
+  padding: 15px;
+  font-size: 21px;
+  font-weight: bold;	
+  height: 60px;
+  width: 200px;
+}
+
+div.link {
+  text-align: center;
+  cursor: pointer;
+}
