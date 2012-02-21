@@ -1,6 +1,6 @@
-function ExposureUtils(){
+function ExposureUtils() {
 
-	function isFloat(value) {
+	this.isFloat = function(value) {
 		if(isNaN(value) || value.toString().indexOf(".") < 0) {
 			return false;
 		} else {
@@ -12,7 +12,7 @@ function ExposureUtils(){
 		}
 	}
 
-	function addCommas(nStr) {
+	this.addCommas = function(nStr) {
 		nStr += '';
 		x = nStr.split('.');
 		x1 = x[0];
@@ -24,7 +24,7 @@ function ExposureUtils(){
 		return x1 + x2;
 	}
 
-	function parseLatLng(str) {
+	this.parseLatLng = function(str) {
 		if(str && str.indexOf(',') > 0) {
 			var commaArray = str.trim().split(',');
 			if(commaArray.length == 2) {
@@ -38,26 +38,26 @@ function ExposureUtils(){
 		return null;
 	}
 
-	function printDate() {
+	this.printDate = function() {
 		var now = new Date();
 		var Weekday = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
 		var Month = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 		document.write(Weekday[now.getDay()] + ", " + Month[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear());
 	}
 
-	function getDate() {
+	this.getDate = function() {
 		var now = new Date();
 		var Weekday = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
 		var Month = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 		return Weekday[now.getDay()] + ", " + Month[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear();
 	}
 
-	function getDateStamp() {
+	this.getDateStamp = function() {
 		var now = new Date();
 		return now.getDate() + "_" + now.getMonth() + 1 + "_" + now.getFullYear();
 	}
 
-	function calculateDateWithFormat() {
+	this.calculateDateWithFormat = function() {
 		var d = new Date();
 		var curr_date = d.getDate();
 		var curr_month = d.getMonth();
@@ -67,9 +67,8 @@ function ExposureUtils(){
 
 		return curr_date;
 	}
-
 	// for creating PDF/Excel files
-	function post(URL, PARAMS, target) {
+	this.post = function(URL, PARAMS, target) {
 
 		var form = document.createElement("form");
 
@@ -91,7 +90,7 @@ function ExposureUtils(){
 		return form;
 	}
 
-	function addCommas(nStr) {
+	this.addCommas = function(nStr) {
 		nStr += '';
 		x = nStr.split('.');
 		x1 = x[0];
@@ -102,5 +101,4 @@ function ExposureUtils(){
 		}
 		return x1 + x2;
 	}
-
 }
