@@ -19,5 +19,6 @@
         <mapping class="com.mapflow.geo.common.model.entities.User" />
 <!--         <mapping class="com.mapflow.geo.common.model.entities.MfServiceLogId" /> -->
         <mapping class="com.mapflow.geo.logging.model.entities.MfServiceLog" />
+        <mapping class="com.mapflow.geo.stats.model.entities.MapdisplayLog" />
     </session-factory>
 </hibernate-configuration>

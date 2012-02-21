@@ -9,6 +9,7 @@
 <!-- 		<class>com.mapflow.model.Role</class> -->
 		<class>com.mapflow.geo.common.model.entities.User</class>
         <class>com.mapflow.geo.logging.model.entities.MfServiceLog</class>
+        <class>com.mapflow.geo.stats.model.entities.MapdisplayLog</class>
 
 		<!-- Adding more <class>f.q.c.Name</class> elements here is not required. 
 			The annotated classes will still be detected, as can be observed in the following 
