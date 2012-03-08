@@ -194,7 +194,7 @@ public class MapdisplayLog extends BaseObject {
     return duration;
   }
 
-  @Column(name = "FEATURE_LIST", length = 50)
+  @Column(name = "FEATURESET_LIST", length = 50)
   public String getFeaturesetList() {
     return featuresetList;
   }

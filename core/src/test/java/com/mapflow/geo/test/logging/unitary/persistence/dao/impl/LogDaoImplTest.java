@@ -1,5 +1,9 @@
 package com.mapflow.geo.test.logging.unitary.persistence.dao.impl;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -12,9 +16,6 @@ import com.mapflow.geo.logging.model.LogMapdisplayTo;
 import com.mapflow.geo.logging.model.entities.MfServiceLog;
 import com.mapflow.geo.test.logging.unitary.factory.LoggingFactoryObjects;
 import com.mapflow.test.dao.BaseDaoTestCase;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertNotNull;
 
 public class LogDaoImplTest extends BaseDaoTestCase {
 
@@ -26,7 +27,7 @@ public class LogDaoImplTest extends BaseDaoTestCase {
   @Test
   public void testRetrieveLogRowFromDatabase() {
 
-    List<MfServiceLog> mfServiceLog = logDao.getTransactionId(TRANSACTION_ID);
+    final List<MfServiceLog> mfServiceLog = logDao.getTransactionId(TRANSACTION_ID);
 
     assertThat(mfServiceLog.isEmpty(), is(false));
   }
@@ -43,7 +44,7 @@ public class LogDaoImplTest extends BaseDaoTestCase {
 
     System.out.println("Trying to save in database log bean");
 
-    MfServiceLog mfServiceLog = logDao.save(log.getMfServiceLog());
+    final MfServiceLog mfServiceLog = logDao.save(log.getMfServiceLog());
 
     log = new LogCounterFeaturesTo(mfServiceLog);
 
