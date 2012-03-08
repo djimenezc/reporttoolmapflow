@@ -17,7 +17,7 @@
 
     <jaxws:endpoint id="userService" implementor="#userManager" address="/UserService"/>
     
-    <jaxws:endpoint id="statsService" implementor="#statsService" address="/StatsService"/>
+    <jaxws:endpoint id="statsService" implementor="#statsManager" address="/StatsService"/>
     
     <!-- Add new endpoints for additional services you'd like to expose -->
     
@@ -27,7 +27,7 @@
         </jaxrs:features>
         <jaxrs:serviceBeans>
             <ref bean="userManager"/>
-            <ref bean="statsService"/>
+            <ref bean="statsManager"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider"/>

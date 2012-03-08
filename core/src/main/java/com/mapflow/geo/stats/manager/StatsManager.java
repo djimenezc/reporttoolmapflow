@@ -3,7 +3,6 @@ package com.mapflow.geo.stats.manager;
 import java.util.List;
 
 import com.mapflow.geo.common.manager.GenericManager;
-import com.mapflow.geo.common.model.entities.User;
 import com.mapflow.geo.stats.dao.MapdisplayLogDao;
 import com.mapflow.geo.stats.model.Mapdisplay;
 
@@ -20,7 +19,7 @@ public interface StatsManager extends GenericManager<Mapdisplay, Long> {
    * 
    * @return List
    */
-  List<User> getLogEntries();
+  List<Mapdisplay> getLogEntries();
 
   /**
    * Convenience method for testing - allows you to mock the DAO and set it on an interface.
