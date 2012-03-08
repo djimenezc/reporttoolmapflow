@@ -18,7 +18,7 @@ import com.mapflow.model.BaseObject;
 @Table(name = "MFWH_MAPDISPLAY_LOG")
 @Searchable
 @XmlRootElement
-public class MapdisplayLog extends BaseObject {
+public class MapdisplayLogEntity extends BaseObject {
 
   private static final long serialVersionUID = 1L;
 
@@ -38,10 +38,10 @@ public class MapdisplayLog extends BaseObject {
   private Long layercount;
   private String featuresetList;
 
-  public MapdisplayLog() {
+  public MapdisplayLogEntity() {
   }
 
-  public MapdisplayLog(final String transactionId, final String serviceHost,
+  public MapdisplayLogEntity(final String transactionId, final String serviceHost,
     final String serviceName, final String clientIp, final Date requestDate,
     final BigDecimal duration, final Long xcoord, final Long ycoord, final int height,
     final int width, final String mimetype, final int zoomLevel, final String mapstyle,
@@ -75,7 +75,7 @@ public class MapdisplayLog extends BaseObject {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final MapdisplayLog other = (MapdisplayLog) obj;
+    final MapdisplayLogEntity other = (MapdisplayLogEntity) obj;
     if (clientIp == null) {
       if (other.clientIp != null) {
         return false;

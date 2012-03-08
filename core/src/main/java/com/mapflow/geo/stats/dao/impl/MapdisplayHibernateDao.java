@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mapflow.geo.common.persistence.hibernate.GenericDaoHibernate;
 import com.mapflow.geo.stats.dao.MapdisplayLogDao;
-import com.mapflow.geo.stats.model.entities.MapdisplayLog;
+import com.mapflow.geo.stats.model.entities.MapdisplayLogEntity;
 
 /**
  * DAO to manage the CRUD operation with Log entries
@@ -12,15 +12,15 @@ import com.mapflow.geo.stats.model.entities.MapdisplayLog;
  * @author djimenez
  */
 @Repository("mapdisplayDao")
-public class MapdisplayHibernateDao extends GenericDaoHibernate<MapdisplayLog, String> implements
+public class MapdisplayHibernateDao extends GenericDaoHibernate<MapdisplayLogEntity, String> implements
   MapdisplayLogDao {
 
   public MapdisplayHibernateDao() {
-    super(MapdisplayLog.class);
+    super(MapdisplayLogEntity.class);
   }
 
   @Override
-  public MapdisplayLog findFirst() {
+  public MapdisplayLogEntity findFirst() {
     // TODO Auto-generated method stub
     return null;
   }
