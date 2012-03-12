@@ -681,5 +681,6 @@
         <module>web</module>
         <module>pandora</module>
         <module>exposure</module>
+        <module>extExamples</module>
     </modules>
 </project>
