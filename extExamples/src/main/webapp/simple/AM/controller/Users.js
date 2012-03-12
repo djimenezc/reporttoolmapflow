@@ -12,6 +12,15 @@ This file may be used under the terms of the GNU General Public License version 
 If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
 
 */
+
+/**
+ *  
+ *  User controller
+ *  
+ *  @docauthor djimenez
+ */
+
+
 Ext.define('AM.controller.Users', {
     extend: 'Ext.app.Controller',
 
@@ -39,6 +48,15 @@ Ext.define('AM.controller.Users', {
         });
     },
 
+    /**
+     * Called automatically when the page has completely loaded. This is an empty function that should be
+     * overridden by each application that needs to take action on page load
+     * @property launch
+     * @type Function
+     * @param {String} profile The detected {@link #profiles application profile}
+     * @return {Boolean} By default, the Application will dispatch to the configured startup controller and
+     * action immediately after running the launch function. Return false to prevent this behavior.
+     */
     editUser: function(grid, record) {
         var edit = Ext.create('AM.view.user.Edit').show();
 
