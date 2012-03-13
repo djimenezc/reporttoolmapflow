@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+
+This file is part of Ext JS 4
+
+Copyright (c) 2011 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
+
+*/
+
+<span id='AM-controller-Users'>/**
+</span> *  
+ *  User controller
+ *  
+ *  @docauthor djimenez
+ */
+
+
+Ext.define('AM.controller.Users', {
+    extend: 'Ext.app.Controller',
+
+    stores: ['Users'],
+
+    models: ['User'],
+
+    views: ['user.Edit', 'user.List'],
+
+    refs: [
+        {
+            ref: 'usersPanel',
+            selector: 'panel'
+        }
+    ],
+
+    init: function() {
+        this.control({
+            'viewport &gt; userlist dataview': {
+                itemdblclick: this.editUser
+            },
+            'useredit button[action=save]': {
+                click: this.updateUser
+            }
+        });
+    },
+
+<span id='AM-controller-Users-property-launch'>    /**
+</span>     * Called automatically when the page has completely loaded. This is an empty function that should be
+     * overridden by each application that needs to take action on page load
+     * @property launch
+     * @type Function
+     * @param {String} profile The detected {@link #profiles application profile}
+     * @return {Boolean} By default, the Application will dispatch to the configured startup controller and
+     * action immediately after running the launch function. Return false to prevent this behavior.
+     */
+    editUser: function(grid, record) {
+        var edit = Ext.create('AM.view.user.Edit').show();
+
+        edit.down('form').loadRecord(record);
+    },
+
+    updateUser: function(button) {
+        var win    = button.up('window'),
+            form   = win.down('form'),
+            record = form.getRecord(),
+            values = form.getValues();
+
+        record.set(values);
+        win.close();
+        this.getUsersStore().sync();
+    }
+});
+
+</pre>
+</body>
+</html>

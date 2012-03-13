@@ -1,0 +1,145 @@
+<div class="body-wrap">
+
+<h1>Class <a href='source/jasmine.html#jasmine-NestedResults'>jasmine.NestedResults</a></h1>
+<table cellspacing='0'>
+
+<tr><td class='label'>Extends:</td><td class='hd-info'>Object</td></tr>
+
+<tr><td class='label'>Defined In:</td><td class='hd-info'><a href='source/jasmine.html#jasmine-NestedResults'>jasmine.js</a></td></tr>
+
+
+
+
+
+</table>
+<div class='description'><p>Holds results for a set of Jasmine spec. Allows for the results array to hold another jasmine.NestedResults</p>
+</div>
+<div class='hr'></div>
+
+<a id='jasmine.NestedResults-props'></a>
+<h2>Public Properties</h2>
+<table cellspacing='0' class='member-table'><tbody>
+<tr><th colspan='2' class='sig-header'>Property</th><th class='msource-header'>Defined By</th></tr>
+      <tr class='property-row  '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.NestedResults-failedCount'></a><b><a href='source/jasmine.html#jasmine-NestedResults-property-failedCount'>failedCount</a></b> : Number<div class='mdesc'><p>Number of failed results</p>
+</div></td>
+        <td class='msource'>NestedResults</td>
+      </tr>
+
+      <tr class='property-row  '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.NestedResults-passedCount'></a><b><a href='source/jasmine.html#jasmine-NestedResults-property-passedCount'>passedCount</a></b> : Number<div class='mdesc'><p>Number of passed results</p>
+</div></td>
+        <td class='msource'>NestedResults</td>
+      </tr>
+
+      <tr class='property-row  '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.NestedResults-skipped'></a><b><a href='source/jasmine.html#jasmine-NestedResults-property-skipped'>skipped</a></b> : Boolean<div class='mdesc'><p>Was this suite/spec skipped?</p>
+</div></td>
+        <td class='msource'>NestedResults</td>
+      </tr>
+
+      <tr class='property-row  '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.NestedResults-totalCount'></a><b><a href='source/jasmine.html#jasmine-NestedResults-property-totalCount'>totalCount</a></b> : Number<div class='mdesc'><p>The total count of results</p>
+</div></td>
+        <td class='msource'>NestedResults</td>
+      </tr>
+
+</tbody></table>
+<a id='jasmine.NestedResults-methods'></a>
+<h2>Public Methods</h2>
+<table cellspacing='0' class='member-table'><tbody>
+<tr><th colspan='2' class='sig-header'>Method</th><th class='msource-header'>Defined By</th></tr>
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.NestedResults-NestedResults'></a><b><a href='source/jasmine.html#jasmine-NestedResults-method-constructor'>NestedResults</a></b>() : void<div class='mdesc'><div class='short'>
+</div><div class='long'>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li>None.</li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>NestedResults</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.NestedResults-addResult'></a><b><a href='source/jasmine.html#jasmine-NestedResults-method-addResult'>addResult</a></b>( <code>jasmine.ExpectationResult|jasmine.NestedResults result</code> ) : void<div class='mdesc'><div class='short'><p>Adds a result, tracking counts (total, passed, &amp; failed)</p>
+</div><div class='long'><p>Adds a result, tracking counts (total, passed, &amp; failed)</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>result</code> : jasmine.ExpectationResult|jasmine.NestedResults<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>NestedResults</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.NestedResults-getItems'></a><b><a href='source/jasmine.html#jasmine-NestedResults-method-getItems'>getItems</a></b>() : void<div class='mdesc'><div class='short'><p>Getter for the results: message &amp; results.</p>
+</div><div class='long'><p>Getter for the results: message &amp; results.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li>None.</li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>NestedResults</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.NestedResults-log'></a><b><a href='source/jasmine.html#jasmine-NestedResults-method-log'>log</a></b>( <code>Object values</code> ) : void<div class='mdesc'><div class='short'><p>Adds a log message.</p>
+</div><div class='long'><p>Adds a log message.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>values</code> : Object<div class='sub-desc'><p>Array of message parts which will be concatenated later.</p>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>NestedResults</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.NestedResults-passed'></a><b><a href='source/jasmine.html#jasmine-NestedResults-method-passed'>passed</a></b>() : Boolean<div class='mdesc'><div class='short'>
+</div><div class='long'>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li>None.</li></ul>
+<strong>Returns:</strong>
+<ul><li><code>Boolean</code><div class='sub-desc'><p>True if <b>everything</b> below passed</p>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>NestedResults</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.NestedResults-rollupCounts'></a><b><a href='source/jasmine.html#jasmine-NestedResults-method-rollupCounts'>rollupCounts</a></b>( <code>Object result</code> ) : void<div class='mdesc'><div class='short'><p>Roll up the result counts.</p>
+</div><div class='long'><p>Roll up the result counts.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>result</code> : Object<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>NestedResults</td>
+      </tr>
+
+</tbody></table>
+
+</div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">describe(&quot;Users&quot;, function() {
+    var store = null, ctlr = null;
+
+    beforeEach(function(){
+        if (!ctlr) {
+            ctlr = Application.getController('Users');
+        }
+
+        if (!store) {
+            store = ctlr.getStore('Users');
+        }
+
+        expect(store).toBeTruthy();
+
+        waitsFor(
+            function(){ return !store.isLoading(); },
+            &quot;load never completed&quot;,
+            4000
+        );
+    });
+
+    it(&quot;should have users&quot;,function(){
+        expect(store.getCount()).toBeGreaterThan(1);
+    });
+
+    it(&quot;should open the editor window&quot;, function(){
+        var grid = Ext.ComponentQuery.query('userlist')[0];
+
+        ctlr.editUser(grid,store.getAt(0));
+
+        var edit = Ext.ComponentQuery.query('useredit')[0];
+
+        expect(edit).toBeTruthy();
+        if(edit)edit.destroy();
+    });
+
+});</pre>
+</body>
+</html>

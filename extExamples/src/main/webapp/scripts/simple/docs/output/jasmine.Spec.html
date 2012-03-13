@@ -1,0 +1,111 @@
+<div class="body-wrap">
+
+<h1>Class <a href='source/jasmine.html#jasmine-Spec'>jasmine.Spec</a></h1>
+<table cellspacing='0'>
+
+<tr><td class='label'>Extends:</td><td class='hd-info'>Object</td></tr>
+
+<tr><td class='label'>Defined In:</td><td class='hd-info'><a href='source/jasmine.html#jasmine-Spec'>jasmine.js</a></td></tr>
+
+
+
+
+
+</table>
+<div class='description'><p>Internal representation of a Jasmine specification, or test.</p>
+</div>
+<div class='hr'></div>
+
+
+<a id='jasmine.Spec-methods'></a>
+<h2>Public Methods</h2>
+<table cellspacing='0' class='member-table'><tbody>
+<tr><th colspan='2' class='sig-header'>Method</th><th class='msource-header'>Defined By</th></tr>
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spec-Spec'></a><b><a href='source/jasmine.html#jasmine-Spec-method-constructor'>Spec</a></b>( <code>jasmine.Env env</code>, <code>jasmine.Suite suite</code>, <code>String description</code> ) : void<div class='mdesc'><div class='short'>
+</div><div class='long'>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>env</code> : jasmine.Env<div class='sub-desc'>
+</div></li><li><code>suite</code> : jasmine.Suite<div class='sub-desc'>
+</div></li><li><code>description</code> : String<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spec</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spec-addMatcherResult'></a><b><a href='source/jasmine.html#jasmine-Spec-method-addMatcherResult'>addMatcherResult</a></b>( <code>jasmine.ExpectationResult result</code> ) : void<div class='mdesc'><div class='short'>
+</div><div class='long'>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>result</code> : jasmine.ExpectationResult<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spec</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spec-log'></a><b><a href='source/jasmine.html#jasmine-Spec-method-log'>log</a></b>() : void<div class='mdesc'><div class='short'>All parameters are pretty-printed and concatenated together, then written to the spec's output.
+
+Be careful not to le...</div><div class='long'><p>All parameters are pretty-printed and concatenated together, then written to the spec's output.</p>
+
+<p>Be careful not to leave calls to <code>jasmine.log</code> in production code.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li>None.</li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spec</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spec-waits'></a><b><a href='source/jasmine.html#jasmine-Spec-method-waits'>waits</a></b>( <code>Number timeout</code> ) : void<div class='mdesc'><div class='short'><p>Waits a fixed time period before moving to the next block.</p>
+
+<p>@deprecated Use waitsFor() instead</p>
+</div><div class='long'><p>Waits a fixed time period before moving to the next block.</p>
+
+<p>@deprecated Use waitsFor() instead</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>timeout</code> : Number<div class='sub-desc'><p>milliseconds to wait</p>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spec</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spec-waitsFor'></a><b><a href='source/jasmine.html#jasmine-Spec-method-waitsFor'>waitsFor</a></b>( <code>Function latchFunction</code>, <code>String optional_timeoutMessage</code>, <code>Number optional_timeout</code> ) : void<div class='mdesc'><div class='short'><p>Waits for the latchFunction to return true before proceeding to the next block.</p>
+</div><div class='long'><p>Waits for the latchFunction to return true before proceeding to the next block.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>latchFunction</code> : Function<div class='sub-desc'>
+</div></li><li><code>optional_timeoutMessage</code> : String<div class='sub-desc'>
+</div></li><li><code>optional_timeout</code> : Number<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spec</td>
+      </tr>
+
+</tbody></table>
+
+</div>

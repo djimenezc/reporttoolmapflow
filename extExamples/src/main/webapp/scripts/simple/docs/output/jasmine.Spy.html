@@ -1,0 +1,552 @@
+<div class="body-wrap">
+
+<h1>Class <a href='source/jasmine.html#jasmine-Spy'>jasmine.Spy</a></h1>
+<table cellspacing='0'>
+
+<tr><td class='label'>Extends:</td><td class='hd-info'>Object</td></tr>
+
+<tr><td class='label'>Defined In:</td><td class='hd-info'><a href='source/jasmine.html#jasmine-Spy'>jasmine.js</a></td></tr>
+
+
+
+
+
+</table>
+<div class='description'><p>Jasmine Spies are test doubles that can act as stubs, spies, fakes or when used in an expecation, mocks.</p>
+
+<p>Spies should be created in test setup, before expectations.  They can then be checked, using the standard Jasmine
+expectation syntax. Spies can be checked if they were called or not and what the calling params were.</p>
+
+<p>A Spy has the following fields: wasCalled, callCount, mostRecentCall, and argsForCall (see docs).</p>
+
+<p>Spies are torn down at the end of every spec.</p>
+
+<p>Note: Do <b>not</b> call new jasmine.Spy() directly - a spy must be created using spyOn, jasmine.createSpy or jasmine.createSpyObj.</p>
+
+<p>@example
+// a stub
+var myStub = jasmine.createSpy('myStub');  // can be used anywhere</p>
+
+<p>// spy example
+var foo = {
+  not: function(bool) { return !bool; }
+}</p>
+
+<p>// actual foo.not will not be called, execution stops
+spyOn(foo, 'not');</p>
+
+<p> // foo.not spied upon, execution will continue to implementation
+spyOn(foo, 'not').andCallThrough();</p>
+
+<p>// fake example
+var foo = {
+  not: function(bool) { return !bool; }
+}</p>
+
+<p>// foo.not(val) will return val
+spyOn(foo, 'not').andCallFake(function(value) {return value;});</p>
+
+<p>// mock example
+foo.not(7 == 7);
+expect(foo.not).toHaveBeenCalled();
+expect(foo.not).toHaveBeenCalledWith(true);</p>
+</div>
+<div class='hr'></div>
+
+<a id='jasmine.Spy-props'></a>
+<h2>Public Properties</h2>
+<table cellspacing='0' class='member-table'><tbody>
+<tr><th colspan='2' class='sig-header'>Property</th><th class='msource-header'>Defined By</th></tr>
+      <tr class='property-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-argsForCall'></a><b><a href='source/jasmine.html#jasmine-Spy-property-argsForCall'>argsForCall</a></b> : Object<div class='mdesc'><div class='short'>Holds arguments for each call to the spy, indexed by call count
+@example
+var mySpy = jasmine.createSpy('foo');
+mySpy(...</div><div class='long'><p>Holds arguments for each call to the spy, indexed by call count
+@example
+var mySpy = jasmine.createSpy('foo');
+mySpy(1, 2);
+mySpy(7, 8);
+mySpy.mostRecentCall.args = [7, 8];
+mySpy.argsForCall[0] = [1, 2];
+mySpy.argsForCall[1] = [7, 8];</p>
+</div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='property-row  '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-identity'></a><b><a href='source/jasmine.html#jasmine-Spy-property-identity'>identity</a></b> : Object<div class='mdesc'><p>The name of the spy, if provided.</p>
+</div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='property-row  '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-isSpy'></a><b><a href='source/jasmine.html#jasmine-Spy-property-isSpy'>isSpy</a></b> : Boolean<div class='mdesc'><p>Is this Object a spy?</p>
+</div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='property-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-mostRecentCall'></a><b><a href='source/jasmine.html#jasmine-Spy-property-mostRecentCall'>mostRecentCall</a></b> : Object<div class='mdesc'><div class='short'>Tracking of the most recent call to the spy.
+@example
+var mySpy = jasmine.createSpy('foo');
+mySpy(1, 2);
+mySpy.mostRe...</div><div class='long'><p>Tracking of the most recent call to the spy.
+@example
+var mySpy = jasmine.createSpy('foo');
+mySpy(1, 2);
+mySpy.mostRecentCall.args = [1, 2];</p>
+</div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='property-row  '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-util'></a><b><a href='source/jasmine.html#jasmine-Spy-property-util'>util</a></b> : Object<div class='mdesc'><p>@namespace</p>
+</div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+</tbody></table>
+<a id='jasmine.Spy-methods'></a>
+<h2>Public Methods</h2>
+<table cellspacing='0' class='member-table'><tbody>
+<tr><th colspan='2' class='sig-header'>Method</th><th class='msource-header'>Defined By</th></tr>
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-Spy'></a><b><a href='source/jasmine.html#jasmine-Spy-method-constructor'>Spy</a></b>( <code>String name</code> ) : void<div class='mdesc'><div class='short'><p>@see spyOn, jasmine.createSpy, jasmine.createSpyObj</p>
+</div><div class='long'><p>@see spyOn, jasmine.createSpy, jasmine.createSpyObj</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>name</code> : String<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-afterEach'></a><b><a href='source/jasmine.html#jasmine-Spy-method-afterEach'>afterEach</a></b>( <code>Function afterEachFunction</code> ) : void<div class='mdesc'><div class='short'>A function that is called after each spec in a suite.
+
+Used for restoring any state that is hijacked during spec exec...</div><div class='long'><p>A function that is called after each spec in a suite.</p>
+
+<p>Used for restoring any state that is hijacked during spec execution.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>afterEachFunction</code> : Function<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-andCallFake'></a><b><a href='source/jasmine.html#jasmine-Spy-method-andCallFake'>andCallFake</a></b>( <code>Function fakeFunc</code> ) : void<div class='mdesc'><div class='short'>Calls an alternate implementation when a spy is called.
+
+@example
+var baz = function() {
+  // do some stuff, return s...</div><div class='long'><p>Calls an alternate implementation when a spy is called.</p>
+
+<p>@example
+var baz = function() {
+  // do some stuff, return something
+}
+// defining a spy from scratch: foo() calls the function baz
+var foo = jasmine.createSpy('spy on foo').andCall(baz);</p>
+
+<p>// defining a spy on an existing property: foo.bar() calls an anonymnous function
+spyOn(foo, 'bar').andCall(function() { return 'baz';} );</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>fakeFunc</code> : Function<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-andCallThrough'></a><b><a href='source/jasmine.html#jasmine-Spy-method-andCallThrough'>andCallThrough</a></b>() : void<div class='mdesc'><div class='short'>Tells a spy to call through to the actual implemenatation.
+
+@example
+var foo = {
+  bar: function() { // do some stuff...</div><div class='long'><p>Tells a spy to call through to the actual implemenatation.</p>
+
+<p>@example
+var foo = {
+  bar: function() { // do some stuff }
+}</p>
+
+<p>// defining a spy on an existing property: foo.bar
+spyOn(foo, 'bar').andCallThrough();</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li>None.</li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-andReturn'></a><b><a href='source/jasmine.html#jasmine-Spy-method-andReturn'>andReturn</a></b>( <code>Object value</code> ) : void<div class='mdesc'><div class='short'>For setting the return value of a spy.
+
+@example
+// defining a spy from scratch: foo() returns 'baz'
+var foo = jasmin...</div><div class='long'><p>For setting the return value of a spy.</p>
+
+<p>@example
+// defining a spy from scratch: foo() returns 'baz'
+var foo = jasmine.createSpy('spy on foo').andReturn('baz');</p>
+
+<p>// defining a spy on an existing property: foo.bar() returns 'baz'
+spyOn(foo, 'bar').andReturn('baz');</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>value</code> : Object<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-andThrow'></a><b><a href='source/jasmine.html#jasmine-Spy-method-andThrow'>andThrow</a></b>( <code>String exceptionMsg</code> ) : void<div class='mdesc'><div class='short'>For throwing an exception when a spy is called.
+
+@example
+// defining a spy from scratch: foo() throws an exception w...</div><div class='long'><p>For throwing an exception when a spy is called.</p>
+
+<p>@example
+// defining a spy from scratch: foo() throws an exception w/ message 'ouch'
+var foo = jasmine.createSpy('spy on foo').andThrow('baz');</p>
+
+<p>// defining a spy on an existing property: foo.bar() throws an exception w/ message 'ouch'
+spyOn(foo, 'bar').andThrow('baz');</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>exceptionMsg</code> : String<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-beforeEach'></a><b><a href='source/jasmine.html#jasmine-Spy-method-beforeEach'>beforeEach</a></b>( <code>Function beforeEachFunction</code> ) : void<div class='mdesc'><div class='short'><p>A function that is called before each spec in a suite.</p>
+
+<p>Used for spec setup, including validating assumptions.</p>
+</div><div class='long'><p>A function that is called before each spec in a suite.</p>
+
+<p>Used for spec setup, including validating assumptions.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>beforeEachFunction</code> : Function<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-createSpyObj'></a><b><a href='source/jasmine.html#jasmine-Spy-method-createSpyObj'>createSpyObj</a></b>( <code>String baseName</code>, <code>Array methodNames</code> ) : void<div class='mdesc'><div class='short'>Creates a more complicated spy: an Object that has every property a function that is a spy.  Used for stubbing someth...</div><div class='long'><p>Creates a more complicated spy: an Object that has every property a function that is a spy.  Used for stubbing something
+large in one call.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>baseName</code> : String<div class='sub-desc'><p>name of spy class</p>
+</div></li><li><code>methodNames</code> : Array<div class='sub-desc'><p>array of names of methods to make spies</p>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-describe'></a><b><a href='source/jasmine.html#jasmine-Spy-method-describe'>describe</a></b>( <code>String description</code>, <code>Function specDefinitions</code> ) : void<div class='mdesc'><div class='short'>Defines a suite of specifications.
+
+Stores the description and all defined specs in the Jasmine environment as one su...</div><div class='long'><p>Defines a suite of specifications.</p>
+
+<p>Stores the description and all defined specs in the Jasmine environment as one suite of specs. Variables declared
+are accessible by calls to beforeEach, it, and afterEach. Describe blocks can be nested, allowing for specialization
+of setup in some tests.</p>
+
+<p>@example
+// TODO: a simple suite</p>
+
+<p>// TODO: a simple suite with a nested describe block</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>description</code> : String<div class='sub-desc'><p>A string, usually the class under test.</p>
+</div></li><li><code>specDefinitions</code> : Function<div class='sub-desc'><p>function that defines several specs.</p>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-expect'></a><b><a href='source/jasmine.html#jasmine-Spy-method-expect'>expect</a></b>( <code>Object actual</code> ) : void<div class='mdesc'><div class='short'>Starts a chain for a Jasmine expectation.
+
+It is passed an Object that is the actual value and should chain to one of...</div><div class='long'><p>Starts a chain for a Jasmine expectation.</p>
+
+<p>It is passed an Object that is the actual value and should chain to one of the many
+jasmine.Matchers functions.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>actual</code> : Object<div class='sub-desc'><p>Actual value to test against and expected value</p>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-isSpy'></a><b><a href='source/jasmine.html#jasmine-Spy-method-isSpy'>isSpy</a></b>( <code>jasmine.Spy|Object putativeSpy</code> ) : Boolean<div class='mdesc'><div class='short'><p>Determines whether an object is a spy.</p>
+</div><div class='long'><p>Determines whether an object is a spy.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>putativeSpy</code> : jasmine.Spy|Object<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>Boolean</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-it'></a><b><a href='source/jasmine.html#jasmine-Spy-method-it'>it</a></b>( <code>String desc</code>, <code>Function func</code> ) : void<div class='mdesc'><div class='short'>Creates a Jasmine spec that will be added to the current suite.
+
+// TODO: pending tests
+
+@example
+it('should be true'...</div><div class='long'><p>Creates a Jasmine spec that will be added to the current suite.</p>
+
+<p>// TODO: pending tests</p>
+
+<p>@example
+it('should be true', function() {
+  expect(true).toEqual(true);
+});</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>desc</code> : String<div class='sub-desc'><p>description of this specification</p>
+</div></li><li><code>func</code> : Function<div class='sub-desc'><p>defines the preconditions and expectations of the spec</p>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-log'></a><b><a href='source/jasmine.html#jasmine-Spy-method-log'>log</a></b>() : void<div class='mdesc'><div class='short'>All parameters are pretty-printed and concatenated together, then written to the current spec's output.
+
+Be careful n...</div><div class='long'><p>All parameters are pretty-printed and concatenated together, then written to the current spec's output.</p>
+
+<p>Be careful not to leave calls to <code>jasmine.log</code> in production code.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li>None.</li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-plan'></a><b><a href='source/jasmine.html#jasmine-Spy-method-plan'>plan</a></b>() : void<div class='mdesc'><div class='short'><p>The actual function this spy stubs.</p>
+</div><div class='long'><p>The actual function this spy stubs.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li>None.</li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-reset'></a><b><a href='source/jasmine.html#jasmine-Spy-method-reset'>reset</a></b>() : void<div class='mdesc'><div class='short'>Resets all of a spy's the tracking variables so that it can be used again.
+
+@example
+spyOn(foo, 'bar');
+
+foo.bar();
+
+...</div><div class='long'><p>Resets all of a spy's the tracking variables so that it can be used again.</p>
+
+<p>@example
+spyOn(foo, 'bar');</p>
+
+<p>foo.bar();</p>
+
+<p>expect(foo.bar.callCount).toEqual(1);</p>
+
+<p>foo.bar.reset();</p>
+
+<p>expect(foo.bar.callCount).toEqual(0);</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li>None.</li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-runs'></a><b><a href='source/jasmine.html#jasmine-Spy-method-runs'>runs</a></b>( <code>Function func</code> ) : void<div class='mdesc'><div class='short'><p>Defines part of a jasmine spec.  Used in cominbination with waits or waitsFor in asynchrnous specs.</p>
+</div><div class='long'><p>Defines part of a jasmine spec.  Used in cominbination with waits or waitsFor in asynchrnous specs.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>func</code> : Function<div class='sub-desc'><p>Function that defines part of a jasmine spec.</p>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-spyOn'></a><b><a href='source/jasmine.html#jasmine-Spy-method-spyOn'>spyOn</a></b>( <code>Object obj</code>, <code>Object methodName</code> ) : void<div class='mdesc'><div class='short'>Function that installs a spy on an existing object's method name.  Used within a Spec to create a spy.
+
+@example
+// s...</div><div class='long'><p>Function that installs a spy on an existing object's method name.  Used within a Spec to create a spy.</p>
+
+<p>@example
+// spy example
+var foo = {
+  not: function(bool) { return !bool; }
+}
+spyOn(foo, 'not'); // actual foo.not will not be called, execution stops</p>
+
+<p>@see jasmine.createSpy</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>obj</code> : Object<div class='sub-desc'>
+</div></li><li><code>methodName</code> : Object<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'><p>a Jasmine spy that can be chained with all spy methods</p>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-waits'></a><b><a href='source/jasmine.html#jasmine-Spy-method-waits'>waits</a></b>( <code>Number timeout</code> ) : void<div class='mdesc'><div class='short'><p>Waits a fixed time period before moving to the next block.</p>
+
+<p>@deprecated Use waitsFor() instead</p>
+</div><div class='long'><p>Waits a fixed time period before moving to the next block.</p>
+
+<p>@deprecated Use waitsFor() instead</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>timeout</code> : Number<div class='sub-desc'><p>milliseconds to wait</p>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-waitsFor'></a><b><a href='source/jasmine.html#jasmine-Spy-method-waitsFor'>waitsFor</a></b>( <code>Function latchFunction</code>, <code>String optional_timeoutMessage</code>, <code>Number optional_timeout</code> ) : void<div class='mdesc'><div class='short'><p>Waits for the latchFunction to return true before proceeding to the next block.</p>
+</div><div class='long'><p>Waits for the latchFunction to return true before proceeding to the next block.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>latchFunction</code> : Function<div class='sub-desc'>
+</div></li><li><code>optional_timeoutMessage</code> : String<div class='sub-desc'>
+</div></li><li><code>optional_timeout</code> : Number<div class='sub-desc'>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-xdescribe'></a><b><a href='source/jasmine.html#jasmine-Spy-method-xdescribe'>xdescribe</a></b>( <code>String description</code>, <code>Function specDefinitions</code> ) : void<div class='mdesc'><div class='short'><p>Disables a suite of specifications.  Used to disable some suites in a file, or files, temporarily during development.</p>
+</div><div class='long'><p>Disables a suite of specifications.  Used to disable some suites in a file, or files, temporarily during development.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>description</code> : String<div class='sub-desc'><p>A string, usually the class under test.</p>
+</div></li><li><code>specDefinitions</code> : Function<div class='sub-desc'><p>function that defines several specs.</p>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+      <tr class='method-row expandable '>
+        <td class='micon'><a href='#expand' class='exi'>&nbsp;</a></td>
+        <td class='sig'><a id='jasmine.Spy-xit'></a><b><a href='source/jasmine.html#jasmine-Spy-method-xit'>xit</a></b>( <code>String desc</code>, <code>Function func</code> ) : void<div class='mdesc'><div class='short'>Creates a disabled Jasmine spec.
+
+A convenience method that allows existing specs to be disabled temporarily during d...</div><div class='long'><p>Creates a <em>disabled</em> Jasmine spec.</p>
+
+<p>A convenience method that allows existing specs to be disabled temporarily during development.</p>
+<div class='mdetail-params'>
+<strong>Parameters:</strong>
+<ul><li><code>desc</code> : String<div class='sub-desc'><p>description of this specification</p>
+</div></li><li><code>func</code> : Function<div class='sub-desc'><p>defines the preconditions and expectations of the spec</p>
+</div></li></ul>
+<strong>Returns:</strong>
+<ul><li><code>void</code><div class='sub-desc'>
+</div></li></ul>
+</div></div></div></td>
+        <td class='msource'>Spy</td>
+      </tr>
+
+</tbody></table>
+
+</div>
